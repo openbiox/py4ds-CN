@@ -1,3 +1,13 @@
 # 作者简介 {#author .unnumbered}
 
-上不了厅堂，下得了厨房。敲得了代码，逮得住蟑螂。
+**Wes McKinney**
+
+> Director of https://ursalabs.org/. Creator of Python pandas. Maker of tools to make data analysis faster and easier. Apache Arrow and Apache Parquet
+
+更多信息，请[点击](https://github.com/wesm)查看作者的Github。
+
+***
+
+* 翻译：[SeanCheney](https://www.jianshu.com/u/130f76596b02)
+
+* 排版与校对：[王诗翔](https://www.jianshu.com/u/b6608e27dc74)
