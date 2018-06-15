@@ -12,11 +12,7 @@
 
 首先感谢[SeanCheney](https://www.jianshu.com/u/130f76596b02)的翻译，以及[Wes McKinney](https://github.com/wesm)的创作，如果没有他们，大家不可能看到当前的中文内容。如果大家对这本书感到满意，钱财富足的话可以购买原作者的实体书。
 
-我用了两个 R 包编译这本书，分别是 **knitr** 和 **bookdown**。以下是我的 R 进程信息：
-
-```{r}
-sessionInfo()
-```
+我用了两个 R 包编译这本书，分别是 **knitr** 和 **bookdown**。
 
 ## 本地阅读
 
