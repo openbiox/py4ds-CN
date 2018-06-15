@@ -4,7 +4,7 @@ bookdown::gitbook:
     toc:
       collapse: none
       before: |
-        <li><a href="./">利用Python进行数据处理（第二版）</a></li>
+        <li><a href="./">利用Python进行数据分析（第二版）</a></li>
       after: |
         <li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
     download: [pdf, epub]
