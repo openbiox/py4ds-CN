@@ -61,7 +61,7 @@ bookdown::render_book("index.Rmd", "bookdown::gitbook")
 于 上海 某小窝
 ```
 
-![](alipay-reward-image.jpg)
+欢迎打赏则个~ [点击](/alipay-reward-image.jpg)
 
 
 
