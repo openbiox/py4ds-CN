@@ -1,16 +1,8 @@
-# 利用Python进行数据分析（第二版）中文翻译
+# 利用Python进行数据分析（第二版）<img src="https://github.com/openbiox/openbiox-wiki/blob/master/static/img/logo-long.png" align="right" width="200"/>
 
-> 如果你觉得不错，不妨Star一下
+本项目由 [Openbiox 小组](https://github.com/openbiox)进行维护，阅读请点击 👉 <https://openbiox.github.io/py4ds-CN/>
 
-## 许可
-
-**本翻译仅供个人学习使用，不涉及任何商业利益。**
-
-当前内容开源，以GPL-3发行。
-
-## 内容创作
-
-首先感谢[SeanCheney](https://www.jianshu.com/u/130f76596b02)的翻译，以及[Wes McKinney](https://github.com/wesm)的创作，如果没有他们，大家不可能看到当前的中文内容。如果大家对这本书感到满意，钱财富足的话可以购买原作者的实体书。
+《利用Python进行数据分析》一书由 [Wes McKinney](https://github.com/wesm)创作，[SeanCheney](https://www.jianshu.com/u/130f76596b02)进行翻译。如果大家对这本书感到满意，钱财富足的话可以购买原作者的实体书。
 
 我用了两个 R 包编译这本书，分别是 **knitr** 和 **bookdown**。
 
@@ -27,7 +19,7 @@
 
 ```
 # 克隆
-git clone https://github.com/ShixiangWang/py4ds-CN.git
+git clone https://github.com/openbiox/py4ds-CN.git
 
 # 点击目录下的bookdown-chinese.Rproj文件（如果安装了RStudio）
 # 如果没有，请将仓库切换为工作目录
@@ -45,19 +37,14 @@ bookdown::render_book("index.Rmd", "bookdown::gitbook")
 
 我会逐字阅读并尽量解决所遇到的问题。
 
-个人能力有限，大家在阅读时发现问题可以通过Github[创建issue](https://github.com/ShixiangWang/py4ds-CN/issues/new)提出或者[fork仓库](https://github.com/ShixiangWang/py4ds-CN/)后修改并提交合并请求。
+个人能力有限，大家在阅读时发现问题可以通过 Github [创建 issue](https://github.com/openbiox/py4ds-CN/issues/new) 提出或者 [fork 仓库](https://github.com/ShixiangWang/openbiox/)后修改并提交合并请求。
 
-## 致谢
+## 许可
 
-非常感谢我女朋友的宽容，不然我无法用一晚上的功夫基本搞定这个事情。也感谢R与创造bookdown的益辉大神及贡献者，不然我无法利用这么便捷的工具进行创造。
+**本翻译仅供个人学习使用，不涉及任何商业利益。，并以 [ACC BY-SA 3.0 协议](https://creativecommons.org/licenses/by-sa/3.0/deed.zh) 传播分享**。
+## 打赏
 
-
-```
-诗翔  
-于 上海 某小窝
-```
-
-欢迎打赏则个~ [点击](/alipay-reward-image.jpg)
+[点击查看二维码](/alipay-reward-image.jpg)
 
 
 
