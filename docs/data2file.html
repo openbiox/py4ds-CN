@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 6 章 数据加载、存储与文件格式 | 利用Python进行数据分析（第二版）中文翻译</title>
+  <meta name="description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 6 章 数据加载、存储与文件格式 | 利用Python进行数据分析（第二版）中文翻译" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="github-repo" content="openbiox/py4ds-CN" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 6 章 数据加载、存储与文件格式 | 利用Python进行数据分析（第二版）中文翻译" />
+  
+  <meta name="twitter:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  
+
+<meta name="author" content="作者：Wes McKinney，翻译：SeanCheney，校对与维护：王诗翔" />
+
+
+<meta name="date" content="2019-10-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="pandas.html"/>
+<link rel="next" href="tidy.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">利用Python进行数据分析（第二版）</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#section-0.1"><i class="fa fa-check"></i><b>0.1</b> 问题与贡献</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#section-0.2"><i class="fa fa-check"></i><b>0.2</b> 许可</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#section-0.3"><i class="fa fa-check"></i><b>0.3</b> 致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>作者简介</a></li>
+<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> 准备工作</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e79a84e58685e5aeb9"><i class="fa fa-check"></i>本书的内容</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>为什么要使用Python进行数据分析</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>重要的Python库</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e5ae89e8a385e5928ce8aebee7bdae"><i class="fa fa-check"></i>安装和设置</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e7a4bee58cbae5928ce4bc9ae8aeae"><i class="fa fa-check"></i>社区和会议</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e5afbce888aa"><i class="fa fa-check"></i>本书导航</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Python 语法基础，IPython 和 Jupyter Notebooks</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python解释器</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i>IPython基础</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python语法基础</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#unicode"><i class="fa fa-check"></i>字节和Unicode</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#e68ea7e588b6e6b581"><i class="fa fa-check"></i>控制流</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>3</b> Python的数据结构、函数和文件</a><ul>
+<li class="chapter" data-level="3.1" data-path="structure.html"><a href="structure.html#section-3.1"><i class="fa fa-check"></i><b>3.1</b> 元组</a></li>
+<li class="chapter" data-level="3.2" data-path="structure.html"><a href="structure.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 列表</a></li>
+<li class="chapter" data-level="3.3" data-path="structure.html"><a href="structure.html#section-3.3"><i class="fa fa-check"></i><b>3.3</b> 序列函数</a></li>
+<li class="chapter" data-level="3.4" data-path="structure.html"><a href="structure.html#section-3.4"><i class="fa fa-check"></i><b>3.4</b> 字典</a></li>
+<li class="chapter" data-level="3.5" data-path="structure.html"><a href="structure.html#section-3.5"><i class="fa fa-check"></i><b>3.5</b> 集合</a></li>
+<li class="chapter" data-level="3.6" data-path="structure.html"><a href="structure.html#section-3.6"><i class="fa fa-check"></i><b>3.6</b> 列表、集合和字典推导式</a></li>
+<li class="chapter" data-level="3.7" data-path="structure.html"><a href="structure.html#section-3.7"><i class="fa fa-check"></i><b>3.7</b> 嵌套列表推导式</a></li>
+<li class="chapter" data-level="3.8" data-path="structure.html"><a href="structure.html#section-3.8"><i class="fa fa-check"></i><b>3.8</b> 函数</a></li>
+<li class="chapter" data-level="3.9" data-path="structure.html"><a href="structure.html#section-3.9"><i class="fa fa-check"></i><b>3.9</b> 生成器</a></li>
+<li class="chapter" data-level="3.10" data-path="structure.html"><a href="structure.html#section-3.10"><i class="fa fa-check"></i><b>3.10</b> 错误和异常处理</a></li>
+<li class="chapter" data-level="3.11" data-path="structure.html"><a href="structure.html#section-3.11"><i class="fa fa-check"></i><b>3.11</b> 文件和操作系统</a></li>
+<li class="chapter" data-level="3.12" data-path="structure.html"><a href="structure.html#section-3.12"><i class="fa fa-check"></i><b>3.12</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="preparation.html"><a href="preparation.html#numpy"><i class="fa fa-check"></i><b>4</b> NumPy基础：数组和矢量计算</a><ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4.1</b> NumPy的ndarray：一种多维数组对象</a></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 通用函数：快速的元素级数组函数</a></li>
+<li class="chapter" data-level="4.3" data-path="numpy.html"><a href="numpy.html#section-4.3"><i class="fa fa-check"></i><b>4.3</b> 利用数组进行数据处理</a></li>
+<li class="chapter" data-level="4.4" data-path="numpy.html"><a href="numpy.html#section-4.4"><i class="fa fa-check"></i><b>4.4</b> 用于数组的文件输入输出</a></li>
+<li class="chapter" data-level="4.5" data-path="numpy.html"><a href="numpy.html#section-4.5"><i class="fa fa-check"></i><b>4.5</b> 线性代数</a></li>
+<li class="chapter" data-level="4.6" data-path="numpy.html"><a href="numpy.html#section-4.6"><i class="fa fa-check"></i><b>4.6</b> 伪随机数生成</a></li>
+<li class="chapter" data-level="4.7" data-path="numpy.html"><a href="numpy.html#section-4.7"><i class="fa fa-check"></i><b>4.7</b> 示例：随机漫步</a></li>
+<li class="chapter" data-level="4.8" data-path="numpy.html"><a href="numpy.html#-1"><i class="fa fa-check"></i><b>4.8</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5</b> pandas入门</a><ul>
+<li class="chapter" data-level="5.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5.1</b> pandas的数据结构介绍</a></li>
+<li class="chapter" data-level="5.2" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>5.2</b> 基本功能</a></li>
+<li class="chapter" data-level="5.3" data-path="pandas.html"><a href="pandas.html#section-5.3"><i class="fa fa-check"></i><b>5.3</b> 汇总和计算描述统计</a></li>
+<li class="chapter" data-level="5.4" data-path="pandas.html"><a href="pandas.html#-2"><i class="fa fa-check"></i><b>5.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data2file.html"><a href="data2file.html"><i class="fa fa-check"></i><b>6</b> 数据加载、存储与文件格式</a><ul>
+<li class="chapter" data-level="6.1" data-path="data2file.html"><a href="data2file.html#section-6.1"><i class="fa fa-check"></i><b>6.1</b> 读写文本格式的数据</a></li>
+<li class="chapter" data-level="6.2" data-path="data2file.html"><a href="data2file.html#section-6.2"><i class="fa fa-check"></i><b>6.2</b> 二进制数据格式</a></li>
+<li class="chapter" data-level="6.3" data-path="data2file.html"><a href="data2file.html#web-apis"><i class="fa fa-check"></i><b>6.3</b> Web APIs交互</a></li>
+<li class="chapter" data-level="6.4" data-path="data2file.html"><a href="data2file.html#section-6.4"><i class="fa fa-check"></i><b>6.4</b> 数据库交互</a></li>
+<li class="chapter" data-level="6.5" data-path="data2file.html"><a href="data2file.html#-3"><i class="fa fa-check"></i><b>6.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>7</b> 数据清洗和准备</a><ul>
+<li class="chapter" data-level="7.1" data-path="tidy.html"><a href="tidy.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 处理缺失数据</a></li>
+<li class="chapter" data-level="7.2" data-path="tidy.html"><a href="tidy.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 数据转换</a></li>
+<li class="chapter" data-level="7.3" data-path="tidy.html"><a href="tidy.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 字符串操作</a></li>
+<li class="chapter" data-level="7.4" data-path="tidy.html"><a href="tidy.html#-4"><i class="fa fa-check"></i><b>7.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reshape.html"><a href="reshape.html"><i class="fa fa-check"></i><b>8</b> 数据规整：聚合、合并和重塑</a><ul>
+<li class="chapter" data-level="8.1" data-path="reshape.html"><a href="reshape.html#section-8.1"><i class="fa fa-check"></i><b>8.1</b> 层次化索引</a></li>
+<li class="chapter" data-level="8.2" data-path="reshape.html"><a href="reshape.html#section-8.2"><i class="fa fa-check"></i><b>8.2</b> 合并数据集</a></li>
+<li class="chapter" data-level="8.3" data-path="reshape.html"><a href="reshape.html#section-8.3"><i class="fa fa-check"></i><b>8.3</b> 重塑和轴向旋转</a></li>
+<li class="chapter" data-level="8.4" data-path="reshape.html"><a href="reshape.html#-5"><i class="fa fa-check"></i><b>8.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="visulization.html"><a href="visulization.html"><i class="fa fa-check"></i><b>9</b> 绘图和可视化</a><ul>
+<li class="chapter" data-level="9.1" data-path="visulization.html"><a href="visulization.html#matplotlib-api"><i class="fa fa-check"></i><b>9.1</b> matplotlib API入门</a></li>
+<li class="chapter" data-level="9.2" data-path="visulization.html"><a href="visulization.html#pandasseaborn"><i class="fa fa-check"></i><b>9.2</b> 使用pandas和seaborn绘图</a></li>
+<li class="chapter" data-level="9.3" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i><b>9.3</b> 其它的Python可视化工具</a></li>
+<li class="chapter" data-level="9.4" data-path="visulization.html"><a href="visulization.html#-6"><i class="fa fa-check"></i><b>9.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="apply.html"><a href="apply.html"><i class="fa fa-check"></i><b>10</b> 数据聚合与分组运算</a><ul>
+<li class="chapter" data-level="10.1" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>10.1</b> GroupBy机制</a></li>
+<li class="chapter" data-level="10.2" data-path="apply.html"><a href="apply.html#section-10.2"><i class="fa fa-check"></i><b>10.2</b> 数据聚合</a></li>
+<li class="chapter" data-level="10.3" data-path="apply.html"><a href="apply.html#apply"><i class="fa fa-check"></i><b>10.3</b> apply：一般性的“拆分－应用－合并”</a></li>
+<li class="chapter" data-level="10.4" data-path="apply.html"><a href="apply.html#section-10.4"><i class="fa fa-check"></i><b>10.4</b> 透视表和交叉表</a></li>
+<li class="chapter" data-level="10.5" data-path="apply.html"><a href="apply.html#-7"><i class="fa fa-check"></i><b>10.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="timeSeries.html"><a href="timeSeries.html"><i class="fa fa-check"></i><b>11</b> 时间序列</a><ul>
+<li class="chapter" data-level="11.1" data-path="timeSeries.html"><a href="timeSeries.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 日期和时间数据类型及工具</a></li>
+<li class="chapter" data-level="11.2" data-path="timeSeries.html"><a href="timeSeries.html#section-11.2"><i class="fa fa-check"></i><b>11.2</b> 时间序列基础</a></li>
+<li class="chapter" data-level="11.3" data-path="timeSeries.html"><a href="timeSeries.html#section-11.3"><i class="fa fa-check"></i><b>11.3</b> 日期的范围、频率以及移动</a></li>
+<li class="chapter" data-level="11.4" data-path="timeSeries.html"><a href="timeSeries.html#section-11.4"><i class="fa fa-check"></i><b>11.4</b> 时区处理</a></li>
+<li class="chapter" data-level="11.5" data-path="timeSeries.html"><a href="timeSeries.html#section-11.5"><i class="fa fa-check"></i><b>11.5</b> 时区本地化和转换</a></li>
+<li class="chapter" data-level="11.6" data-path="timeSeries.html"><a href="timeSeries.html#section-11.6"><i class="fa fa-check"></i><b>11.6</b> 时期及其算术运算</a></li>
+<li class="chapter" data-level="11.7" data-path="timeSeries.html"><a href="timeSeries.html#section-11.7"><i class="fa fa-check"></i><b>11.7</b> 重采样及频率转换</a></li>
+<li class="chapter" data-level="11.8" data-path="timeSeries.html"><a href="timeSeries.html#section-11.8"><i class="fa fa-check"></i><b>11.8</b> 移动窗口函数</a></li>
+<li class="chapter" data-level="11.9" data-path="timeSeries.html"><a href="timeSeries.html#-8"><i class="fa fa-check"></i><b>11.9</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="adPandas.html"><a href="adPandas.html"><i class="fa fa-check"></i><b>12</b> pandas高级应用</a><ul>
+<li class="chapter" data-level="12.1" data-path="adPandas.html"><a href="adPandas.html#section-12.1"><i class="fa fa-check"></i><b>12.1</b> 分类数据</a></li>
+<li class="chapter" data-level="12.2" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>12.2</b> GroupBy高级应用</a></li>
+<li class="chapter" data-level="12.3" data-path="adPandas.html"><a href="adPandas.html#section-12.3"><i class="fa fa-check"></i><b>12.3</b> 链式编程技术</a></li>
+<li class="chapter" data-level="12.4" data-path="adPandas.html"><a href="adPandas.html#-9"><i class="fa fa-check"></i><b>12.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="buildModels.html"><a href="buildModels.html"><i class="fa fa-check"></i><b>13</b> Python建模库介绍</a><ul>
+<li class="chapter" data-level="13.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>13.1</b> pandas与模型代码的接口</a></li>
+<li class="chapter" data-level="13.2" data-path="buildModels.html"><a href="buildModels.html#patsy"><i class="fa fa-check"></i><b>13.2</b> 用Patsy创建模型描述</a></li>
+<li class="chapter" data-level="13.3" data-path="preparation.html"><a href="preparation.html#statsmodels"><i class="fa fa-check"></i><b>13.3</b> statsmodels介绍</a></li>
+<li class="chapter" data-level="13.4" data-path="preparation.html"><a href="preparation.html#scikit-learn"><i class="fa fa-check"></i><b>13.4</b> scikit-learn介绍</a></li>
+<li class="chapter" data-level="13.5" data-path="buildModels.html"><a href="buildModels.html#section-13.5"><i class="fa fa-check"></i><b>13.5</b> 继续学习</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="dsCases.html"><a href="dsCases.html"><i class="fa fa-check"></i><b>14</b> 数据分析案例</a><ul>
+<li class="chapter" data-level="14.1" data-path="dsCases.html"><a href="dsCases.html#bitlyusa.gov"><i class="fa fa-check"></i><b>14.1</b> 来自Bitly的USA.gov数据</a></li>
+<li class="chapter" data-level="14.2" data-path="dsCases.html"><a href="dsCases.html#movielens-1m"><i class="fa fa-check"></i><b>14.2</b> MovieLens 1M数据集</a></li>
+<li class="chapter" data-level="14.3" data-path="dsCases.html"><a href="dsCases.html#section-14.3"><i class="fa fa-check"></i><b>14.3</b> 1880-2010年间全美婴儿姓名</a></li>
+<li class="chapter" data-level="14.4" data-path="dsCases.html"><a href="dsCases.html#usda"><i class="fa fa-check"></i><b>14.4</b> USDA食品数据库</a></li>
+<li class="chapter" data-level="14.5" data-path="dsCases.html"><a href="dsCases.html#section-14.5"><i class="fa fa-check"></i><b>14.5</b> 2012联邦选举委员会数据库</a></li>
+<li class="chapter" data-level="14.6" data-path="dsCases.html"><a href="dsCases.html#-10"><i class="fa fa-check"></i><b>14.6</b> 总结</a></li>
+</ul></li>
+<li class="appendix"><span><b>附录</b></span></li>
+<li class="chapter" data-level="A" data-path="adNumpy.html"><a href="adNumpy.html"><i class="fa fa-check"></i><b>A</b> NumPy高级应用</a><ul>
+<li class="chapter" data-level="A.1" data-path="numpy.html"><a href="numpy.html#ndarray"><i class="fa fa-check"></i><b>A.1</b> ndarray对象的内部机理</a></li>
+<li class="chapter" data-level="A.2" data-path="06-data2file.html"><a href="#section-A.2"><i class="fa fa-check"></i><b>A.2</b> 高级数组操作</a></li>
+<li class="chapter" data-level="A.3" data-path="06-data2file.html"><a href="#section-A.3"><i class="fa fa-check"></i><b>A.3</b> 广播</a></li>
+<li class="chapter" data-level="A.4" data-path="adNumpy.html"><a href="adNumpy.html#ufunc"><i class="fa fa-check"></i><b>A.4</b> ufunc高级应用</a></li>
+<li class="chapter" data-level="A.5" data-path="06-data2file.html"><a href="#section-A.5"><i class="fa fa-check"></i><b>A.5</b> 结构化和记录式数组</a></li>
+<li class="chapter" data-level="A.6" data-path="06-data2file.html"><a href="#section-A.6"><i class="fa fa-check"></i><b>A.6</b> 更多有关排序的话题</a></li>
+<li class="chapter" data-level="A.7" data-path="adNumpy.html"><a href="adNumpy.html#numbanumpy"><i class="fa fa-check"></i><b>A.7</b> 用Numba编写快速NumPy函数</a></li>
+<li class="chapter" data-level="A.8" data-path="06-data2file.html"><a href="#section-A.8"><i class="fa fa-check"></i><b>A.8</b> 高级数组输入输出</a></li>
+<li class="chapter" data-level="A.9" data-path="06-data2file.html"><a href="#section-A.9"><i class="fa fa-check"></i><b>A.9</b> 性能建议</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="moreInfo.html"><a href="moreInfo.html"><i class="fa fa-check"></i><b>B</b> 更多关于IPython的内容</a><ul>
+<li class="chapter" data-level="B.1" data-path="06-data2file.html"><a href="#section-B.1"><i class="fa fa-check"></i><b>B.1</b> 使用命令历史</a></li>
+<li class="chapter" data-level="B.2" data-path="06-data2file.html"><a href="#section-B.2"><i class="fa fa-check"></i><b>B.2</b> 与操作系统交互</a></li>
+<li class="chapter" data-level="B.3" data-path="06-data2file.html"><a href="#section-B.3"><i class="fa fa-check"></i><b>B.3</b> 软件开发工具</a></li>
+<li class="chapter" data-level="B.4" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.4</b> 使用IPython高效开发的技巧</a></li>
+<li class="chapter" data-level="B.5" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.5</b> IPython高级功能</a></li>
+<li class="chapter" data-level="B.6" data-path="moreInfo.html"><a href="moreInfo.html#-11"><i class="fa fa-check"></i><b>B.6</b> 总结</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">利用Python进行数据分析（第二版）中文翻译</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data2file" class="section level1">
+<h1><span class="header-section-number">第 6 章</span> 数据加载、存储与文件格式</h1>
+<p>访问数据是使用本书所介绍的这些工具的第一步。我会着重介绍pandas的数据输入与输出，虽然别的库中也有不少以此为目的的工具。</p>
+<p>输入输出通常可以划分为几个大类：读取文本文件和其他更高效的磁盘存储格式，加载数据库中的数据，利用Web API操作网络资源。</p>
+<div id="section-6.1" class="section level2">
+<h2><span class="header-section-number">6.1</span> 读写文本格式的数据</h2>
+<p>pandas提供了一些用于将表格型数据读取为DataFrame对象的函数。表6-1对它们进行了总结，其中read_csv和read_table可能会是你今后用得最多的。</p>
+<div class="figure">
+<img src="//upload-images.jianshu.io/upload_images/7178691-958f849e6067b19b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>表6-1 pandas中的解析函数</p>
+<p>我将大致介绍一下这些函数在将文本数据转换为DataFrame时所用到的一些技术。这些函数的选项可以划分为以下几个大类：</p>
+<ul>
+<li>索引：将一个或多个列当做返回的DataFrame处理，以及是否从文件、用户获取列名。</li>
+<li>类型推断和数据转换：包括用户定义值的转换、和自定义的缺失值标记列表等。</li>
+<li>日期解析：包括组合功能，比如将分散在多个列中的日期时间信息组合成结果中的单个列。</li>
+<li>迭代：支持对大文件进行逐块迭代。</li>
+<li>不规整数据问题：跳过一些行、页脚、注释或其他一些不重要的东西（比如由成千上万个逗号隔开的数值数据）。</li>
+</ul>
+<p>因为工作中实际碰到的数据可能十分混乱，一些数据加载函数（尤其是read_csv）的选项逐渐变得复杂起来。面对不同的参数，感到头痛很正常（read_csv有超过50个参数）。pandas文档有这些参数的例子，如果你感到阅读某个文件很难，可以通过相似的足够多的例子找到正确的参数。</p>
+<p>其中一些函数，比如pandas.read_csv，有类型推断功能，因为列数据的类型不属于数据类型。也就是说，你不需要指定列的类型到底是数值、整数、布尔值，还是字符串。其它的数据格式，如HDF5、Feather和msgpack，会在格式中存储数据类型。</p>
+<p>日期和其他自定义类型的处理需要多花点工夫才行。首先我们来看一个以逗号分隔的（CSV）文本文件：</p>
+<pre><code>In [8]: !cat examples/ex1.csv
+a,b,c,d,message
+1,2,3,4,hello
+5,6,7,8,world
+9,10,11,12,foo</code></pre>
+<blockquote>
+<p>笔记：这里，我用的是Unix的cat shell命令将文件的原始内容打印到屏幕上。如果你用的是Windows，你可以使用type达到同样的效果。</p>
+</blockquote>
+<p>由于该文件以逗号分隔，所以我们可以使用read_csv将其读入一个DataFrame：</p>
+<pre><code>In [9]: df = pd.read_csv(&#39;examples/ex1.csv&#39;)
+
+In [10]: df
+Out[10]: 
+   a   b   c   d message
+0  1   2   3   4   hello
+1  5   6   7   8   world
+2  9  10  11  12     foo</code></pre>
+<p>我们还可以使用read_table，并指定分隔符：</p>
+<pre><code>In [11]: pd.read_table(&#39;examples/ex1.csv&#39;, sep=&#39;,&#39;)
+Out[11]: 
+   a   b   c   d message
+0  1   2   3   4   hello
+1  5   6   7   8   world
+2  9  10  11  12     foo</code></pre>
+<p>并不是所有文件都有标题行。看看下面这个文件：</p>
+<pre><code>In [12]: !cat examples/ex2.csv
+1,2,3,4,hello
+5,6,7,8,world
+9,10,11,12,foo</code></pre>
+<p>读入该文件的办法有两个。你可以让pandas为其分配默认的列名，也可以自己定义列名：</p>
+<pre><code>In [13]: pd.read_csv(&#39;examples/ex2.csv&#39;, header=None)
+Out[13]: 
+   0   1   2   3      4
+0  1   2   3   4  hello
+1  5   6   7   8  world
+2  9  10  11  12    foo
+
+In [14]: pd.read_csv(&#39;examples/ex2.csv&#39;, names=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;message&#39;])
+Out[14]: 
+   a   b   c   d message
+0  1   2   3   4   hello
+1  5   6   7   8   world
+2  9  10  11  12     foo</code></pre>
+<p>假设你希望将message列做成DataFrame的索引。你可以明确表示要将该列放到索引4的位置上，也可以通过index_col参数指定“message”：</p>
+<pre><code>In [15]: names = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;message&#39;]
+
+In [16]: pd.read_csv(&#39;examples/ex2.csv&#39;, names=names, index_col=&#39;message&#39;)
+Out[16]: 
+         a   b   c   d
+message               
+hello    1   2   3   4
+world    5   6   7   8
+foo      9  10  11  12</code></pre>
+<p>如果希望将多个列做成一个层次化索引，只需传入由列编号或列名组成的列表即可：</p>
+<pre><code>In [17]: !cat examples/csv_mindex.csv
+key1,key2,value1,value2
+one,a,1,2
+one,b,3,4
+one,c,5,6
+one,d,7,8
+two,a,9,10
+two,b,11,12
+two,c,13,14
+two,d,15,16
+
+In [18]: parsed = pd.read_csv(&#39;examples/csv_mindex.csv&#39;,
+   ....:                      index_col=[&#39;key1&#39;, &#39;key2&#39;])
+
+In [19]: parsed
+Out[19]: 
+           value1  value2
+key1 key2                
+one  a          1       2
+     b          3       4
+     c          5       6
+     d          7       8
+two  a          9      10
+     b         11      12
+     c         13      14
+     d         15      16</code></pre>
+<p>有些情况下，有些表格可能不是用固定的分隔符去分隔字段的（比如空白符或其它模式）。看看下面这个文本文件：</p>
+<pre><code>In [20]: list(open(&#39;examples/ex3.txt&#39;))
+Out[20]: 
+[&#39;            A         B         C\n&#39;,
+ &#39;aaa -0.264438 -1.026059 -0.619500\n&#39;,
+ &#39;bbb  0.927272  0.302904 -0.032399\n&#39;,
+ &#39;ccc -0.264273 -0.386314 -0.217601\n&#39;,
+ &#39;ddd -0.871858 -0.348382  1.100491\n&#39;]</code></pre>
+<p>虽然可以手动对数据进行规整，这里的字段是被数量不同的空白字符间隔开的。这种情况下，你可以传递一个正则表达式作为read_table的分隔符。可以用正则表达式表达为+，于是有有：</p>
+<pre><code>In [21]: result = pd.read_table(&#39;examples/ex3.txt&#39;, sep=&#39;\s+&#39;)
+
+In [22]: result
+Out[22]: 
+            A         B         C
+aaa -0.264438 -1.026059 -0.619500
+bbb  0.927272  0.302904 -0.032399
+ccc -0.264273 -0.386314 -0.217601
+ddd -0.871858 -0.348382  1.100491</code></pre>
+<p>这里，由于列名比数据行的数量少，所以read_table推断第一列应该是DataFrame的索引。这里，由于列名比数据行的数量少，所以read_table推断第一列应该是DataFrame的索引。</p>
+<p>这些解析器函数还有许多参数可以帮助你处理各种各样的异形文件格式（表6-2列出了一些）。比如说，你可以用skiprows跳过文件的第一行、第三行和第四行：</p>
+<pre><code>In [23]: !cat examples/ex4.csv
+# hey!
+a,b,c,d,message
+# just wanted to make things more difficult for you
+# who reads CSV files with computers, anyway?
+1,2,3,4,hello
+5,6,7,8,world
+9,10,11,12,foo
+In [24]: pd.read_csv(&#39;examples/ex4.csv&#39;, skiprows=[0, 2, 3])
+Out[24]: 
+   a   b   c   d message
+0  1   2   3   4   hello
+1  5   6   7   8   world
+2  9  10  11  12     foo</code></pre>
+<p>缺失值处理是文件解析任务中的一个重要组成部分。缺失数据经常是要么没有（空字符串），要么用某个标记值表示。默认情况下，pandas会用一组经常出现的标记值进行识别，比如NA及NULL：</p>
+<pre><code>In [25]: !cat examples/ex5.csv
+something,a,b,c,d,message
+one,1,2,3,4,NA
+two,5,6,,8,world
+three,9,10,11,12,foo
+In [26]: result = pd.read_csv(&#39;examples/ex5.csv&#39;)
+
+In [27]: result
+Out[27]: 
+  something  a   b     c   d message
+0       one  1   2   3.0   4     NaN
+1       two  5   6   NaN   8   world
+2     three  9  10  11.0  12     foo
+
+In [28]: pd.isnull(result)
+Out[28]: 
+   something      a      b      c      d  message
+0      False  False  False  False  False     True
+1      False  False  False   True  False    False
+2      False  False  False  False  False    False</code></pre>
+<p>na_values可以用一个列表或集合的字符串表示缺失值：</p>
+<pre><code>In [29]: result = pd.read_csv(&#39;examples/ex5.csv&#39;, na_values=[&#39;NULL&#39;])
+
+In [30]: result
+Out[30]: 
+  something  a   b     c   d message
+0       one  1   2   3.0   4     NaN
+1       two  5   6   NaN   8   world
+2     three  9  10  11.0  12     foo</code></pre>
+<p>字典的各列可以使用不同的NA标记值：</p>
+<pre><code>In [31]: sentinels = {&#39;message&#39;: [&#39;foo&#39;, &#39;NA&#39;], &#39;something&#39;: [&#39;two&#39;]}
+
+In [32]: pd.read_csv(&#39;examples/ex5.csv&#39;, na_values=sentinels)
+Out[32]:
+something  a   b     c   d message
+0       one  1   2   3.0   4     NaN
+1       NaN  5   6   NaN   8   world
+2     three  9  10  11.0  12     NaN</code></pre>
+<p>表6-2列出了pandas.read_csv和pandas.read_table常用的选项。</p>
+<div class="figure">
+<img src="" alt="img" />
+<p class="caption">img</p>
+</div>
+<div class="figure">
+<img src="" alt="img" />
+<p class="caption">img</p>
+</div>
+<div class="figure">
+<img src="" alt="img" />
+<p class="caption">img</p>
+</div>
+<div id="section-6.1.1" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> 逐块读取文本文件</h3>
+<p>在处理很大的文件时，或找出大文件中的参数集以便于后续处理时，你可能只想读取文件的一小部分或逐块对文件进行迭代。</p>
+<p>在看大文件之前，我们先设置pandas显示地更紧些：</p>
+<pre><code>In [33]: pd.options.display.max_rows = 10</code></pre>
+<p>然后有：</p>
+<pre><code>In [34]: result = pd.read_csv(&#39;examples/ex6.csv&#39;)
+
+In [35]: result
+Out[35]: 
+           one       two     three      four key
+0     0.467976 -0.038649 -0.295344 -1.824726   L
+1    -0.358893  1.404453  0.704965 -0.200638   B
+2    -0.501840  0.659254 -0.421691 -0.057688   G
+3     0.204886  1.074134  1.388361 -0.982404   R
+4     0.354628 -0.133116  0.283763 -0.837063   Q
+...        ...       ...       ...       ...  ..
+9995  2.311896 -0.417070 -1.409599 -0.515821   L
+9996 -0.479893 -0.650419  0.745152 -0.646038   E
+9997  0.523331  0.787112  0.486066  1.093156   K
+9998 -0.362559  0.598894 -1.843201  0.887292   G
+9999 -0.096376 -1.012999 -0.657431 -0.573315   0
+[10000 rows x 5 columns]
+If you want to only read a small</code></pre>
+<p>如果只想读取几行（避免读取整个文件），通过nrows进行指定即可：</p>
+<pre><code>In [36]: pd.read_csv(&#39;examples/ex6.csv&#39;, nrows=5)
+Out[36]: 
+        one       two     three      four key
+0  0.467976 -0.038649 -0.295344 -1.824726   L
+1 -0.358893  1.404453  0.704965 -0.200638   B
+2 -0.501840  0.659254 -0.421691 -0.057688   G
+3  0.204886  1.074134  1.388361 -0.982404   R
+4  0.354628 -0.133116  0.283763 -0.837063   Q</code></pre>
+<p>要逐块读取文件，可以指定chunksize（行数）：</p>
+<pre><code>In [874]: chunker = pd.read_csv(&#39;ch06/ex6.csv&#39;, chunksize=1000)
+
+In [875]: chunker
+Out[875]: &lt;pandas.io.parsers.TextParser at 0x8398150&gt;</code></pre>
+<p>read_csv所返回的这个TextParser对象使你可以根据chunksize对文件进行逐块迭代。比如说，我们可以迭代处理ex6.csv，将值计数聚合到“key”列中，如下所示：</p>
+<pre><code>chunker = pd.read_csv(&#39;examples/ex6.csv&#39;, chunksize=1000)
+
+tot = pd.Series([])
+for piece in chunker:
+    tot = tot.add(piece[&#39;key&#39;].value_counts(), fill_value=0)
+
+tot = tot.sort_values(ascending=False)</code></pre>
+<p>然后有：</p>
+<pre><code>In [40]: tot[:10]
+Out[40]: 
+E    368.0
+X    364.0
+L    346.0
+O    343.0
+Q    340.0
+M    338.0
+J    337.0
+F    335.0
+K    334.0
+H    330.0
+dtype: float64</code></pre>
+<p>TextParser还有一个get_chunk方法，它使你可以读取任意大小的块。</p>
+</div>
+<div id="section-6.1.2" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> 将数据写出到文本格式</h3>
+<p>数据也可以被输出为分隔符格式的文本。我们再来看看之前读过的一个CSV文件：</p>
+<pre><code>In [41]: data = pd.read_csv(&#39;examples/ex5.csv&#39;)
+
+In [42]: data
+Out[42]: 
+  something  a   b     c   d message
+0       one  1   2   3.0   4     NaN
+1       two  5   6   NaN   8   world
+2     three  9  10  11.0  12     foo</code></pre>
+<p>利用DataFrame的to_csv方法，我们可以将数据写到一个以逗号分隔的文件中：</p>
+<pre><code>In [43]: data.to_csv(&#39;examples/out.csv&#39;)
+
+In [44]: !cat examples/out.csv
+,something,a,b,c,d,message
+0,one,1,2,3.0,4,
+1,two,5,6,,8,world
+2,three,9,10,11.0,12,foo</code></pre>
+<p>当然，还可以使用其他分隔符（由于这里直接写出到sys.stdout，所以仅仅是打印出文本结果而已）：</p>
+<pre><code>In [45]: import sys
+
+In [46]: data.to_csv(sys.stdout, sep=&#39;|&#39;)
+|something|a|b|c|d|message
+0|one|1|2|3.0|4|
+1|two|5|6||8|world
+2|three|9|10|11.0|12|foo</code></pre>
+<p>缺失值在输出结果中会被表示为空字符串。你可能希望将其表示为别的标记值：</p>
+<pre><code>In [47]: data.to_csv(sys.stdout, na_rep=&#39;NULL&#39;)
+,something,a,b,c,d,message
+0,one,1,2,3.0,4,NULL
+1,two,5,6,NULL,8,world
+2,three,9,10,11.0,12,foo</code></pre>
+<p>如果没有设置其他选项，则会写出行和列的标签。当然，它们也都可以被禁用：</p>
+<pre><code>In [48]: data.to_csv(sys.stdout, index=False, header=False)
+one,1,2,3.0,4,
+two,5,6,,8,world
+three,9,10,11.0,12,foo</code></pre>
+<p>此外，你还可以只写出一部分的列，并以你指定的顺序排列：</p>
+<pre><code>In [49]: data.to_csv(sys.stdout, index=False, columns=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
+a,b,c
+1,2,3.0
+5,6,
+9,10,11.0</code></pre>
+<p>Series也有一个to_csv方法：</p>
+<pre><code>In [50]: dates = pd.date_range(&#39;1/1/2000&#39;, periods=7)
+
+In [51]: ts = pd.Series(np.arange(7), index=dates)
+
+In [52]: ts.to_csv(&#39;examples/tseries.csv&#39;)
+
+In [53]: !cat examples/tseries.csv
+2000-01-01,0
+2000-01-02,1
+2000-01-03,2
+2000-01-04,3
+2000-01-05,4
+2000-01-06,5
+2000-01-07,6</code></pre>
+</div>
+<div id="section-6.1.3" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> 处理分隔符格式</h3>
+<p>大部分存储在磁盘上的表格型数据都能用pandas.read_table进行加载。然而，有时还是需要做一些手工处理。由于接收到含有畸形行的文件而使read_table出毛病的情况并不少见。为了说明这些基本工具，看看下面这个简单的CSV文件：</p>
+<pre><code>In [54]: !cat examples/ex7.csv
+&quot;a&quot;,&quot;b&quot;,&quot;c&quot;
+&quot;1&quot;,&quot;2&quot;,&quot;3&quot;
+&quot;1&quot;,&quot;2&quot;,&quot;3&quot;</code></pre>
+<p>对于任何单字符分隔符文件，可以直接使用Python内置的csv模块。将任意已打开的文件或文件型的对象传给csv.reader：</p>
+<pre><code>import csv
+f = open(&#39;examples/ex7.csv&#39;)
+
+reader = csv.reader(f)</code></pre>
+<p>对这个reader进行迭代将会为每行产生一个元组（并移除了所有的引号）：对这个reader进行迭代将会为每行产生一个元组（并移除了所有的引号）：</p>
+<pre><code>In [56]: for line in reader:
+   ....:     print(line)
+[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</code></pre>
+<p>现在，为了使数据格式合乎要求，你需要对其做一些整理工作。我们一步一步来做。首先，读取文件到一个多行的列表中：</p>
+<pre><code>In [57]: with open(&#39;examples/ex7.csv&#39;) as f:
+   ....:     lines = list(csv.reader(f))</code></pre>
+<p>然后，我们将这些行分为标题行和数据行：</p>
+<pre><code>In [58]: header, values = lines[0], lines[1:]</code></pre>
+<p>然后，我们可以用字典构造式和zip(*values)，后者将行转置为列，创建数据列的字典：</p>
+<pre><code>In [59]: data_dict = {h: v for h, v in zip(header, zip(*values))}
+
+In [60]: data_dict
+Out[60]: {&#39;a&#39;: (&#39;1&#39;, &#39;1&#39;), &#39;b&#39;: (&#39;2&#39;, &#39;2&#39;), &#39;c&#39;: (&#39;3&#39;, &#39;3&#39;)}</code></pre>
+<p>CSV文件的形式有很多。只需定义csv.Dialect的一个子类即可定义出新格式（如专门的分隔符、字符串引用约定、行结束符等）：</p>
+<pre><code>class my_dialect(csv.Dialect):
+    lineterminator = &#39;\n&#39;
+    delimiter = &#39;;&#39;
+    quotechar = &#39;&quot;&#39;
+    quoting = csv.QUOTE_MINIMAL
+reader = csv.reader(f, dialect=my_dialect)</code></pre>
+<p>各个CSV语支的参数也可以关键字的形式提供给csv.reader，而无需定义子类：</p>
+<pre><code>reader = csv.reader(f, delimiter=&#39;|&#39;)</code></pre>
+<p>可用的选项（csv.Dialect的属性）及其功能如表6-3所示。</p>
+<div class="figure">
+<img src="//upload-images.jianshu.io/upload_images/7178691-7a1cee622459072b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img" />
+<p class="caption">img</p>
+</div>
+<blockquote>
+<p>笔记：对于那些使用复杂分隔符或多字符分隔符的文件，csv模块就无能为力了。这种情况下，你就只能使用字符串的split方法或正则表达式方法re.split进行行拆分和其他整理工作了。</p>
+</blockquote>
+<p>要手工输出分隔符文件，你可以使用csv.writer。它接受一个已打开且可写的文件对象以及跟csv.reader相同的那些语支和格式化选项：</p>
+<pre><code>with open(&#39;mydata.csv&#39;, &#39;w&#39;) as f:
+    writer = csv.writer(f, dialect=my_dialect)
+    writer.writerow((&#39;one&#39;, &#39;two&#39;, &#39;three&#39;))
+    writer.writerow((&#39;1&#39;, &#39;2&#39;, &#39;3&#39;))
+    writer.writerow((&#39;4&#39;, &#39;5&#39;, &#39;6&#39;))
+    writer.writerow((&#39;7&#39;, &#39;8&#39;, &#39;9&#39;))</code></pre>
+</div>
+<div id="json" class="section level3">
+<h3><span class="header-section-number">6.1.4</span> JSON数据</h3>
+<p>JSON（JavaScript Object Notation的简称）已经成为通过HTTP请求在Web浏览器和其他应用程序之间发送数据的标准格式之一。它是一种比表格型文本格式（如CSV）灵活得多的数据格式。下面是一个例子：</p>
+<pre><code>obj = &quot;&quot;&quot;
+{&quot;name&quot;: &quot;Wes&quot;,
+ &quot;places_lived&quot;: [&quot;United States&quot;, &quot;Spain&quot;, &quot;Germany&quot;],
+ &quot;pet&quot;: null,
+ &quot;siblings&quot;: [{&quot;name&quot;: &quot;Scott&quot;, &quot;age&quot;: 30, &quot;pets&quot;: [&quot;Zeus&quot;, &quot;Zuko&quot;]},
+              {&quot;name&quot;: &quot;Katie&quot;, &quot;age&quot;: 38,
+               &quot;pets&quot;: [&quot;Sixes&quot;, &quot;Stache&quot;, &quot;Cisco&quot;]}]
+}
+&quot;&quot;&quot;
+
+除其空值null和一些其他的细微差别（如列表末尾不允许存在多余的逗号）之外，JSON非常接近于有效的Python代码。基本类型有对象（字典）、数组（列表）、字符串、数值、布尔值以及null。对象中所有的键都必须是字符串。许多Python库都可以读写JSON数据。我将使用json，因为它是构建于Python标准库中的。通过json.loads即可将JSON字符串转换成Python形式：
+```python
+In [62]: import json
+
+In [63]: result = json.loads(obj)
+
+In [64]: result
+Out[64]: 
+{&#39;name&#39;: &#39;Wes&#39;,
+ &#39;pet&#39;: None,
+ &#39;places_lived&#39;: [&#39;United States&#39;, &#39;Spain&#39;, &#39;Germany&#39;],
+ &#39;siblings&#39;: [{&#39;age&#39;: 30, &#39;name&#39;: &#39;Scott&#39;, &#39;pets&#39;: [&#39;Zeus&#39;, &#39;Zuko&#39;]},
+  {&#39;age&#39;: 38, &#39;name&#39;: &#39;Katie&#39;, &#39;pets&#39;: [&#39;Sixes&#39;, &#39;Stache&#39;, &#39;Cisco&#39;]}]}</code></pre>
+<p>json.dumps则将Python对象转换成JSON格式：</p>
+<pre><code>In [65]: asjson = json.dumps(result)</code></pre>
+<p>如何将（一个或一组）JSON对象转换为DataFrame或其他便于分析的数据结构就由你决定了。最简单方便的方式是：向DataFrame构造器传入一个字典的列表（就是原先的JSON对象），并选取数据字段的子集：</p>
+<pre><code>In [66]: siblings = pd.DataFrame(result[&#39;siblings&#39;], columns=[&#39;name&#39;, &#39;age&#39;])
+
+In [67]: siblings
+Out[67]: 
+    name  age
+0  Scott   30
+1  Katie   38</code></pre>
+<p>pandas.read_json可以自动将特别格式的JSON数据集转换为Series或DataFrame。例如：</p>
+<pre><code>In [68]: !cat examples/example.json
+[{&quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3},
+ {&quot;a&quot;: 4, &quot;b&quot;: 5, &quot;c&quot;: 6},
+ {&quot;a&quot;: 7, &quot;b&quot;: 8, &quot;c&quot;: 9}]</code></pre>
+<p>pandas.read_json的默认选项假设JSON数组中的每个对象是表格中的一行：</p>
+<pre><code>In [69]: data = pd.read_json(&#39;examples/example.json&#39;)
+
+In [70]: data
+Out[70]: 
+   a  b  c
+0  1  2  3
+1  4  5  6
+2  7  8  9</code></pre>
+<p>第7章中关于USDA Food Database的那个例子进一步讲解了JSON数据的读取和处理（包括嵌套记录）。</p>
+<p>如果你需要将数据从pandas输出到JSON，可以使用to_json方法：</p>
+<pre><code>In [71]: print(data.to_json())
+{&quot;a&quot;:{&quot;0&quot;:1,&quot;1&quot;:4,&quot;2&quot;:7},&quot;b&quot;:{&quot;0&quot;:2,&quot;1&quot;:5,&quot;2&quot;:8},&quot;c&quot;:{&quot;0&quot;:3,&quot;1&quot;:6,&quot;2&quot;:9}}
+
+In [72]: print(data.to_json(orient=&#39;records&#39;))
+[{&quot;a&quot;:1,&quot;b&quot;:2,&quot;c&quot;:3},{&quot;a&quot;:4,&quot;b&quot;:5,&quot;c&quot;:6},{&quot;a&quot;:7,&quot;b&quot;:8,&quot;c&quot;:9}]</code></pre>
+</div>
+<div id="xmlhtmlweb" class="section level3">
+<h3><span class="header-section-number">6.1.5</span> XML和HTML：Web信息收集</h3>
+<p>Python有许多可以读写常见的HTML和XML格式数据的库，包括lxml、Beautiful Soup和html5lib。lxml的速度比较快，但其它的库处理有误的HTML或XML文件更好。</p>
+<p>pandas有一个内置的功能，read_html，它可以使用lxml和Beautiful Soup自动将HTML文件中的表格解析为DataFrame对象。为了进行展示，我从美国联邦存款保险公司下载了一个HTML文件（pandas文档中也使用过），它记录了银行倒闭的情况。首先，你需要安装read_html用到的库：</p>
+<pre><code>conda install lxml
+pip install beautifulsoup4 html5lib</code></pre>
+<p>如果你用的不是conda，可以使用<code>pip install lxml</code>。</p>
+pandas.read_html有一些选项，默认条件下，它会搜索、尝试解析
+<table>
+<p>标签内的的表格数据。结果是一个列表的DataFrame对象：</p>
+<pre><code>In [73]: tables = pd.read_html(&#39;examples/fdic_failed_bank_list.html&#39;)
+
+In [74]: len(tables)
+Out[74]: 1
+
+In [75]: failures = tables[0]
+
+In [76]: failures.head()
+Out[76]: 
+                      Bank Name             City  ST   CERT  \
+0                   Allied Bank         Mulberry  AR     91   
+1  The Woodbury Banking Company         Woodbury  GA  11297   
+2        First CornerStone Bank  King of Prussia  PA  35312   
+3            Trust Company Bank          Memphis  TN   9956   
+4    North Milwaukee State Bank        Milwaukee  WI  20364   
+                 Acquiring Institution        Closing Date       Updated Date  
+0                         Today&#39;s Bank  September 23, 2016  November 17, 2016  
+1                          United Bank     August 19, 2016  November 17, 2016  
+2  First-Citizens Bank &amp; Trust Company         May 6, 2016  September 6, 2016  
+3           The Bank of Fayette County      April 29, 2016  September 6, 2016  
+4  First-Citizens Bank &amp; Trust Company      March 11, 2016      June 16, 2016</code></pre>
+<p>因为failures有许多列，pandas插入了一个换行符。</p>
+<p>这里，我们可以做一些数据清洗和分析（后面章节会进一步讲解），比如计算按年份计算倒闭的银行数：</p>
+<pre><code>In [77]: close_timestamps = pd.to_datetime(failures[&#39;Closing Date&#39;])
+
+In [78]: close_timestamps.dt.year.value_counts()
+Out[78]: 
+2010    157
+2009    140
+2011     92
+2012     51
+2008     25
+       ... 
+2004      4
+2001      4
+2007      3
+2003      3
+2000      2
+Name: Closing Date, Length: 15, dtype: int64</code></pre>
+</div>
+<div id="lxml.objectifyxml" class="section level3">
+<h3><span class="header-section-number">6.1.6</span> 利用lxml.objectify解析XML</h3>
+<p>XML（Extensible Markup Language）是另一种常见的支持分层、嵌套数据以及元数据的结构化数据格式。本书所使用的这些文件实际上来自于一个很大的XML文档。</p>
+<p>前面，我介绍了pandas.read_html函数，它可以使用lxml或Beautiful Soup从HTML解析数据。XML和HTML的结构很相似，但XML更为通用。这里，我会用一个例子演示如何利用lxml从XML格式解析数据。</p>
+<p>纽约大都会运输署发布了一些有关其公交和列车服务的数据资料（<a href="https://link.jianshu.com?t=http%3A%2F%2Fwww.mta.info%2Fdevelopers%2Fdownload.html">http://www.mta.info/developers/download.html</a>）。这里，我们将看看包含在一组XML文件中的运行情况数据。每项列车或公交服务都有各自的文件（如Metro-North Railroad的文件是Performance_MNR.xml），其中每条XML记录就是一条月度数据，如下所示：</p>
+<pre><code>&lt;INDICATOR&gt;
+  &lt;INDICATOR_SEQ&gt;373889&lt;/INDICATOR_SEQ&gt;
+  &lt;PARENT_SEQ&gt;&lt;/PARENT_SEQ&gt;
+  &lt;AGENCY_NAME&gt;Metro-North Railroad&lt;/AGENCY_NAME&gt;
+  &lt;INDICATOR_NAME&gt;Escalator Availability&lt;/INDICATOR_NAME&gt;
+  &lt;DESCRIPTION&gt;Percent of the time that escalators are operational
+  systemwide. The availability rate is based on physical observations performed
+  the morning of regular business days only. This is a new indicator the agency
+  began reporting in 2009.&lt;/DESCRIPTION&gt;
+  &lt;PERIOD_YEAR&gt;2011&lt;/PERIOD_YEAR&gt;
+  &lt;PERIOD_MONTH&gt;12&lt;/PERIOD_MONTH&gt;
+  &lt;CATEGORY&gt;Service Indicators&lt;/CATEGORY&gt;
+  &lt;FREQUENCY&gt;M&lt;/FREQUENCY&gt;
+  &lt;DESIRED_CHANGE&gt;U&lt;/DESIRED_CHANGE&gt;
+  &lt;INDICATOR_UNIT&gt;%&lt;/INDICATOR_UNIT&gt;
+  &lt;DECIMAL_PLACES&gt;1&lt;/DECIMAL_PLACES&gt;
+  &lt;YTD_TARGET&gt;97.00&lt;/YTD_TARGET&gt;
+  &lt;YTD_ACTUAL&gt;&lt;/YTD_ACTUAL&gt;
+  &lt;MONTHLY_TARGET&gt;97.00&lt;/MONTHLY_TARGET&gt;
+  &lt;MONTHLY_ACTUAL&gt;&lt;/MONTHLY_ACTUAL&gt;
+&lt;/INDICATOR&gt;</code></pre>
+<p>我们先用lxml.objectify解析该文件，然后通过getroot得到该XML文件的根节点的引用：</p>
+<pre><code>from lxml import objectify
+
+path = &#39;datasets/mta_perf/Performance_MNR.xml&#39;
+parsed = objectify.parse(open(path))
+root = parsed.getroot()</code></pre>
+<p>root.INDICATOR返回一个用于产生各个<INDICATOR>XML元素的生成器。对于每条记录，我们可以用标记名（如YTD_ACTUAL）和数据值填充一个字典（排除几个标记）：</p>
+<pre><code>data = []
+
+skip_fields = [&#39;PARENT_SEQ&#39;, &#39;INDICATOR_SEQ&#39;,
+               &#39;DESIRED_CHANGE&#39;, &#39;DECIMAL_PLACES&#39;]
+
+for elt in root.INDICATOR:
+    el_data = {}
+    for child in elt.getchildren():
+        if child.tag in skip_fields:
+            continue
+        el_data[child.tag] = child.pyval
+    data.append(el_data)</code></pre>
+<p>最后，将这组字典转换为一个DataFrame：</p>
+<pre><code>In [81]: perf = pd.DataFrame(data)
+
+In [82]: perf.head()
+Out[82]:
+Empty DataFrame
+Columns: []
+Index: []</code></pre>
+<p>XML数据可以比本例复杂得多。每个标记都可以有元数据。看看下面这个HTML的链接标签（它也算是一段有效的XML）：</p>
+<pre><code>from io import StringIO
+tag = &#39;&lt;a href=&quot;http://www.google.com&quot;&gt;Google&lt;/a&gt;&#39;
+root = objectify.parse(StringIO(tag)).getroot()</code></pre>
+<p>现在就可以访问标签或链接文本中的任何字段了（如href）：</p>
+<pre><code>In [84]: root
+Out[84]: &lt;Element a at 0x7f6b15817748&gt;
+
+In [85]: root.get(&#39;href&#39;)
+Out[85]: &#39;http://www.google.com&#39;
+
+In [86]: root.text
+Out[86]: &#39;Google&#39;</code></pre>
+</div>
+</div>
+<div id="section-6.2" class="section level2">
+<h2><span class="header-section-number">6.2</span> 二进制数据格式</h2>
+<p>实现数据的高效二进制格式存储最简单的办法之一是使用Python内置的pickle序列化。pandas对象都有一个用于将数据以pickle格式保存到磁盘上的to_pickle方法：</p>
+<pre><code>In [87]: frame = pd.read_csv(&#39;examples/ex1.csv&#39;)
+
+In [88]: frame
+Out[88]: 
+   a   b   c   d message
+0  1   2   3   4   hello
+1  5   6   7   8   world
+2  9  10  11  12     foo
+
+In [89]: frame.to_pickle(&#39;examples/frame_pickle&#39;)</code></pre>
+<p>你可以通过pickle直接读取被pickle化的数据，或是使用更为方便的pandas.read_pickle：</p>
+<pre><code>In [90]: pd.read_pickle(&#39;examples/frame_pickle&#39;)
+Out[90]: 
+   a   b   c   d message
+0  1   2   3   4   hello
+1  5   6   7   8   world
+2  9  10  11  12     foo</code></pre>
+<blockquote>
+<p>注意：pickle仅建议用于短期存储格式。其原因是很难保证该格式永远是稳定的；今天pickle的对象可能无法被后续版本的库unpickle出来。虽然我尽力保证这种事情不会发生在pandas中，但是今后的某个时候说不定还是得“打破”该pickle格式。</p>
+</blockquote>
+<p>pandas内置支持两个二进制数据格式：HDF5和MessagePack。下一节，我会给出几个HDF5的例子，但我建议你尝试下不同的文件格式，看看它们的速度以及是否适合你的分析工作。pandas或NumPy数据的其它存储格式有：</p>
+<ul>
+<li>bcolz：一种可压缩的列存储二进制格式，基于Blosc压缩库。</li>
+<li>Feather：我与R语言社区的Hadley Wickham设计的一种跨语言的列存储文件格式。Feather使用了Apache Arrow的列式内存格式。</li>
+</ul>
+<div id="hdf5" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> 使用HDF5格式</h3>
+<p>HDF5是一种存储大规模科学数组数据的非常好的文件格式。它可以被作为C库，带有许多语言的接口，如Java、Python和MATLAB等。HDF5中的HDF指的是层次型数据格式（hierarchical data format）。每个HDF5文件都含有一个文件系统式的节点结构，它使你能够存储多个数据集并支持元数据。与其他简单格式相比，HDF5支持多种压缩器的即时压缩，还能更高效地存储重复模式数据。对于那些非常大的无法直接放入内存的数据集，HDF5就是不错的选择，因为它可以高效地分块读写。</p>
+<p>虽然可以用PyTables或h5py库直接访问HDF5文件，pandas提供了更为高级的接口，可以简化存储Series和DataFrame对象。HDFStore类可以像字典一样，处理低级的细节：</p>
+<pre><code>In [92]: frame = pd.DataFrame({&#39;a&#39;: np.random.randn(100)})
+
+In [93]: store = pd.HDFStore(&#39;mydata.h5&#39;)
+
+In [94]: store[&#39;obj1&#39;] = frame
+
+In [95]: store[&#39;obj1_col&#39;] = frame[&#39;a&#39;]
+
+In [96]: store
+Out[96]: 
+&lt;class &#39;pandas.io.pytables.HDFStore&#39;&gt;
+File path: mydata.h5
+/obj1                frame        (shape-&gt;[100,1])                               
+        
+/obj1_col            series       (shape-&gt;[100])                                 
+        
+/obj2                frame_table  (typ-&gt;appendable,nrows-&gt;100,ncols-&gt;1,indexers-&gt;
+[index])
+/obj3                frame_table  (typ-&gt;appendable,nrows-&gt;100,ncols-&gt;1,indexers-&gt;
+[index])</code></pre>
+<p>HDF5文件中的对象可以通过与字典一样的API进行获取：</p>
+<pre><code>In [97]: store[&#39;obj1&#39;]
+Out[97]: 
+           a
+0  -0.204708
+1   0.478943
+2  -0.519439
+3  -0.555730
+4   1.965781
+..       ...
+95  0.795253
+96  0.118110
+97 -0.748532
+98  0.584970
+99  0.152677
+[100 rows x 1 columns]</code></pre>
+<p>HDFStore支持两种存储模式，‘fixed’和’table’。后者通常会更慢，但是支持使用特殊语法进行查询操作：</p>
+<pre><code>In [98]: store.put(&#39;obj2&#39;, frame, format=&#39;table&#39;)
+
+In [99]: store.select(&#39;obj2&#39;, where=[&#39;index &gt;= 10 and index &lt;= 15&#39;])
+Out[99]: 
+           a
+10  1.007189
+11 -1.296221
+12  0.274992
+13  0.228913
+14  1.352917
+15  0.886429
+
+In [100]: store.close()</code></pre>
+<p>put是store[‘obj2’] = frame方法的显示版本，允许我们设置其它的选项，比如格式。</p>
+<p>pandas.read_hdf函数可以快捷使用这些工具：</p>
+<pre><code>In [101]: frame.to_hdf(&#39;mydata.h5&#39;, &#39;obj3&#39;, format=&#39;table&#39;)
+
+In [102]: pd.read_hdf(&#39;mydata.h5&#39;, &#39;obj3&#39;, where=[&#39;index &lt; 5&#39;])
+Out[102]: 
+          a
+0 -0.204708
+1  0.478943
+2 -0.519439
+3 -0.555730
+4  1.965781</code></pre>
+<blockquote>
+<p>笔记：如果你要处理的数据位于远程服务器，比如Amazon S3或HDFS，使用专门为分布式存储（比如Apache Parquet）的二进制格式也许更加合适。Python的Parquet和其它存储格式还在不断的发展之中，所以这本书中没有涉及。</p>
+</blockquote>
+<p>如果需要本地处理海量数据，我建议你好好研究一下PyTables和h5py，看看它们能满足你的哪些需求。。由于许多数据分析问题都是IO密集型（而不是CPU密集型），利用HDF5这样的工具能显著提升应用程序的效率。</p>
+<blockquote>
+<p>注意：HDF5不是数据库。它最适合用作“一次写多次读”的数据集。虽然数据可以在任何时候被添加到文件中，但如果同时发生多个写操作，文件就可能会被破坏。</p>
+</blockquote>
+</div>
+<div id="microsoft-excel" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> 读取Microsoft Excel文件</h3>
+<p>pandas的ExcelFile类或pandas.read_excel函数支持读取存储在Excel 2003（或更高版本）中的表格型数据。这两个工具分别使用扩展包xlrd和openpyxl读取XLS和XLSX文件。你可以用pip或conda安装它们。</p>
+<p>要使用ExcelFile，通过传递xls或xlsx路径创建一个实例：</p>
+<pre><code>In [104]: xlsx = pd.ExcelFile(&#39;examples/ex1.xlsx&#39;)</code></pre>
+<p>存储在表单中的数据可以read_excel读取到DataFrame（原书这里写的是用parse解析，但代码中用的是read_excel，是个笔误：只换了代码，没有改文字）：</p>
+<pre><code>In [105]: pd.read_excel(xlsx, &#39;Sheet1&#39;)
+Out[105]: 
+   a   b   c   d message
+0  1   2   3   4   hello
+1  5   6   7   8   world
+2  9  10  11  12     foo</code></pre>
+<p>如果要读取一个文件中的多个表单，创建ExcelFile会更快，但你也可以将文件名传递到pandas.read_excel：</p>
+<pre><code>In [106]: frame = pd.read_excel(&#39;examples/ex1.xlsx&#39;, &#39;Sheet1&#39;)
+
+In [107]: frame
+Out[107]: 
+   a   b   c   d message
+0  1   2   3   4   hello
+1  5   6   7   8   world
+2  9  10  11  12     foo</code></pre>
+<p>如果要将pandas数据写入为Excel格式，你必须首先创建一个ExcelWriter，然后使用pandas对象的to_excel方法将数据写入到其中：</p>
+<pre><code>In [108]: writer = pd.ExcelWriter(&#39;examples/ex2.xlsx&#39;)
+
+In [109]: frame.to_excel(writer, &#39;Sheet1&#39;)
+
+In [110]: writer.save()</code></pre>
+<p>你还可以不使用ExcelWriter，而是传递文件的路径到to_excel：</p>
+<pre><code>In [111]: frame.to_excel(&#39;examples/ex2.xlsx&#39;)</code></pre>
+</div>
+</div>
+<div id="web-apis" class="section level2">
+<h2><span class="header-section-number">6.3</span> Web APIs交互</h2>
+<p>许多网站都有一些通过JSON或其他格式提供数据的公共API。通过Python访问这些API的办法有不少。一个简单易用的办法（推荐）是requests包（<a href="https://link.jianshu.com?t=http%3A%2F%2Fdocs.python-requests.org">http://docs.python-requests.org</a>）。</p>
+<p>为了搜索最新的30个GitHub上的pandas主题，我们可以发一个HTTP GET请求，使用requests扩展库：</p>
+<pre><code>In [113]: import requests
+
+In [114]: url = &#39;https://api.github.com/repos/pandas-dev/pandas/issues&#39;
+
+In [115]: resp = requests.get(url)
+
+In [116]: resp
+Out[116]: &lt;Response [200]&gt;</code></pre>
+<p>响应对象的json方法会返回一个包含被解析过的JSON字典，加载到一个Python对象中：</p>
+<pre><code>In [117]: data = resp.json()
+
+In [118]: data[0][&#39;title&#39;]
+Out[118]: &#39;Period does not round down for frequencies less that 1 hour&#39;</code></pre>
+<p>data中的每个元素都是一个包含所有GitHub主题页数据（不包含评论）的字典。我们可以直接传递数据到DataFrame，并提取感兴趣的字段：</p>
+<pre><code>In [119]: issues = pd.DataFrame(data, columns=[&#39;number&#39;, &#39;title&#39;,
+   .....:                                      &#39;labels&#39;, &#39;state&#39;])
+
+In [120]: issues
+Out[120]:
+    number                                              title  \
+0    17666  Period does not round down for frequencies les...   
+1    17665           DOC: improve docstring of function where   
+2    17664               COMPAT: skip 32-bit test on int repr   
+3    17662                          implement Delegator class
+4    17654  BUG: Fix series rename called with str alterin...   
+..     ...                                                ...   
+25   17603  BUG: Correctly localize naive datetime strings...   
+26   17599                     core.dtypes.generic --&gt; cython   
+27   17596   Merge cdate_range functionality into bdate_range   
+28   17587  Time Grouper bug fix when applied for list gro...   
+29   17583  BUG: fix tz-aware DatetimeIndex + TimedeltaInd...   
+                                               labels state  
+0                                                  []  open  
+1   [{&#39;id&#39;: 134699, &#39;url&#39;: &#39;https://api.github.com...  open  
+2   [{&#39;id&#39;: 563047854, &#39;url&#39;: &#39;https://api.github....  open  
+3                                                  []  open  
+4   [{&#39;id&#39;: 76811, &#39;url&#39;: &#39;https://api.github.com/...  open  
+..                                                ...   ...  
+25  [{&#39;id&#39;: 76811, &#39;url&#39;: &#39;https://api.github.com/...  open  
+26  [{&#39;id&#39;: 49094459, &#39;url&#39;: &#39;https://api.github.c...  open  
+27  [{&#39;id&#39;: 35818298, &#39;url&#39;: &#39;https://api.github.c...  open  
+28  [{&#39;id&#39;: 233160, &#39;url&#39;: &#39;https://api.github.com...  open  
+29  [{&#39;id&#39;: 76811, &#39;url&#39;: &#39;https://api.github.com/...  open  
+[30 rows x 4 columns]</code></pre>
+<p>花费一些精力，你就可以创建一些更高级的常见的Web API的接口，返回DataFrame对象，方便进行分析。</p>
+</div>
+<div id="section-6.4" class="section level2">
+<h2><span class="header-section-number">6.4</span> 数据库交互</h2>
+<p>在商业场景下，大多数数据可能不是存储在文本或Excel文件中。基于SQL的关系型数据库（如SQL Server、PostgreSQL和MySQL等）使用非常广泛，其它一些数据库也很流行。数据库的选择通常取决于性能、数据完整性以及应用程序的伸缩性需求。</p>
+<p>将数据从SQL加载到DataFrame的过程很简单，此外pandas还有一些能够简化该过程的函数。例如，我将使用SQLite数据库（通过Python内置的sqlite3驱动器）：</p>
+<pre><code>In [121]: import sqlite3
+
+In [122]: query = &quot;&quot;&quot;
+   .....: CREATE TABLE test
+   .....: (a VARCHAR(20), b VARCHAR(20),
+   .....:  c REAL,        d INTEGER
+   .....: );&quot;&quot;&quot;
+
+In [123]: con = sqlite3.connect(&#39;mydata.sqlite&#39;)
+
+In [124]: con.execute(query)
+Out[124]: &lt;sqlite3.Cursor at 0x7f6b12a50f10&gt;
+
+In [125]: con.commit()</code></pre>
+<p>然后插入几行数据：</p>
+<pre><code>In [126]: data = [(&#39;Atlanta&#39;, &#39;Georgia&#39;, 1.25, 6),
+   .....:         (&#39;Tallahassee&#39;, &#39;Florida&#39;, 2.6, 3),
+   .....:         (&#39;Sacramento&#39;, &#39;California&#39;, 1.7, 5)]
+
+In [127]: stmt = &quot;INSERT INTO test VALUES(?, ?, ?, ?)&quot;
+
+In [128]: con.executemany(stmt, data)
+Out[128]: &lt;sqlite3.Cursor at 0x7f6b15c66ce0&gt;</code></pre>
+<p>从表中选取数据时，大部分Python SQL驱动器（PyODBC、psycopg2、MySQLdb、pymssql等）都会返回一个元组列表：</p>
+<pre><code>In [130]: cursor = con.execute(&#39;select * from test&#39;)
+
+In [131]: rows = cursor.fetchall()
+
+In [132]: rows
+Out[132]: 
+[(&#39;Atlanta&#39;, &#39;Georgia&#39;, 1.25, 6),
+ (&#39;Tallahassee&#39;, &#39;Florida&#39;, 2.6, 3),
+ (&#39;Sacramento&#39;, &#39;California&#39;, 1.7, 5)]</code></pre>
+<p>你可以将这个元组列表传给DataFrame构造器，但还需要列名（位于光标的description属性中）：</p>
+<pre><code>In [133]: cursor.description
+Out[133]: 
+((&#39;a&#39;, None, None, None, None, None, None),
+ (&#39;b&#39;, None, None, None, None, None, None),
+ (&#39;c&#39;, None, None, None, None, None, None),
+ (&#39;d&#39;, None, None, None, None, None, None))
+
+In [134]: pd.DataFrame(rows, columns=[x[0] for x in cursor.description])
+Out[134]: 
+             a           b     c  d
+0      Atlanta     Georgia  1.25  6
+1  Tallahassee     Florida  2.60  3
+2   Sacramento  California  1.70  5</code></pre>
+<p>这种数据规整操作相当多，你肯定不想每查一次数据库就重写一次。<a href="https://link.jianshu.com?t=http%3A%2F%2Fwww.sqlalchemy.org%2F">SQLAlchemy项目</a>是一个流行的Python SQL工具，它抽象出了SQL数据库中的许多常见差异。pandas有一个read_sql函数，可以让你轻松的从SQLAlchemy连接读取数据。这里，我们用SQLAlchemy连接SQLite数据库，并从之前创建的表读取数据：</p>
+<pre><code>In [135]: import sqlalchemy as sqla
+
+In [136]: db = sqla.create_engine(&#39;sqlite:///mydata.sqlite&#39;)
+
+In [137]: pd.read_sql(&#39;select * from test&#39;, db)
+Out[137]: 
+             a           b     c  d
+0      Atlanta     Georgia  1.25  6
+1  Tallahassee     Florida  2.60  3
+2   Sacramento  California  1.70  5</code></pre>
+</div>
+<div id="-3" class="section level2">
+<h2><span class="header-section-number">6.5</span> 总结</h2>
+<p>访问数据通常是数据分析的第一步。在本章中，我们已经学了一些有用的工具。在接下来的章节中，我们将深入研究数据规整、数据可视化、时间序列分析和其它主题。</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pandas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tidy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/openbiox/Cookbook-for-R-Chinese/edit/master/book/06-data2file.Rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

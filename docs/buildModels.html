@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 13 章 Python建模库介绍 | 利用Python进行数据分析（第二版）中文翻译</title>
+  <meta name="description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 13 章 Python建模库介绍 | 利用Python进行数据分析（第二版）中文翻译" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="github-repo" content="openbiox/py4ds-CN" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 13 章 Python建模库介绍 | 利用Python进行数据分析（第二版）中文翻译" />
+  
+  <meta name="twitter:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  
+
+<meta name="author" content="作者：Wes McKinney，翻译：SeanCheney，校对与维护：王诗翔" />
+
+
+<meta name="date" content="2019-10-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="adPandas.html"/>
+<link rel="next" href="dsCases.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">利用Python进行数据分析（第二版）</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#section-0.1"><i class="fa fa-check"></i><b>0.1</b> 问题与贡献</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#section-0.2"><i class="fa fa-check"></i><b>0.2</b> 许可</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#section-0.3"><i class="fa fa-check"></i><b>0.3</b> 致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>作者简介</a></li>
+<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> 准备工作</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e79a84e58685e5aeb9"><i class="fa fa-check"></i>本书的内容</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>为什么要使用Python进行数据分析</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>重要的Python库</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e5ae89e8a385e5928ce8aebee7bdae"><i class="fa fa-check"></i>安装和设置</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e7a4bee58cbae5928ce4bc9ae8aeae"><i class="fa fa-check"></i>社区和会议</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e5afbce888aa"><i class="fa fa-check"></i>本书导航</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Python 语法基础，IPython 和 Jupyter Notebooks</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python解释器</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i>IPython基础</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python语法基础</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#unicode"><i class="fa fa-check"></i>字节和Unicode</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#e68ea7e588b6e6b581"><i class="fa fa-check"></i>控制流</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>3</b> Python的数据结构、函数和文件</a><ul>
+<li class="chapter" data-level="3.1" data-path="structure.html"><a href="structure.html#section-3.1"><i class="fa fa-check"></i><b>3.1</b> 元组</a></li>
+<li class="chapter" data-level="3.2" data-path="structure.html"><a href="structure.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 列表</a></li>
+<li class="chapter" data-level="3.3" data-path="structure.html"><a href="structure.html#section-3.3"><i class="fa fa-check"></i><b>3.3</b> 序列函数</a></li>
+<li class="chapter" data-level="3.4" data-path="structure.html"><a href="structure.html#section-3.4"><i class="fa fa-check"></i><b>3.4</b> 字典</a></li>
+<li class="chapter" data-level="3.5" data-path="structure.html"><a href="structure.html#section-3.5"><i class="fa fa-check"></i><b>3.5</b> 集合</a></li>
+<li class="chapter" data-level="3.6" data-path="structure.html"><a href="structure.html#section-3.6"><i class="fa fa-check"></i><b>3.6</b> 列表、集合和字典推导式</a></li>
+<li class="chapter" data-level="3.7" data-path="structure.html"><a href="structure.html#section-3.7"><i class="fa fa-check"></i><b>3.7</b> 嵌套列表推导式</a></li>
+<li class="chapter" data-level="3.8" data-path="structure.html"><a href="structure.html#section-3.8"><i class="fa fa-check"></i><b>3.8</b> 函数</a></li>
+<li class="chapter" data-level="3.9" data-path="structure.html"><a href="structure.html#section-3.9"><i class="fa fa-check"></i><b>3.9</b> 生成器</a></li>
+<li class="chapter" data-level="3.10" data-path="structure.html"><a href="structure.html#section-3.10"><i class="fa fa-check"></i><b>3.10</b> 错误和异常处理</a></li>
+<li class="chapter" data-level="3.11" data-path="structure.html"><a href="structure.html#section-3.11"><i class="fa fa-check"></i><b>3.11</b> 文件和操作系统</a></li>
+<li class="chapter" data-level="3.12" data-path="structure.html"><a href="structure.html#section-3.12"><i class="fa fa-check"></i><b>3.12</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="preparation.html"><a href="preparation.html#numpy"><i class="fa fa-check"></i><b>4</b> NumPy基础：数组和矢量计算</a><ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4.1</b> NumPy的ndarray：一种多维数组对象</a></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 通用函数：快速的元素级数组函数</a></li>
+<li class="chapter" data-level="4.3" data-path="numpy.html"><a href="numpy.html#section-4.3"><i class="fa fa-check"></i><b>4.3</b> 利用数组进行数据处理</a></li>
+<li class="chapter" data-level="4.4" data-path="numpy.html"><a href="numpy.html#section-4.4"><i class="fa fa-check"></i><b>4.4</b> 用于数组的文件输入输出</a></li>
+<li class="chapter" data-level="4.5" data-path="numpy.html"><a href="numpy.html#section-4.5"><i class="fa fa-check"></i><b>4.5</b> 线性代数</a></li>
+<li class="chapter" data-level="4.6" data-path="numpy.html"><a href="numpy.html#section-4.6"><i class="fa fa-check"></i><b>4.6</b> 伪随机数生成</a></li>
+<li class="chapter" data-level="4.7" data-path="numpy.html"><a href="numpy.html#section-4.7"><i class="fa fa-check"></i><b>4.7</b> 示例：随机漫步</a></li>
+<li class="chapter" data-level="4.8" data-path="numpy.html"><a href="numpy.html#-1"><i class="fa fa-check"></i><b>4.8</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5</b> pandas入门</a><ul>
+<li class="chapter" data-level="5.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5.1</b> pandas的数据结构介绍</a></li>
+<li class="chapter" data-level="5.2" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>5.2</b> 基本功能</a></li>
+<li class="chapter" data-level="5.3" data-path="pandas.html"><a href="pandas.html#section-5.3"><i class="fa fa-check"></i><b>5.3</b> 汇总和计算描述统计</a></li>
+<li class="chapter" data-level="5.4" data-path="pandas.html"><a href="pandas.html#-2"><i class="fa fa-check"></i><b>5.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data2file.html"><a href="data2file.html"><i class="fa fa-check"></i><b>6</b> 数据加载、存储与文件格式</a><ul>
+<li class="chapter" data-level="6.1" data-path="data2file.html"><a href="data2file.html#section-6.1"><i class="fa fa-check"></i><b>6.1</b> 读写文本格式的数据</a></li>
+<li class="chapter" data-level="6.2" data-path="data2file.html"><a href="data2file.html#section-6.2"><i class="fa fa-check"></i><b>6.2</b> 二进制数据格式</a></li>
+<li class="chapter" data-level="6.3" data-path="data2file.html"><a href="data2file.html#web-apis"><i class="fa fa-check"></i><b>6.3</b> Web APIs交互</a></li>
+<li class="chapter" data-level="6.4" data-path="data2file.html"><a href="data2file.html#section-6.4"><i class="fa fa-check"></i><b>6.4</b> 数据库交互</a></li>
+<li class="chapter" data-level="6.5" data-path="data2file.html"><a href="data2file.html#-3"><i class="fa fa-check"></i><b>6.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>7</b> 数据清洗和准备</a><ul>
+<li class="chapter" data-level="7.1" data-path="tidy.html"><a href="tidy.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 处理缺失数据</a></li>
+<li class="chapter" data-level="7.2" data-path="tidy.html"><a href="tidy.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 数据转换</a></li>
+<li class="chapter" data-level="7.3" data-path="tidy.html"><a href="tidy.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 字符串操作</a></li>
+<li class="chapter" data-level="7.4" data-path="tidy.html"><a href="tidy.html#-4"><i class="fa fa-check"></i><b>7.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reshape.html"><a href="reshape.html"><i class="fa fa-check"></i><b>8</b> 数据规整：聚合、合并和重塑</a><ul>
+<li class="chapter" data-level="8.1" data-path="reshape.html"><a href="reshape.html#section-8.1"><i class="fa fa-check"></i><b>8.1</b> 层次化索引</a></li>
+<li class="chapter" data-level="8.2" data-path="reshape.html"><a href="reshape.html#section-8.2"><i class="fa fa-check"></i><b>8.2</b> 合并数据集</a></li>
+<li class="chapter" data-level="8.3" data-path="reshape.html"><a href="reshape.html#section-8.3"><i class="fa fa-check"></i><b>8.3</b> 重塑和轴向旋转</a></li>
+<li class="chapter" data-level="8.4" data-path="reshape.html"><a href="reshape.html#-5"><i class="fa fa-check"></i><b>8.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="visulization.html"><a href="visulization.html"><i class="fa fa-check"></i><b>9</b> 绘图和可视化</a><ul>
+<li class="chapter" data-level="9.1" data-path="visulization.html"><a href="visulization.html#matplotlib-api"><i class="fa fa-check"></i><b>9.1</b> matplotlib API入门</a></li>
+<li class="chapter" data-level="9.2" data-path="visulization.html"><a href="visulization.html#pandasseaborn"><i class="fa fa-check"></i><b>9.2</b> 使用pandas和seaborn绘图</a></li>
+<li class="chapter" data-level="9.3" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i><b>9.3</b> 其它的Python可视化工具</a></li>
+<li class="chapter" data-level="9.4" data-path="visulization.html"><a href="visulization.html#-6"><i class="fa fa-check"></i><b>9.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="apply.html"><a href="apply.html"><i class="fa fa-check"></i><b>10</b> 数据聚合与分组运算</a><ul>
+<li class="chapter" data-level="10.1" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>10.1</b> GroupBy机制</a></li>
+<li class="chapter" data-level="10.2" data-path="apply.html"><a href="apply.html#section-10.2"><i class="fa fa-check"></i><b>10.2</b> 数据聚合</a></li>
+<li class="chapter" data-level="10.3" data-path="apply.html"><a href="apply.html#apply"><i class="fa fa-check"></i><b>10.3</b> apply：一般性的“拆分－应用－合并”</a></li>
+<li class="chapter" data-level="10.4" data-path="apply.html"><a href="apply.html#section-10.4"><i class="fa fa-check"></i><b>10.4</b> 透视表和交叉表</a></li>
+<li class="chapter" data-level="10.5" data-path="apply.html"><a href="apply.html#-7"><i class="fa fa-check"></i><b>10.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="timeSeries.html"><a href="timeSeries.html"><i class="fa fa-check"></i><b>11</b> 时间序列</a><ul>
+<li class="chapter" data-level="11.1" data-path="timeSeries.html"><a href="timeSeries.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 日期和时间数据类型及工具</a></li>
+<li class="chapter" data-level="11.2" data-path="timeSeries.html"><a href="timeSeries.html#section-11.2"><i class="fa fa-check"></i><b>11.2</b> 时间序列基础</a></li>
+<li class="chapter" data-level="11.3" data-path="timeSeries.html"><a href="timeSeries.html#section-11.3"><i class="fa fa-check"></i><b>11.3</b> 日期的范围、频率以及移动</a></li>
+<li class="chapter" data-level="11.4" data-path="timeSeries.html"><a href="timeSeries.html#section-11.4"><i class="fa fa-check"></i><b>11.4</b> 时区处理</a></li>
+<li class="chapter" data-level="11.5" data-path="timeSeries.html"><a href="timeSeries.html#section-11.5"><i class="fa fa-check"></i><b>11.5</b> 时区本地化和转换</a></li>
+<li class="chapter" data-level="11.6" data-path="timeSeries.html"><a href="timeSeries.html#section-11.6"><i class="fa fa-check"></i><b>11.6</b> 时期及其算术运算</a></li>
+<li class="chapter" data-level="11.7" data-path="timeSeries.html"><a href="timeSeries.html#section-11.7"><i class="fa fa-check"></i><b>11.7</b> 重采样及频率转换</a></li>
+<li class="chapter" data-level="11.8" data-path="timeSeries.html"><a href="timeSeries.html#section-11.8"><i class="fa fa-check"></i><b>11.8</b> 移动窗口函数</a></li>
+<li class="chapter" data-level="11.9" data-path="timeSeries.html"><a href="timeSeries.html#-8"><i class="fa fa-check"></i><b>11.9</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="adPandas.html"><a href="adPandas.html"><i class="fa fa-check"></i><b>12</b> pandas高级应用</a><ul>
+<li class="chapter" data-level="12.1" data-path="adPandas.html"><a href="adPandas.html#section-12.1"><i class="fa fa-check"></i><b>12.1</b> 分类数据</a></li>
+<li class="chapter" data-level="12.2" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>12.2</b> GroupBy高级应用</a></li>
+<li class="chapter" data-level="12.3" data-path="adPandas.html"><a href="adPandas.html#section-12.3"><i class="fa fa-check"></i><b>12.3</b> 链式编程技术</a></li>
+<li class="chapter" data-level="12.4" data-path="adPandas.html"><a href="adPandas.html#-9"><i class="fa fa-check"></i><b>12.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="buildModels.html"><a href="buildModels.html"><i class="fa fa-check"></i><b>13</b> Python建模库介绍</a><ul>
+<li class="chapter" data-level="13.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>13.1</b> pandas与模型代码的接口</a></li>
+<li class="chapter" data-level="13.2" data-path="buildModels.html"><a href="buildModels.html#patsy"><i class="fa fa-check"></i><b>13.2</b> 用Patsy创建模型描述</a></li>
+<li class="chapter" data-level="13.3" data-path="preparation.html"><a href="preparation.html#statsmodels"><i class="fa fa-check"></i><b>13.3</b> statsmodels介绍</a></li>
+<li class="chapter" data-level="13.4" data-path="preparation.html"><a href="preparation.html#scikit-learn"><i class="fa fa-check"></i><b>13.4</b> scikit-learn介绍</a></li>
+<li class="chapter" data-level="13.5" data-path="buildModels.html"><a href="buildModels.html#section-13.5"><i class="fa fa-check"></i><b>13.5</b> 继续学习</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="dsCases.html"><a href="dsCases.html"><i class="fa fa-check"></i><b>14</b> 数据分析案例</a><ul>
+<li class="chapter" data-level="14.1" data-path="dsCases.html"><a href="dsCases.html#bitlyusa.gov"><i class="fa fa-check"></i><b>14.1</b> 来自Bitly的USA.gov数据</a></li>
+<li class="chapter" data-level="14.2" data-path="dsCases.html"><a href="dsCases.html#movielens-1m"><i class="fa fa-check"></i><b>14.2</b> MovieLens 1M数据集</a></li>
+<li class="chapter" data-level="14.3" data-path="dsCases.html"><a href="dsCases.html#section-14.3"><i class="fa fa-check"></i><b>14.3</b> 1880-2010年间全美婴儿姓名</a></li>
+<li class="chapter" data-level="14.4" data-path="dsCases.html"><a href="dsCases.html#usda"><i class="fa fa-check"></i><b>14.4</b> USDA食品数据库</a></li>
+<li class="chapter" data-level="14.5" data-path="dsCases.html"><a href="dsCases.html#section-14.5"><i class="fa fa-check"></i><b>14.5</b> 2012联邦选举委员会数据库</a></li>
+<li class="chapter" data-level="14.6" data-path="dsCases.html"><a href="dsCases.html#-10"><i class="fa fa-check"></i><b>14.6</b> 总结</a></li>
+</ul></li>
+<li class="appendix"><span><b>附录</b></span></li>
+<li class="chapter" data-level="A" data-path="adNumpy.html"><a href="adNumpy.html"><i class="fa fa-check"></i><b>A</b> NumPy高级应用</a><ul>
+<li class="chapter" data-level="A.1" data-path="numpy.html"><a href="numpy.html#ndarray"><i class="fa fa-check"></i><b>A.1</b> ndarray对象的内部机理</a></li>
+<li class="chapter" data-level="A.2" data-path="13-buildModels.html"><a href="#section-A.2"><i class="fa fa-check"></i><b>A.2</b> 高级数组操作</a></li>
+<li class="chapter" data-level="A.3" data-path="13-buildModels.html"><a href="#section-A.3"><i class="fa fa-check"></i><b>A.3</b> 广播</a></li>
+<li class="chapter" data-level="A.4" data-path="adNumpy.html"><a href="adNumpy.html#ufunc"><i class="fa fa-check"></i><b>A.4</b> ufunc高级应用</a></li>
+<li class="chapter" data-level="A.5" data-path="13-buildModels.html"><a href="#section-A.5"><i class="fa fa-check"></i><b>A.5</b> 结构化和记录式数组</a></li>
+<li class="chapter" data-level="A.6" data-path="13-buildModels.html"><a href="#section-A.6"><i class="fa fa-check"></i><b>A.6</b> 更多有关排序的话题</a></li>
+<li class="chapter" data-level="A.7" data-path="adNumpy.html"><a href="adNumpy.html#numbanumpy"><i class="fa fa-check"></i><b>A.7</b> 用Numba编写快速NumPy函数</a></li>
+<li class="chapter" data-level="A.8" data-path="13-buildModels.html"><a href="#section-A.8"><i class="fa fa-check"></i><b>A.8</b> 高级数组输入输出</a></li>
+<li class="chapter" data-level="A.9" data-path="13-buildModels.html"><a href="#section-A.9"><i class="fa fa-check"></i><b>A.9</b> 性能建议</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="moreInfo.html"><a href="moreInfo.html"><i class="fa fa-check"></i><b>B</b> 更多关于IPython的内容</a><ul>
+<li class="chapter" data-level="B.1" data-path="13-buildModels.html"><a href="#section-B.1"><i class="fa fa-check"></i><b>B.1</b> 使用命令历史</a></li>
+<li class="chapter" data-level="B.2" data-path="13-buildModels.html"><a href="#section-B.2"><i class="fa fa-check"></i><b>B.2</b> 与操作系统交互</a></li>
+<li class="chapter" data-level="B.3" data-path="13-buildModels.html"><a href="#section-B.3"><i class="fa fa-check"></i><b>B.3</b> 软件开发工具</a></li>
+<li class="chapter" data-level="B.4" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.4</b> 使用IPython高效开发的技巧</a></li>
+<li class="chapter" data-level="B.5" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.5</b> IPython高级功能</a></li>
+<li class="chapter" data-level="B.6" data-path="moreInfo.html"><a href="moreInfo.html#-11"><i class="fa fa-check"></i><b>B.6</b> 总结</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">利用Python进行数据分析（第二版）中文翻译</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="buildModels" class="section level1">
+<h1><span class="header-section-number">第 13 章</span> Python建模库介绍</h1>
+<p>本书中，我已经介绍了Python数据分析的编程基础。因为数据分析师和科学家总是在数据规整和准备上花费大量时间，这本书的重点在于掌握这些功能。</p>
+<p>开发模型选用什么库取决于应用本身。许多统计问题可以用简单方法解决，比如普通的最小二乘回归，其它问题可能需要复杂的机器学习方法。幸运的是，Python已经成为了运用这些分析方法的语言之一，因此读完此书，你可以探索许多工具。</p>
+<p>本章中，我会回顾一些pandas的特点，在你胶着于pandas数据规整和模型拟合和评分时，它们可能派上用场。然后我会简短介绍两个流行的建模工具，statsmodels和scikit-learn。这二者每个都值得再写一本书，我就不做全面的介绍，而是建议你学习两个项目的线上文档和其它基于Python的数据科学、统计和机器学习的书籍。</p>
+<div id="pandas" class="section level2">
+<h2><span class="header-section-number">13.1</span> pandas与模型代码的接口</h2>
+<p>模型开发的通常工作流是使用pandas进行数据加载和清洗，然后切换到建模库进行建模。开发模型的重要一环是机器学习中的“特征工程”。它可以描述从原始数据集中提取信息的任何数据转换或分析，这些数据集可能在建模中有用。本书中学习的数据聚合和GroupBy工具常用于特征工程中。</p>
+<p>优秀的特征工程超出了本书的范围，我会尽量直白地介绍一些用于数据操作和建模切换的方法。</p>
+<p>pandas与其它分析库通常是靠NumPy的数组联系起来的。将DataFrame转换为NumPy数组，可以使用.values属性：</p>
+<pre><code>In [10]: import pandas as pd
+
+In [11]: import numpy as np
+
+In [12]: data = pd.DataFrame({
+   ....:     &#39;x0&#39;: [1, 2, 3, 4, 5],
+   ....:     &#39;x1&#39;: [0.01, -0.01, 0.25, -4.1, 0.],
+   ....:     &#39;y&#39;: [-1.5, 0., 3.6, 1.3, -2.]})
+
+In [13]: data
+Out[13]: 
+   x0    x1    y
+0   1  0.01 -1.5
+1   2 -0.01  0.0
+2   3  0.25  3.6
+3   4 -4.10  1.3
+4   5  0.00 -2.0
+
+In [14]: data.columns
+Out[14]: Index([&#39;x0&#39;, &#39;x1&#39;, &#39;y&#39;], dtype=&#39;object&#39;)
+
+In [15]: data.values
+Out[15]: 
+array([[ 1.  ,  0.01, -1.5 ],
+       [ 2.  , -0.01,  0.  ],
+       [ 3.  ,  0.25,  3.6 ],
+       [ 4.  , -4.1 ,  1.3 ],
+       [ 5.  ,  0.  , -2.  ]])</code></pre>
+<p>要转换回DataFrame，可以传递一个二维ndarray，可带有列名：</p>
+<pre><code>In [16]: df2 = pd.DataFrame(data.values, columns=[&#39;one&#39;, &#39;two&#39;, &#39;three&#39;])
+
+In [17]: df2
+Out[17]: 
+   one   two  three
+0  1.0  0.01   -1.5
+1  2.0 -0.01    0.0
+2  3.0  0.25    3.6
+3  4.0 -4.10    1.3
+4  5.0  0.00   -2.0</code></pre>
+<blockquote>
+<p>笔记：最好当数据是均匀的时候使用.values属性。例如，全是数值类型。如果数据是不均匀的，结果会是Python对象的ndarray：</p>
+<pre><code>In [18]: df3 = data.copy()
+
+In [19]: df3[&#39;strings&#39;] = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]
+
+In [20]: df3
+Out[20]: 
+  x0    x1    y strings
+0   1  0.01 -1.5       a
+1   2 -0.01  0.0       b
+2   3  0.25  3.6       c
+3   4 -4.10  1.3       d
+4   5  0.00 -2.0       e
+
+In [21]: df3.values
+Out[21]: 
+array([[1, 0.01, -1.5, &#39;a&#39;],
+      [2, -0.01, 0.0, &#39;b&#39;],
+      [3, 0.25, 3.6, &#39;c&#39;],
+      [4, -4.1, 1.3, &#39;d&#39;],
+      [5, 0.0, -2.0, &#39;e&#39;]], dtype=object)</code></pre>
+</blockquote>
+<p>对于一些模型，你可能只想使用列的子集。我建议你使用loc，用values作索引：</p>
+<pre><code>In [22]: model_cols = [&#39;x0&#39;, &#39;x1&#39;]
+
+In [23]: data.loc[:, model_cols].values
+Out[23]: 
+array([[ 1.  ,  0.01],
+       [ 2.  , -0.01],
+       [ 3.  ,  0.25],
+       [ 4.  , -4.1 ],
+       [ 5.  ,  0.  ]])</code></pre>
+<p>一些库原生支持pandas，会自动完成工作：从DataFrame转换到NumPy，将模型的参数名添加到输出表的列或Series。其它情况，你可以手工进行“元数据管理”。</p>
+<p>在第12章，我们学习了pandas的Categorical类型和pandas.get_dummies函数。假设数据集中有一个非数值列：</p>
+<pre><code>In [24]: data[&#39;category&#39;] = pd.Categorical([&#39;a&#39;, &#39;b&#39;, &#39;a&#39;, &#39;a&#39;, &#39;b&#39;],
+   ....:                                   categories=[&#39;a&#39;, &#39;b&#39;])
+
+In [25]: data
+Out[25]: 
+   x0    x1    y category
+0   1  0.01 -1.5        a
+1   2 -0.01  0.0        b
+2   3  0.25  3.6        a
+3   4 -4.10  1.3        a
+4   5  0.00 -2.0        b</code></pre>
+<p>如果我们想替换category列为虚变量，我们可以创建虚变量，删除category列，然后添加到结果：</p>
+<pre><code>In [26]: dummies = pd.get_dummies(data.category, prefix=&#39;category&#39;)
+
+In [27]: data_with_dummies = data.drop(&#39;category&#39;, axis=1).join(dummies)
+
+In [28]: data_with_dummies
+Out[28]: 
+   x0    x1    y  category_a  category_b
+0   1  0.01 -1.5           1           0
+1   2 -0.01  0.0           0           1
+2   3  0.25  3.6           1           0
+3   4 -4.10  1.3           1           0
+4   5  0.00 -2.0           0           1</code></pre>
+<p>用虚变量拟合某些统计模型会有一些细微差别。当你不只有数字列时，使用Patsy（下一节的主题）可能更简单，更不容易出错。</p>
+</div>
+<div id="patsy" class="section level2">
+<h2><span class="header-section-number">13.2</span> 用Patsy创建模型描述</h2>
+<p>Patsy是Python的一个库，使用简短的字符串“公式语法”描述统计模型（尤其是线性模型），可能是受到了R和S统计编程语言的公式语法的启发。</p>
+<p>Patsy适合描述statsmodels的线性模型，因此我会关注于它的主要特点，让你尽快掌握。Patsy的公式是一个特殊的字符串语法，如下所示：</p>
+<pre><code>y ~ x0 + x1</code></pre>
+<p>a+b不是将a与b相加的意思，而是为模型创建的设计矩阵。patsy.dmatrices函数接收一个公式字符串和一个数据集（可以是DataFrame或数组的字典），为线性模型创建设计矩阵：</p>
+<pre><code>In [29]: data = pd.DataFrame({
+   ....:     &#39;x0&#39;: [1, 2, 3, 4, 5],
+   ....:     &#39;x1&#39;: [0.01, -0.01, 0.25, -4.1, 0.],
+   ....:     &#39;y&#39;: [-1.5, 0., 3.6, 1.3, -2.]})
+
+In [30]: data
+Out[30]: 
+   x0    x1    y
+0   1  0.01 -1.5
+1   2 -0.01  0.0
+2   3  0.25  3.6
+3   4 -4.10  1.3
+4   5  0.00 -2.0
+
+In [31]: import patsy
+
+In [32]: y, X = patsy.dmatrices(&#39;y ~ x0 + x1&#39;, data)</code></pre>
+<p>现在有：</p>
+<pre><code>In [33]: y
+Out[33]: 
+DesignMatrix with shape (5, 1)
+     y
+  -1.5
+   0.0
+   3.6
+   1.3
+  -2.0
+  Terms:
+    &#39;y&#39; (column 0)
+
+In [34]: X
+Out[34]: 
+DesignMatrix with shape (5, 3)
+  Intercept  x0     x1
+          1   1   0.01
+          1   2  -0.01
+          1   3   0.25
+          1   4  -4.10
+          1   5   0.00
+  Terms:
+    &#39;Intercept&#39; (column 0)
+    &#39;x0&#39; (column 1)
+    &#39;x1&#39; (column 2)</code></pre>
+<p>这些Patsy的DesignMatrix实例是NumPy的ndarray，带有附加元数据：</p>
+<pre><code>In [35]: np.asarray(y)
+Out[35]: 
+array([[-1.5],
+       [ 0. ],
+       [ 3.6],
+       [ 1.3],
+       [-2. ]])
+
+In [36]: np.asarray(X)
+Out[36]: 
+array([[ 1.  ,  1.  ,  0.01],
+       [ 1.  ,  2.  , -0.01],
+       [ 1.  ,  3.  ,  0.25],
+       [ 1.  ,  4.  , -4.1 ],
+       [ 1.  ,  5.  ,  0.  ]])</code></pre>
+<p>你可能想Intercept是哪里来的。这是线性模型（比如普通最小二乘回归）的惯例用法。添加 +0 到模型可以不显示intercept：</p>
+<pre><code>In [37]: patsy.dmatrices(&#39;y ~ x0 + x1 + 0&#39;, data)[1]
+Out[37]: 
+DesignMatrix with shape (5, 2)
+  x0     x1
+   1   0.01
+   2  -0.01
+   3   0.25
+   4  -4.10
+   5   0.00
+  Terms:
+    &#39;x0&#39; (column 0)
+    &#39;x1&#39; (column 1)</code></pre>
+<p>Patsy对象可以直接传递到算法（比如numpy.linalg.lstsq）中，它执行普通最小二乘回归：</p>
+<pre><code>In [38]: coef, resid, _, _ = np.linalg.lstsq(X, y)</code></pre>
+<p>模型的元数据保留在design_info属性中，因此你可以重新附加列名到拟合系数，以获得一个Series，例如：</p>
+<pre><code>In [39]: coef
+Out[39]: 
+array([[ 0.3129],
+       [-0.0791],
+       [-0.2655]])
+
+In [40]: coef = pd.Series(coef.squeeze(), index=X.design_info.column_names)
+
+In [41]: coef
+Out[41]: 
+Intercept    0.312910
+x0          -0.079106
+x1          -0.265464
+dtype: float64</code></pre>
+<div id="patsy" class="section level3">
+<h3><span class="header-section-number">13.2.1</span> 用Patsy公式进行数据转换</h3>
+<p>你可以将Python代码与patsy公式结合。在评估公式时，库将尝试查找在封闭作用域内使用的函数：</p>
+<pre><code>In [42]: y, X = patsy.dmatrices(&#39;y ~ x0 + np.log(np.abs(x1) + 1)&#39;, data)
+
+In [43]: X
+Out[43]: 
+DesignMatrix with shape (5, 3)
+  Intercept  x0  np.log(np.abs(x1) + 1)
+          1   1                 0.00995
+          1   2                 0.00995
+          1   3                 0.22314
+          1   4                 1.62924
+          1   5                 0.00000
+  Terms:
+    &#39;Intercept&#39; (column 0)
+    &#39;x0&#39; (column 1)
+    &#39;np.log(np.abs(x1) + 1)&#39; (column 2)</code></pre>
+<p>常见的变量转换包括标准化（平均值为0，方差为1）和中心化（减去平均值）。Patsy有内置的函数进行这样的工作：</p>
+<pre><code>In [44]: y, X = patsy.dmatrices(&#39;y ~ standardize(x0) + center(x1)&#39;, data)
+
+In [45]: X
+Out[45]: 
+DesignMatrix with shape (5, 3)
+  Intercept  standardize(x0)  center(x1)
+          1         -1.41421        0.78
+          1         -0.70711        0.76
+          1          0.00000        1.02
+          1          0.70711       -3.33
+          1          1.41421        0.77
+  Terms:
+    &#39;Intercept&#39; (column 0)
+    &#39;standardize(x0)&#39; (column 1)
+    &#39;center(x1)&#39; (column 2)</code></pre>
+<p>作为建模的一步，你可能拟合模型到一个数据集，然后用另一个数据集评估模型。另一个数据集可能是剩余的部分或是新数据。当执行中心化和标准化转变，用新数据进行预测要格外小心。因为你必须使用平均值或标准差转换新数据集，这也称作状态转换。</p>
+<p>patsy.build_design_matrices函数可以使用原始样本数据集的保存信息，来转换新数据，：</p>
+<pre><code>In [46]: new_data = pd.DataFrame({
+   ....:     &#39;x0&#39;: [6, 7, 8, 9],
+   ....:     &#39;x1&#39;: [3.1, -0.5, 0, 2.3],
+   ....:     &#39;y&#39;: [1, 2, 3, 4]})
+
+In [47]: new_X = patsy.build_design_matrices([X.design_info], new_data)
+
+In [48]: new_X
+Out[48]: 
+[DesignMatrix with shape (4, 3)
+   Intercept  standardize(x0)  center(x1)
+           1          2.12132        3.87
+           1          2.82843        0.27
+           1          3.53553        0.77
+           1          4.24264        3.07
+   Terms:
+     &#39;Intercept&#39; (column 0)
+     &#39;standardize(x0)&#39; (column 1)
+     &#39;center(x1)&#39; (column 2)]</code></pre>
+<p>因为Patsy中的加号不是加法的意义，当你按照名称将数据集的列相加时，你必须用特殊I函数将它们封装起来：</p>
+<pre><code>In [49]: y, X = patsy.dmatrices(&#39;y ~ I(x0 + x1)&#39;, data)
+
+In [50]: X
+Out[50]: 
+DesignMatrix with shape (5, 2)
+  Intercept  I(x0 + x1)
+          1        1.01
+          1        1.99
+          1        3.25
+          1       -0.10
+          1        5.00
+  Terms:
+    &#39;Intercept&#39; (column 0)
+    &#39;I(x0 + x1)&#39; (column 1)</code></pre>
+<p>Patsy的patsy.builtins模块还有一些其它的内置转换。请查看线上文档。</p>
+<p>分类数据有一个特殊的转换类，下面进行讲解。</p>
+</div>
+<div id="patsy" class="section level3">
+<h3><span class="header-section-number">13.2.2</span> 分类数据和Patsy</h3>
+<p>非数值数据可以用多种方式转换为模型设计矩阵。完整的讲解超出了本书范围，最好和统计课一起学习。</p>
+<p>当你在Patsy公式中使用非数值数据，它们会默认转换为虚变量。如果有截距，会去掉一个，避免共线性：</p>
+<pre><code>In [51]: data = pd.DataFrame({
+   ....:     &#39;key1&#39;: [&#39;a&#39;, &#39;a&#39;, &#39;b&#39;, &#39;b&#39;, &#39;a&#39;, &#39;b&#39;, &#39;a&#39;, &#39;b&#39;],
+   ....:     &#39;key2&#39;: [0, 1, 0, 1, 0, 1, 0, 0],
+   ....:     &#39;v1&#39;: [1, 2, 3, 4, 5, 6, 7, 8],
+   ....:     &#39;v2&#39;: [-1, 0, 2.5, -0.5, 4.0, -1.2, 0.2, -1.7]
+   ....: })
+
+In [52]: y, X = patsy.dmatrices(&#39;v2 ~ key1&#39;, data)
+
+In [53]: X
+Out[53]: 
+DesignMatrix with shape (8, 2)
+  Intercept  key1[T.b]
+          1          0
+          1          0
+          1          1
+          1          1
+          1          0
+          1          1
+          1          0
+          1          1
+  Terms:
+    &#39;Intercept&#39; (column 0)
+    &#39;key1&#39; (column 1)</code></pre>
+<p>如果你从模型中忽略截距，每个分类值得列都会包括在设计矩阵的模型中：</p>
+<pre><code>In [54]: y, X = patsy.dmatrices(&#39;v2 ~ key1 + 0&#39;, data)
+
+In [55]: X
+Out[55]: 
+DesignMatrix with shape (8, 2)
+  key1[a]  key1[b]
+        1        0
+        1        0
+        0        1
+        0        1
+        1        0
+        0        1
+        1        0
+        0        1
+  Terms:
+    &#39;key1&#39; (columns 0:2)</code></pre>
+<p>使用C函数，数值列可以截取为分类量：</p>
+<pre><code>In [56]: y, X = patsy.dmatrices(&#39;v2 ~ C(key2)&#39;, data)
+
+In [57]: X
+Out[57]: 
+DesignMatrix with shape (8, 2)
+  Intercept  C(key2)[T.1]
+          1             0
+          1             1
+          1             0
+          1             1
+          1             0
+          1             1
+          1             0
+          1             0
+  Terms:
+    &#39;Intercept&#39; (column 0)
+    &#39;C(key2)&#39; (column 1)</code></pre>
+<p>当你在模型中使用多个分类名，事情就会变复杂，因为会包括key1:key2形式的相交部分，它可以用在方差（ANOVA）模型分析中：</p>
+<pre><code>In [58]: data[&#39;key2&#39;] = data[&#39;key2&#39;].map({0: &#39;zero&#39;, 1: &#39;one&#39;})
+
+In [59]: data
+Out[59]: 
+  key1  key2  v1   v2
+0    a  zero   1 -1.0
+1    a   one   2  0.0
+2    b  zero   3  2.5
+3    b   one   4 -0.5
+4    a  zero   5  4.0
+5    b   one   6 -1.2
+6    a  zero   7  0.2
+7    b  zero   8 -1.7
+
+In [60]: y, X = patsy.dmatrices(&#39;v2 ~ key1 + key2&#39;, data)
+
+In [61]: X
+Out[61]: 
+DesignMatrix with shape (8, 3)
+  Intercept  key1[T.b]  key2[T.zero]
+          1          0             1
+          1          0             0
+          1          1             1
+          1          1             0
+          1          0             1
+          1          1             0
+          1          0             1
+          1          1             1
+  Terms:
+    &#39;Intercept&#39; (column 0)
+    &#39;key1&#39; (column 1)
+    &#39;key2&#39; (column 2)
+
+In [62]: y, X = patsy.dmatrices(&#39;v2 ~ key1 + key2 + key1:key2&#39;, data)
+
+In [63]: X
+Out[63]: 
+DesignMatrix with shape (8, 4)
+  Intercept  key1[T.b]  key2[T.zero]
+key1[T.b]:key2[T.zero]
+          1          0             1                       0
+          1          0             0                       0
+          1          1             1                       1
+          1          1             0                       0
+          1          0             1                       0
+          1          1             0                       0
+          1          0             1                       0
+          1          1             1                       1
+  Terms:
+    &#39;Intercept&#39; (column 0)
+    &#39;key1&#39; (column 1)
+    &#39;key2&#39; (column 2)
+    &#39;key1:key2&#39; (column 3)</code></pre>
+<p>Patsy提供转换分类数据的其它方法，包括以特定顺序转换。请参阅线上文档。</p>
+</div>
+</div>
+<div id="statsmodels" class="section level2">
+<h2><span class="header-section-number">13.3</span> statsmodels介绍</h2>
+<p>statsmodels是Python进行拟合多种统计模型、进行统计试验和数据探索可视化的库。Statsmodels包含许多经典的统计方法，但没有贝叶斯方法和机器学习模型。</p>
+<p>statsmodels包含的模型有：</p>
+<ul>
+<li>线性模型，广义线性模型和健壮线性模型</li>
+<li>线性混合效应模型</li>
+<li>方差（ANOVA）方法分析</li>
+<li>时间序列过程和状态空间模型</li>
+<li>广义矩估计</li>
+</ul>
+<p>下面，我会使用一些基本的statsmodels工具，探索Patsy公式和pandasDataFrame对象如何使用模型接口。</p>
+<div id="section-13.3.1" class="section level3">
+<h3><span class="header-section-number">13.3.1</span> 估计线性模型</h3>
+<p>statsmodels有多种线性回归模型，包括从基本（比如普通最小二乘）到复杂（比如迭代加权最小二乘法）的。</p>
+<p>statsmodels的线性模型有两种不同的接口：基于数组，和基于公式。它们可以通过API模块引入：</p>
+<pre><code>import statsmodels.api as sm
+import statsmodels.formula.api as smf</code></pre>
+<p>为了展示它们的使用方法，我们从一些随机数据生成一个线性模型：</p>
+<pre><code>def dnorm(mean, variance, size=1):
+    if isinstance(size, int):
+        size = size,
+    return mean + np.sqrt(variance) * np.random.randn(*size)
+
+# For reproducibility
+np.random.seed(12345)
+
+N = 100
+X = np.c_[dnorm(0, 0.4, size=N),
+          dnorm(0, 0.6, size=N),
+          dnorm(0, 0.2, size=N)]
+eps = dnorm(0, 0.1, size=N)
+beta = [0.1, 0.3, 0.5]
+
+y = np.dot(X, beta) + eps</code></pre>
+<p>这里，我使用了“真实”模型和可知参数beta。此时，dnorm可用来生成正太分布数据，带有特定均值和方差。现在有：</p>
+<pre><code>In [66]: X[:5]
+Out[66]: 
+array([[-0.1295, -1.2128,  0.5042],
+       [ 0.3029, -0.4357, -0.2542],
+       [-0.3285, -0.0253,  0.1384],
+       [-0.3515, -0.7196, -0.2582],
+       [ 1.2433, -0.3738, -0.5226]])
+
+In [67]: y[:5]
+Out[67]: array([ 0.4279, -0.6735, -0.0909, -0.4895,-0.1289])</code></pre>
+<p>像之前Patsy看到的，线性模型通常要拟合一个截距。sm.add_constant函数可以添加一个截距的列到现存的矩阵：</p>
+<pre><code>In [68]: X_model = sm.add_constant(X)
+
+In [69]: X_model[:5]
+Out[69]: 
+array([[ 1.    , -0.1295, -1.2128,  0.5042],
+       [ 1.    ,  0.3029, -0.4357, -0.2542],
+       [ 1.    , -0.3285, -0.0253,  0.1384],
+       [ 1.    , -0.3515, -0.7196, -0.2582],
+       [ 1.    ,  1.2433, -0.3738, -0.5226]])</code></pre>
+<p>sm.OLS类可以拟合一个普通最小二乘回归：</p>
+<pre><code>In [70]: model = sm.OLS(y, X)</code></pre>
+<p>这个模型的fit方法返回了一个回归结果对象，它包含估计的模型参数和其它内容：</p>
+<pre><code>In [71]: results = model.fit()
+
+In [72]: results.params
+Out[72]: array([ 0.1783,  0.223 ,  0.501 ])</code></pre>
+<p>对结果使用summary方法可以打印模型的详细诊断结果：</p>
+<pre><code>In [73]: print(results.summary())
+OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.430
+Model:                            OLS   Adj. R-squared:                  0.413
+Method:                 Least Squares   F-statistic:                     24.42
+Date:                Mon, 25 Sep 2017   Prob (F-statistic):           7.44e-12
+Time:                        14:06:15   Log-Likelihood:                -34.305
+No. Observations:                 100   AIC:                             74.61
+Df Residuals:                      97   BIC:                             82.42
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+x1             0.1783      0.053      3.364      0.001       0.073       0.283
+x2             0.2230      0.046      4.818      0.000       0.131       0.315
+x3             0.5010      0.080      6.237      0.000       0.342       0.660
+==============================================================================
+Omnibus:                        4.662   Durbin-Watson:                   2.201
+Prob(Omnibus):                  0.097   Jarque-Bera (JB):                4.098
+Skew:                           0.481   Prob(JB):                        0.129
+Kurtosis:                       3.243   Cond. No.
+1.74
+==============================================================================
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly 
+specified.</code></pre>
+<p>这里的参数名为通用名x1, x2等等。假设所有的模型参数都在一个DataFrame中：</p>
+<pre><code>In [74]: data = pd.DataFrame(X, columns=[&#39;col0&#39;, &#39;col1&#39;, &#39;col2&#39;])
+
+In [75]: data[&#39;y&#39;] = y
+
+In [76]: data[:5]
+Out[76]: 
+       col0      col1      col2         y
+0 -0.129468 -1.212753  0.504225  0.427863
+1  0.302910 -0.435742 -0.254180 -0.673480
+2 -0.328522 -0.025302  0.138351 -0.090878
+3 -0.351475 -0.719605 -0.258215 -0.489494
+4  1.243269 -0.373799 -0.522629 -0.128941</code></pre>
+<p>现在，我们使用statsmodels的公式API和Patsy的公式字符串：</p>
+<pre><code>In [77]: results = smf.ols(&#39;y ~ col0 + col1 + col2&#39;, data=data).fit()
+
+In [78]: results.params
+Out[78]: 
+Intercept    0.033559
+col0         0.176149
+col1         0.224826
+col2         0.514808
+dtype: float64
+
+In [79]: results.tvalues
+Out[79]: 
+Intercept    0.952188
+col0         3.319754
+col1         4.850730
+col2         6.303971
+dtype: float64</code></pre>
+<p>观察下statsmodels是如何返回Series结果的，附带有DataFrame的列名。当使用公式和pandas对象时，我们不需要使用add_constant。</p>
+<p>给出一个样本外数据，你可以根据估计的模型参数计算预测值：</p>
+<pre><code>In [80]: results.predict(data[:5])
+Out[80]: 
+0   -0.002327
+1   -0.141904
+2    0.041226
+3   -0.323070
+4   -0.100535
+dtype: float64</code></pre>
+<p>statsmodels的线性模型结果还有其它的分析、诊断和可视化工具。除了普通最小二乘模型，还有其它的线性模型。</p>
+</div>
+<div id="section-13.3.2" class="section level3">
+<h3><span class="header-section-number">13.3.2</span> 估计时间序列过程</h3>
+<p>statsmodels的另一模型类是进行时间序列分析，包括自回归过程、卡尔曼滤波和其它态空间模型，和多元自回归模型。</p>
+<p>用自回归结构和噪声来模拟一些时间序列数据：</p>
+<pre><code>init_x = 4
+
+import random
+values = [init_x, init_x]
+N = 1000
+
+b0 = 0.8
+b1 = -0.4
+noise = dnorm(0, 0.1, N)
+for i in range(N):
+    new_x = values[-1] * b0 + values[-2] * b1 + noise[i]
+    values.append(new_x)</code></pre>
+<p>这个数据有AR(2)结构（两个延迟），参数是0.8和-0.4。拟合AR模型时，你可能不知道滞后项的个数，因此可以用较多的滞后量来拟合这个模型：</p>
+<pre><code>In [82]: MAXLAGS = 5
+
+In [83]: model = sm.tsa.AR(values)
+
+In [84]: results = model.fit(MAXLAGS)</code></pre>
+<p>结果中的估计参数首先是截距，其次是前两个参数的估计值：</p>
+<pre><code>In [85]: results.params
+Out[85]: array([-0.0062,  0.7845, -0.4085, -0.0136,  0.015 ,  0.0143])</code></pre>
+<p>更多的细节以及如何解释结果超出了本书的范围，可以通过statsmodels文档学习更多。</p>
+</div>
+</div>
+<div id="scikit-learn" class="section level2">
+<h2><span class="header-section-number">13.4</span> scikit-learn介绍</h2>
+<p>scikit-learn是一个广泛使用、用途多样的Python机器学习库。它包含多种标准监督和非监督机器学习方法和模型选择和评估、数据转换、数据加载和模型持久化工具。这些模型可以用于分类、聚合、预测和其它任务。</p>
+<p>机器学习方面的学习和应用scikit-learn和TensorFlow解决实际问题的线上和纸质资料很多。本节中，我会简要介绍scikit-learn API的风格。</p>
+<p>写作此书的时候，scikit-learn并没有和pandas深度结合，但是有些第三方包在开发中。尽管如此，pandas非常适合在模型拟合前处理数据集。</p>
+<p>举个例子，我用一个Kaggle竞赛的经典数据集，关于泰坦尼克号乘客的生还率。我们用pandas加载测试和训练数据集：</p>
+<pre><code>In [86]: train = pd.read_csv(&#39;datasets/titanic/train.csv&#39;)
+
+In [87]: test = pd.read_csv(&#39;datasets/titanic/test.csv&#39;)
+
+In [88]: train[:4]
+Out[88]: 
+   PassengerId  Survived  Pclass  \
+0            1         0       3   
+1            2         1       1   
+2            3         1       3   
+3            4         1       1   
+                                                Name     Sex   Age  SibSp  \
+0                            Braund, Mr. Owen Harris    male  22.0      1   
+1  Cumings, Mrs. John Bradley (Florence Briggs Th...  female  38.0      1   
+2                             Heikkinen, Miss. Laina  female  26.0      0   
+3       Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1   
+   Parch            Ticket     Fare Cabin Embarked  
+0      0         A/5 21171   7.2500   NaN        S  
+1      0          PC 17599  71.2833   C85        C  
+2      0  STON/O2. 3101282   7.9250   NaN        S  
+3      0            113803  53.1000  C123        S</code></pre>
+<p>statsmodels和scikit-learn通常不能接收缺失数据，因此我们要查看列是否包含缺失值：</p>
+<pre><code>In [89]: train.isnull().sum()
+Out[89]: 
+PassengerId      0
+Survived         0
+Pclass           0
+Name             0
+Sex              0
+Age            177
+SibSp            0
+Parch            0
+Ticket           0
+Fare             0
+Cabin          687
+Embarked         2
+dtype: int64
+
+In [90]: test.isnull().sum()
+Out[90]: 
+PassengerId      0
+Pclass           0
+Name             0
+Sex              0
+Age             86
+SibSp            0
+Parch            0
+Ticket           0
+Fare             1
+Cabin          327
+Embarked         0
+dtype: int64</code></pre>
+<p>在统计和机器学习的例子中，根据数据中的特征，一个典型的任务是预测乘客能否生还。模型现在训练数据集中拟合，然后用样本外测试数据集评估。</p>
+<p>我想用年龄作为预测值，但是它包含缺失值。缺失数据补全的方法有多种，我用的是一种简单方法，用训练数据集的中位数补全两个表的空值：</p>
+<pre><code>In [91]: impute_value = train[&#39;Age&#39;].median()
+
+In [92]: train[&#39;Age&#39;] = train[&#39;Age&#39;].fillna(impute_value)
+
+In [93]: test[&#39;Age&#39;] = test[&#39;Age&#39;].fillna(impute_value)</code></pre>
+<p>现在我们需要指定模型。我增加了一个列IsFemale，作为“Sex”列的编码：</p>
+<pre><code>In [94]: train[&#39;IsFemale&#39;] = (train[&#39;Sex&#39;] == &#39;female&#39;).astype(int)
+
+In [95]: test[&#39;IsFemale&#39;] = (test[&#39;Sex&#39;] == &#39;female&#39;).astype(int)</code></pre>
+<p>然后，我们确定一些模型变量，并创建NumPy数组：</p>
+<pre><code>In [96]: predictors = [&#39;Pclass&#39;, &#39;IsFemale&#39;, &#39;Age&#39;]
+
+In [97]: X_train = train[predictors].values
+
+In [98]: X_test = test[predictors].values
+
+In [99]: y_train = train[&#39;Survived&#39;].values
+
+In [100]: X_train[:5]
+Out[100]: 
+array([[  3.,   0.,  22.],
+       [  1.,   1.,  38.],
+       [  3.,   1.,  26.],
+       [  1.,   1.,  35.],
+       [  3.,   0.,  35.]])
+
+In [101]: y_train[:5]
+Out[101]: array([0, 1, 1, 1, 0])</code></pre>
+<p>我不能保证这是一个好模型，它的特征都符合。我们用scikit-learn的LogisticRegression模型，创建一个模型实例：</p>
+<pre><code>In [102]: from sklearn.linear_model import LogisticRegression
+
+In [103]: model = LogisticRegression()</code></pre>
+<p>与statsmodels类似，我们可以用模型的fit方法，将它拟合到训练数据：</p>
+<pre><code>In [104]: model.fit(X_train, y_train)
+Out[104]: 
+LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class=&#39;ovr&#39;, n_jobs=1,
+          penalty=&#39;l2&#39;, random_state=None, solver=&#39;liblinear&#39;, tol=0.0001,
+          verbose=0, warm_start=False)</code></pre>
+<p>现在，我们可以用model.predict，对测试数据进行预测：</p>
+<pre><code>In [105]: y_predict = model.predict(X_test)
+
+In [106]: y_predict[:10]
+Out[106]: array([0, 0, 0, 0, 1, 0, 1, 0, 1, 0])</code></pre>
+<p>如果你有测试数据集的真是值，你可以计算准确率或其它错误度量值：</p>
+<pre><code>(y_true == y_predict).mean()</code></pre>
+<p>在实际中，模型训练经常有许多额外的复杂因素。许多模型有可以调节的参数，有些方法（比如交叉验证）可以用来进行参数调节，避免对训练数据过拟合。这通常可以提高预测性或对新数据的健壮性。</p>
+<p>交叉验证通过分割训练数据来模拟样本外预测。基于模型的精度得分（比如均方差），可以对模型参数进行网格搜索。有些模型，如logistic回归，有内置的交叉验证的估计类。例如，logisticregressioncv类可以用一个参数指定网格搜索对模型的正则化参数C的粒度：</p>
+<pre><code>In [107]: from sklearn.linear_model import LogisticRegressionCV
+
+In [108]: model_cv = LogisticRegressionCV(10)
+
+In [109]: model_cv.fit(X_train, y_train)
+Out[109]: 
+LogisticRegressionCV(Cs=10, class_weight=None, cv=None, dual=False,
+           fit_intercept=True, intercept_scaling=1.0, max_iter=100,
+           multi_class=&#39;ovr&#39;, n_jobs=1, penalty=&#39;l2&#39;, random_state=None,
+           refit=True, scoring=None, solver=&#39;lbfgs&#39;, tol=0.0001, verbose=0)</code></pre>
+<p>要手动进行交叉验证，你可以使用cross_val_score帮助函数，它可以处理数据分割。例如，要交叉验证我们的带有四个不重叠训练数据的模型，可以这样做：</p>
+<pre><code>In [110]: from sklearn.model_selection import cross_val_score
+
+In [111]: model = LogisticRegression(C=10)
+
+In [112]: scores = cross_val_score(model, X_train, y_train, cv=4)
+
+In [113]: scores
+Out[113]: array([ 0.7723,  0.8027,  0.7703,  0.7883])</code></pre>
+<p>默认的评分指标取决于模型本身，但是可以明确指定一个评分。交叉验证过的模型需要更长时间来训练，但会有更高的模型性能。</p>
+</div>
+<div id="section-13.5" class="section level2">
+<h2><span class="header-section-number">13.5</span> 继续学习</h2>
+<p>我只是介绍了一些Python建模库的表面内容，现在有越来越多的框架用于各种统计和机器学习，它们都是用Python或Python用户界面实现的。</p>
+<p>这本书的重点是数据规整，有其它的书是关注建模和数据科学工具的。其中优秀的有：</p>
+<ul>
+<li>Andreas Mueller and Sarah Guido (O’Reilly)的 《Introduction to Machine Learning with Python》</li>
+<li>Jake VanderPlas (O’Reilly)的 《Python Data Science Handbook》</li>
+<li>Joel Grus (O’Reilly) 的 《Data Science from Scratch: First Principles》</li>
+<li>Sebastian Raschka (Packt Publishing) 的《Python Machine Learning》</li>
+<li>Aurélien Géron (O’Reilly) 的《Hands-On Machine Learning with Scikit-Learn and TensorFlow》</li>
+</ul>
+<p>虽然书是学习的好资源，但是随着底层开源软件的发展，书的内容会过时。最好是不断熟悉各种统计和机器学习框架的文档，学习最新的功能和API。</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="adPandas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dsCases.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/openbiox/Cookbook-for-R-Chinese/edit/master/book/13-buildModels.Rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

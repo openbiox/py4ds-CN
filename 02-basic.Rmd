@@ -1,4 +1,4 @@
-# Python语法基础，IPython和Jupyter Notebooks {#basics}
+# Python 语法基础，IPython 和 Jupyter Notebooks {#basics}
 
 当我在2011年和2012年写作本书的第一版时，可用的学习Python数据分析的资源很少。这部分上是一个鸡和蛋的问题：我们现在使用的库，比如pandas、scikit-learn和statsmodels，那时相对来说并不成熟。2017年，数据科学、数据分析和机器学习的资源已经很多，原来通用的科学计算拓展到了计算机科学家、物理学家和其它研究领域的工作人员。学习Python和成为软件工程师的优秀书籍也有了。
 

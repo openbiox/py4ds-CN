@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>利用Python进行数据分析（第二版）中文翻译</title>
+  <meta name="description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="利用Python进行数据分析（第二版）中文翻译" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="github-repo" content="openbiox/py4ds-CN" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="利用Python进行数据分析（第二版）中文翻译" />
+  
+  <meta name="twitter:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  
+
+<meta name="author" content="作者：Wes McKinney，翻译：SeanCheney，校对与维护：王诗翔" />
+
+
+<meta name="date" content="2019-10-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="author.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">利用Python进行数据分析（第二版）</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#section-0.1"><i class="fa fa-check"></i><b>0.1</b> 问题与贡献</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#section-0.2"><i class="fa fa-check"></i><b>0.2</b> 许可</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#section-0.3"><i class="fa fa-check"></i><b>0.3</b> 致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>作者简介</a></li>
+<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> 准备工作</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e79a84e58685e5aeb9"><i class="fa fa-check"></i>本书的内容</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>为什么要使用Python进行数据分析</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>重要的Python库</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e5ae89e8a385e5928ce8aebee7bdae"><i class="fa fa-check"></i>安装和设置</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e7a4bee58cbae5928ce4bc9ae8aeae"><i class="fa fa-check"></i>社区和会议</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e5afbce888aa"><i class="fa fa-check"></i>本书导航</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Python 语法基础，IPython 和 Jupyter Notebooks</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python解释器</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i>IPython基础</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python语法基础</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#unicode"><i class="fa fa-check"></i>字节和Unicode</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#e68ea7e588b6e6b581"><i class="fa fa-check"></i>控制流</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>3</b> Python的数据结构、函数和文件</a><ul>
+<li class="chapter" data-level="3.1" data-path="structure.html"><a href="structure.html#section-3.1"><i class="fa fa-check"></i><b>3.1</b> 元组</a></li>
+<li class="chapter" data-level="3.2" data-path="structure.html"><a href="structure.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 列表</a></li>
+<li class="chapter" data-level="3.3" data-path="structure.html"><a href="structure.html#section-3.3"><i class="fa fa-check"></i><b>3.3</b> 序列函数</a></li>
+<li class="chapter" data-level="3.4" data-path="structure.html"><a href="structure.html#section-3.4"><i class="fa fa-check"></i><b>3.4</b> 字典</a></li>
+<li class="chapter" data-level="3.5" data-path="structure.html"><a href="structure.html#section-3.5"><i class="fa fa-check"></i><b>3.5</b> 集合</a></li>
+<li class="chapter" data-level="3.6" data-path="structure.html"><a href="structure.html#section-3.6"><i class="fa fa-check"></i><b>3.6</b> 列表、集合和字典推导式</a></li>
+<li class="chapter" data-level="3.7" data-path="structure.html"><a href="structure.html#section-3.7"><i class="fa fa-check"></i><b>3.7</b> 嵌套列表推导式</a></li>
+<li class="chapter" data-level="3.8" data-path="structure.html"><a href="structure.html#section-3.8"><i class="fa fa-check"></i><b>3.8</b> 函数</a></li>
+<li class="chapter" data-level="3.9" data-path="structure.html"><a href="structure.html#section-3.9"><i class="fa fa-check"></i><b>3.9</b> 生成器</a></li>
+<li class="chapter" data-level="3.10" data-path="structure.html"><a href="structure.html#section-3.10"><i class="fa fa-check"></i><b>3.10</b> 错误和异常处理</a></li>
+<li class="chapter" data-level="3.11" data-path="structure.html"><a href="structure.html#section-3.11"><i class="fa fa-check"></i><b>3.11</b> 文件和操作系统</a></li>
+<li class="chapter" data-level="3.12" data-path="structure.html"><a href="structure.html#section-3.12"><i class="fa fa-check"></i><b>3.12</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="preparation.html"><a href="preparation.html#numpy"><i class="fa fa-check"></i><b>4</b> NumPy基础：数组和矢量计算</a><ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4.1</b> NumPy的ndarray：一种多维数组对象</a></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 通用函数：快速的元素级数组函数</a></li>
+<li class="chapter" data-level="4.3" data-path="numpy.html"><a href="numpy.html#section-4.3"><i class="fa fa-check"></i><b>4.3</b> 利用数组进行数据处理</a></li>
+<li class="chapter" data-level="4.4" data-path="numpy.html"><a href="numpy.html#section-4.4"><i class="fa fa-check"></i><b>4.4</b> 用于数组的文件输入输出</a></li>
+<li class="chapter" data-level="4.5" data-path="numpy.html"><a href="numpy.html#section-4.5"><i class="fa fa-check"></i><b>4.5</b> 线性代数</a></li>
+<li class="chapter" data-level="4.6" data-path="numpy.html"><a href="numpy.html#section-4.6"><i class="fa fa-check"></i><b>4.6</b> 伪随机数生成</a></li>
+<li class="chapter" data-level="4.7" data-path="numpy.html"><a href="numpy.html#section-4.7"><i class="fa fa-check"></i><b>4.7</b> 示例：随机漫步</a></li>
+<li class="chapter" data-level="4.8" data-path="numpy.html"><a href="numpy.html#-1"><i class="fa fa-check"></i><b>4.8</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5</b> pandas入门</a><ul>
+<li class="chapter" data-level="5.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5.1</b> pandas的数据结构介绍</a></li>
+<li class="chapter" data-level="5.2" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>5.2</b> 基本功能</a></li>
+<li class="chapter" data-level="5.3" data-path="pandas.html"><a href="pandas.html#section-5.3"><i class="fa fa-check"></i><b>5.3</b> 汇总和计算描述统计</a></li>
+<li class="chapter" data-level="5.4" data-path="pandas.html"><a href="pandas.html#-2"><i class="fa fa-check"></i><b>5.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data2file.html"><a href="data2file.html"><i class="fa fa-check"></i><b>6</b> 数据加载、存储与文件格式</a><ul>
+<li class="chapter" data-level="6.1" data-path="data2file.html"><a href="data2file.html#section-6.1"><i class="fa fa-check"></i><b>6.1</b> 读写文本格式的数据</a></li>
+<li class="chapter" data-level="6.2" data-path="data2file.html"><a href="data2file.html#section-6.2"><i class="fa fa-check"></i><b>6.2</b> 二进制数据格式</a></li>
+<li class="chapter" data-level="6.3" data-path="data2file.html"><a href="data2file.html#web-apis"><i class="fa fa-check"></i><b>6.3</b> Web APIs交互</a></li>
+<li class="chapter" data-level="6.4" data-path="data2file.html"><a href="data2file.html#section-6.4"><i class="fa fa-check"></i><b>6.4</b> 数据库交互</a></li>
+<li class="chapter" data-level="6.5" data-path="data2file.html"><a href="data2file.html#-3"><i class="fa fa-check"></i><b>6.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>7</b> 数据清洗和准备</a><ul>
+<li class="chapter" data-level="7.1" data-path="tidy.html"><a href="tidy.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 处理缺失数据</a></li>
+<li class="chapter" data-level="7.2" data-path="tidy.html"><a href="tidy.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 数据转换</a></li>
+<li class="chapter" data-level="7.3" data-path="tidy.html"><a href="tidy.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 字符串操作</a></li>
+<li class="chapter" data-level="7.4" data-path="tidy.html"><a href="tidy.html#-4"><i class="fa fa-check"></i><b>7.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reshape.html"><a href="reshape.html"><i class="fa fa-check"></i><b>8</b> 数据规整：聚合、合并和重塑</a><ul>
+<li class="chapter" data-level="8.1" data-path="reshape.html"><a href="reshape.html#section-8.1"><i class="fa fa-check"></i><b>8.1</b> 层次化索引</a></li>
+<li class="chapter" data-level="8.2" data-path="reshape.html"><a href="reshape.html#section-8.2"><i class="fa fa-check"></i><b>8.2</b> 合并数据集</a></li>
+<li class="chapter" data-level="8.3" data-path="reshape.html"><a href="reshape.html#section-8.3"><i class="fa fa-check"></i><b>8.3</b> 重塑和轴向旋转</a></li>
+<li class="chapter" data-level="8.4" data-path="reshape.html"><a href="reshape.html#-5"><i class="fa fa-check"></i><b>8.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="visulization.html"><a href="visulization.html"><i class="fa fa-check"></i><b>9</b> 绘图和可视化</a><ul>
+<li class="chapter" data-level="9.1" data-path="visulization.html"><a href="visulization.html#matplotlib-api"><i class="fa fa-check"></i><b>9.1</b> matplotlib API入门</a></li>
+<li class="chapter" data-level="9.2" data-path="visulization.html"><a href="visulization.html#pandasseaborn"><i class="fa fa-check"></i><b>9.2</b> 使用pandas和seaborn绘图</a></li>
+<li class="chapter" data-level="9.3" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i><b>9.3</b> 其它的Python可视化工具</a></li>
+<li class="chapter" data-level="9.4" data-path="visulization.html"><a href="visulization.html#-6"><i class="fa fa-check"></i><b>9.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="apply.html"><a href="apply.html"><i class="fa fa-check"></i><b>10</b> 数据聚合与分组运算</a><ul>
+<li class="chapter" data-level="10.1" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>10.1</b> GroupBy机制</a></li>
+<li class="chapter" data-level="10.2" data-path="apply.html"><a href="apply.html#section-10.2"><i class="fa fa-check"></i><b>10.2</b> 数据聚合</a></li>
+<li class="chapter" data-level="10.3" data-path="apply.html"><a href="apply.html#apply"><i class="fa fa-check"></i><b>10.3</b> apply：一般性的“拆分－应用－合并”</a></li>
+<li class="chapter" data-level="10.4" data-path="apply.html"><a href="apply.html#section-10.4"><i class="fa fa-check"></i><b>10.4</b> 透视表和交叉表</a></li>
+<li class="chapter" data-level="10.5" data-path="apply.html"><a href="apply.html#-7"><i class="fa fa-check"></i><b>10.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="timeSeries.html"><a href="timeSeries.html"><i class="fa fa-check"></i><b>11</b> 时间序列</a><ul>
+<li class="chapter" data-level="11.1" data-path="timeSeries.html"><a href="timeSeries.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 日期和时间数据类型及工具</a></li>
+<li class="chapter" data-level="11.2" data-path="timeSeries.html"><a href="timeSeries.html#section-11.2"><i class="fa fa-check"></i><b>11.2</b> 时间序列基础</a></li>
+<li class="chapter" data-level="11.3" data-path="timeSeries.html"><a href="timeSeries.html#section-11.3"><i class="fa fa-check"></i><b>11.3</b> 日期的范围、频率以及移动</a></li>
+<li class="chapter" data-level="11.4" data-path="timeSeries.html"><a href="timeSeries.html#section-11.4"><i class="fa fa-check"></i><b>11.4</b> 时区处理</a></li>
+<li class="chapter" data-level="11.5" data-path="timeSeries.html"><a href="timeSeries.html#section-11.5"><i class="fa fa-check"></i><b>11.5</b> 时区本地化和转换</a></li>
+<li class="chapter" data-level="11.6" data-path="timeSeries.html"><a href="timeSeries.html#section-11.6"><i class="fa fa-check"></i><b>11.6</b> 时期及其算术运算</a></li>
+<li class="chapter" data-level="11.7" data-path="timeSeries.html"><a href="timeSeries.html#section-11.7"><i class="fa fa-check"></i><b>11.7</b> 重采样及频率转换</a></li>
+<li class="chapter" data-level="11.8" data-path="timeSeries.html"><a href="timeSeries.html#section-11.8"><i class="fa fa-check"></i><b>11.8</b> 移动窗口函数</a></li>
+<li class="chapter" data-level="11.9" data-path="timeSeries.html"><a href="timeSeries.html#-8"><i class="fa fa-check"></i><b>11.9</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="adPandas.html"><a href="adPandas.html"><i class="fa fa-check"></i><b>12</b> pandas高级应用</a><ul>
+<li class="chapter" data-level="12.1" data-path="adPandas.html"><a href="adPandas.html#section-12.1"><i class="fa fa-check"></i><b>12.1</b> 分类数据</a></li>
+<li class="chapter" data-level="12.2" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>12.2</b> GroupBy高级应用</a></li>
+<li class="chapter" data-level="12.3" data-path="adPandas.html"><a href="adPandas.html#section-12.3"><i class="fa fa-check"></i><b>12.3</b> 链式编程技术</a></li>
+<li class="chapter" data-level="12.4" data-path="adPandas.html"><a href="adPandas.html#-9"><i class="fa fa-check"></i><b>12.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="buildModels.html"><a href="buildModels.html"><i class="fa fa-check"></i><b>13</b> Python建模库介绍</a><ul>
+<li class="chapter" data-level="13.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>13.1</b> pandas与模型代码的接口</a></li>
+<li class="chapter" data-level="13.2" data-path="buildModels.html"><a href="buildModels.html#patsy"><i class="fa fa-check"></i><b>13.2</b> 用Patsy创建模型描述</a></li>
+<li class="chapter" data-level="13.3" data-path="preparation.html"><a href="preparation.html#statsmodels"><i class="fa fa-check"></i><b>13.3</b> statsmodels介绍</a></li>
+<li class="chapter" data-level="13.4" data-path="preparation.html"><a href="preparation.html#scikit-learn"><i class="fa fa-check"></i><b>13.4</b> scikit-learn介绍</a></li>
+<li class="chapter" data-level="13.5" data-path="buildModels.html"><a href="buildModels.html#section-13.5"><i class="fa fa-check"></i><b>13.5</b> 继续学习</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="dsCases.html"><a href="dsCases.html"><i class="fa fa-check"></i><b>14</b> 数据分析案例</a><ul>
+<li class="chapter" data-level="14.1" data-path="dsCases.html"><a href="dsCases.html#bitlyusa.gov"><i class="fa fa-check"></i><b>14.1</b> 来自Bitly的USA.gov数据</a></li>
+<li class="chapter" data-level="14.2" data-path="dsCases.html"><a href="dsCases.html#movielens-1m"><i class="fa fa-check"></i><b>14.2</b> MovieLens 1M数据集</a></li>
+<li class="chapter" data-level="14.3" data-path="dsCases.html"><a href="dsCases.html#section-14.3"><i class="fa fa-check"></i><b>14.3</b> 1880-2010年间全美婴儿姓名</a></li>
+<li class="chapter" data-level="14.4" data-path="dsCases.html"><a href="dsCases.html#usda"><i class="fa fa-check"></i><b>14.4</b> USDA食品数据库</a></li>
+<li class="chapter" data-level="14.5" data-path="dsCases.html"><a href="dsCases.html#section-14.5"><i class="fa fa-check"></i><b>14.5</b> 2012联邦选举委员会数据库</a></li>
+<li class="chapter" data-level="14.6" data-path="dsCases.html"><a href="dsCases.html#-10"><i class="fa fa-check"></i><b>14.6</b> 总结</a></li>
+</ul></li>
+<li class="appendix"><span><b>附录</b></span></li>
+<li class="chapter" data-level="A" data-path="adNumpy.html"><a href="adNumpy.html"><i class="fa fa-check"></i><b>A</b> NumPy高级应用</a><ul>
+<li class="chapter" data-level="A.1" data-path="numpy.html"><a href="numpy.html#ndarray"><i class="fa fa-check"></i><b>A.1</b> ndarray对象的内部机理</a></li>
+<li class="chapter" data-level="A.2" data-path="index.html"><a href="#section-A.2"><i class="fa fa-check"></i><b>A.2</b> 高级数组操作</a></li>
+<li class="chapter" data-level="A.3" data-path="index.html"><a href="#section-A.3"><i class="fa fa-check"></i><b>A.3</b> 广播</a></li>
+<li class="chapter" data-level="A.4" data-path="adNumpy.html"><a href="adNumpy.html#ufunc"><i class="fa fa-check"></i><b>A.4</b> ufunc高级应用</a></li>
+<li class="chapter" data-level="A.5" data-path="index.html"><a href="#section-A.5"><i class="fa fa-check"></i><b>A.5</b> 结构化和记录式数组</a></li>
+<li class="chapter" data-level="A.6" data-path="index.html"><a href="#section-A.6"><i class="fa fa-check"></i><b>A.6</b> 更多有关排序的话题</a></li>
+<li class="chapter" data-level="A.7" data-path="adNumpy.html"><a href="adNumpy.html#numbanumpy"><i class="fa fa-check"></i><b>A.7</b> 用Numba编写快速NumPy函数</a></li>
+<li class="chapter" data-level="A.8" data-path="index.html"><a href="#section-A.8"><i class="fa fa-check"></i><b>A.8</b> 高级数组输入输出</a></li>
+<li class="chapter" data-level="A.9" data-path="index.html"><a href="#section-A.9"><i class="fa fa-check"></i><b>A.9</b> 性能建议</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="moreInfo.html"><a href="moreInfo.html"><i class="fa fa-check"></i><b>B</b> 更多关于IPython的内容</a><ul>
+<li class="chapter" data-level="B.1" data-path="index.html"><a href="#section-B.1"><i class="fa fa-check"></i><b>B.1</b> 使用命令历史</a></li>
+<li class="chapter" data-level="B.2" data-path="index.html"><a href="#section-B.2"><i class="fa fa-check"></i><b>B.2</b> 与操作系统交互</a></li>
+<li class="chapter" data-level="B.3" data-path="index.html"><a href="#section-B.3"><i class="fa fa-check"></i><b>B.3</b> 软件开发工具</a></li>
+<li class="chapter" data-level="B.4" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.4</b> 使用IPython高效开发的技巧</a></li>
+<li class="chapter" data-level="B.5" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.5</b> IPython高级功能</a></li>
+<li class="chapter" data-level="B.6" data-path="moreInfo.html"><a href="moreInfo.html#-11"><i class="fa fa-check"></i><b>B.6</b> 总结</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">利用Python进行数据分析（第二版）中文翻译</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">利用Python进行数据分析（第二版）中文翻译</h1>
+<p class="author"><em>作者：Wes McKinney，翻译：SeanCheney，校对与维护：王诗翔</em></p>
+<p class="date"><em>2019-10-21</em></p>
+</div>
+<div id="e5898de8a880" class="section level1 unnumbered">
+<h1>前言</h1>
+<p>本项目由 <a href="https://github.com/openbiox">Openbiox 小组</a>进行维护，阅读请点击 👉 <a href="https://openbiox.github.io/py4ds-CN/" class="uri">https://openbiox.github.io/py4ds-CN/</a></p>
+<p>《利用Python进行数据分析》一书由 <a href="https://github.com/wesm">Wes McKinney</a>创作，<a href="https://www.jianshu.com/u/130f76596b02">SeanCheney</a>进行翻译。如果大家对这本书感到满意，钱财富足的话可以购买原作者的实体书。</p>
+<p>我用了两个 R 包编译这本书，分别是 <strong>knitr</strong> 和 <strong>bookdown</strong>。</p>
+<p>如果你想要离线阅读该内容，需要克隆仓库并进行编译。</p>
+<p>需求：</p>
+<ul>
+<li>R</li>
+<li>bookdown</li>
+</ul>
+<p>编译：</p>
+<pre><code># 克隆
+git clone https://github.com/openbiox/py4ds-CN.git
+
+# 点击目录下的bookdown-chinese.Rproj文件（如果安装了RStudio）
+# 如果没有，请将仓库切换为工作目录
+
+# 在R控制台运行
+bookdown::render_book(&quot;index.Rmd&quot;, &quot;bookdown::gitbook&quot;)</code></pre>
+<div id="section-0.1" class="section level2">
+<h2><span class="header-section-number">0.1</span> 问题与贡献</h2>
+<p>在本书翻译内容转换的过程中，产生了不少问题。其中我已知有：</p>
+<ul>
+<li>某些章节链接跳转不正常</li>
+<li>部分图表丢失</li>
+</ul>
+<p>我会逐字阅读并尽量解决所遇到的问题。</p>
+<p>个人能力有限，大家在阅读时发现问题可以通过 Github <a href="https://github.com/openbiox/py4ds-CN/issues/new">创建 issue</a> 提出或者 <a href="https://github.com/ShixiangWang/openbiox/">fork 仓库</a>后修改并提交合并请求。</p>
+</div>
+<div id="section-0.2" class="section level2">
+<h2><span class="header-section-number">0.2</span> 许可</h2>
+<p><strong>本翻译仅供个人学习使用，不涉及任何商业利益，并以 <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.zh">ACC BY-SA 3.0 协议</a> 传播分享</strong>。</p>
+</div>
+<div id="section-0.3" class="section level2">
+<h2><span class="header-section-number">0.3</span> 致谢</h2>
+<p>非常感谢我女朋友的宽容，不然我无法用一晚上的功夫基本搞定这个事情。也感谢R与创造bookdown的益辉大神及贡献者，不然我无法利用这么便捷的工具进行创造。</p>
+
+<p class="flushright">
+诗翔<br />
+于 上海 某小窝
+</p>
+
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="author.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/openbiox/Cookbook-for-R-Chinese/edit/master/book/index.Rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

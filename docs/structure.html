@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 3 章 Python的数据结构、函数和文件 | 利用Python进行数据分析（第二版）中文翻译</title>
+  <meta name="description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 3 章 Python的数据结构、函数和文件 | 利用Python进行数据分析（第二版）中文翻译" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="github-repo" content="openbiox/py4ds-CN" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 3 章 Python的数据结构、函数和文件 | 利用Python进行数据分析（第二版）中文翻译" />
+  
+  <meta name="twitter:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  
+
+<meta name="author" content="作者：Wes McKinney，翻译：SeanCheney，校对与维护：王诗翔" />
+
+
+<meta name="date" content="2019-10-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="basics.html"/>
+<link rel="next" href="numpy.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">利用Python进行数据分析（第二版）</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#section-0.1"><i class="fa fa-check"></i><b>0.1</b> 问题与贡献</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#section-0.2"><i class="fa fa-check"></i><b>0.2</b> 许可</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#section-0.3"><i class="fa fa-check"></i><b>0.3</b> 致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>作者简介</a></li>
+<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> 准备工作</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e79a84e58685e5aeb9"><i class="fa fa-check"></i>本书的内容</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>为什么要使用Python进行数据分析</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>重要的Python库</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e5ae89e8a385e5928ce8aebee7bdae"><i class="fa fa-check"></i>安装和设置</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e7a4bee58cbae5928ce4bc9ae8aeae"><i class="fa fa-check"></i>社区和会议</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e5afbce888aa"><i class="fa fa-check"></i>本书导航</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Python 语法基础，IPython 和 Jupyter Notebooks</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python解释器</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i>IPython基础</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python语法基础</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#unicode"><i class="fa fa-check"></i>字节和Unicode</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#e68ea7e588b6e6b581"><i class="fa fa-check"></i>控制流</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>3</b> Python的数据结构、函数和文件</a><ul>
+<li class="chapter" data-level="3.1" data-path="structure.html"><a href="structure.html#section-3.1"><i class="fa fa-check"></i><b>3.1</b> 元组</a></li>
+<li class="chapter" data-level="3.2" data-path="structure.html"><a href="structure.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 列表</a></li>
+<li class="chapter" data-level="3.3" data-path="structure.html"><a href="structure.html#section-3.3"><i class="fa fa-check"></i><b>3.3</b> 序列函数</a></li>
+<li class="chapter" data-level="3.4" data-path="structure.html"><a href="structure.html#section-3.4"><i class="fa fa-check"></i><b>3.4</b> 字典</a></li>
+<li class="chapter" data-level="3.5" data-path="structure.html"><a href="structure.html#section-3.5"><i class="fa fa-check"></i><b>3.5</b> 集合</a></li>
+<li class="chapter" data-level="3.6" data-path="structure.html"><a href="structure.html#section-3.6"><i class="fa fa-check"></i><b>3.6</b> 列表、集合和字典推导式</a></li>
+<li class="chapter" data-level="3.7" data-path="structure.html"><a href="structure.html#section-3.7"><i class="fa fa-check"></i><b>3.7</b> 嵌套列表推导式</a></li>
+<li class="chapter" data-level="3.8" data-path="structure.html"><a href="structure.html#section-3.8"><i class="fa fa-check"></i><b>3.8</b> 函数</a></li>
+<li class="chapter" data-level="3.9" data-path="structure.html"><a href="structure.html#section-3.9"><i class="fa fa-check"></i><b>3.9</b> 生成器</a></li>
+<li class="chapter" data-level="3.10" data-path="structure.html"><a href="structure.html#section-3.10"><i class="fa fa-check"></i><b>3.10</b> 错误和异常处理</a></li>
+<li class="chapter" data-level="3.11" data-path="structure.html"><a href="structure.html#section-3.11"><i class="fa fa-check"></i><b>3.11</b> 文件和操作系统</a></li>
+<li class="chapter" data-level="3.12" data-path="structure.html"><a href="structure.html#section-3.12"><i class="fa fa-check"></i><b>3.12</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="preparation.html"><a href="preparation.html#numpy"><i class="fa fa-check"></i><b>4</b> NumPy基础：数组和矢量计算</a><ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4.1</b> NumPy的ndarray：一种多维数组对象</a></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 通用函数：快速的元素级数组函数</a></li>
+<li class="chapter" data-level="4.3" data-path="numpy.html"><a href="numpy.html#section-4.3"><i class="fa fa-check"></i><b>4.3</b> 利用数组进行数据处理</a></li>
+<li class="chapter" data-level="4.4" data-path="numpy.html"><a href="numpy.html#section-4.4"><i class="fa fa-check"></i><b>4.4</b> 用于数组的文件输入输出</a></li>
+<li class="chapter" data-level="4.5" data-path="numpy.html"><a href="numpy.html#section-4.5"><i class="fa fa-check"></i><b>4.5</b> 线性代数</a></li>
+<li class="chapter" data-level="4.6" data-path="numpy.html"><a href="numpy.html#section-4.6"><i class="fa fa-check"></i><b>4.6</b> 伪随机数生成</a></li>
+<li class="chapter" data-level="4.7" data-path="numpy.html"><a href="numpy.html#section-4.7"><i class="fa fa-check"></i><b>4.7</b> 示例：随机漫步</a></li>
+<li class="chapter" data-level="4.8" data-path="numpy.html"><a href="numpy.html#-1"><i class="fa fa-check"></i><b>4.8</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5</b> pandas入门</a><ul>
+<li class="chapter" data-level="5.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5.1</b> pandas的数据结构介绍</a></li>
+<li class="chapter" data-level="5.2" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>5.2</b> 基本功能</a></li>
+<li class="chapter" data-level="5.3" data-path="pandas.html"><a href="pandas.html#section-5.3"><i class="fa fa-check"></i><b>5.3</b> 汇总和计算描述统计</a></li>
+<li class="chapter" data-level="5.4" data-path="pandas.html"><a href="pandas.html#-2"><i class="fa fa-check"></i><b>5.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data2file.html"><a href="data2file.html"><i class="fa fa-check"></i><b>6</b> 数据加载、存储与文件格式</a><ul>
+<li class="chapter" data-level="6.1" data-path="data2file.html"><a href="data2file.html#section-6.1"><i class="fa fa-check"></i><b>6.1</b> 读写文本格式的数据</a></li>
+<li class="chapter" data-level="6.2" data-path="data2file.html"><a href="data2file.html#section-6.2"><i class="fa fa-check"></i><b>6.2</b> 二进制数据格式</a></li>
+<li class="chapter" data-level="6.3" data-path="data2file.html"><a href="data2file.html#web-apis"><i class="fa fa-check"></i><b>6.3</b> Web APIs交互</a></li>
+<li class="chapter" data-level="6.4" data-path="data2file.html"><a href="data2file.html#section-6.4"><i class="fa fa-check"></i><b>6.4</b> 数据库交互</a></li>
+<li class="chapter" data-level="6.5" data-path="data2file.html"><a href="data2file.html#-3"><i class="fa fa-check"></i><b>6.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>7</b> 数据清洗和准备</a><ul>
+<li class="chapter" data-level="7.1" data-path="tidy.html"><a href="tidy.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 处理缺失数据</a></li>
+<li class="chapter" data-level="7.2" data-path="tidy.html"><a href="tidy.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 数据转换</a></li>
+<li class="chapter" data-level="7.3" data-path="tidy.html"><a href="tidy.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 字符串操作</a></li>
+<li class="chapter" data-level="7.4" data-path="tidy.html"><a href="tidy.html#-4"><i class="fa fa-check"></i><b>7.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reshape.html"><a href="reshape.html"><i class="fa fa-check"></i><b>8</b> 数据规整：聚合、合并和重塑</a><ul>
+<li class="chapter" data-level="8.1" data-path="reshape.html"><a href="reshape.html#section-8.1"><i class="fa fa-check"></i><b>8.1</b> 层次化索引</a></li>
+<li class="chapter" data-level="8.2" data-path="reshape.html"><a href="reshape.html#section-8.2"><i class="fa fa-check"></i><b>8.2</b> 合并数据集</a></li>
+<li class="chapter" data-level="8.3" data-path="reshape.html"><a href="reshape.html#section-8.3"><i class="fa fa-check"></i><b>8.3</b> 重塑和轴向旋转</a></li>
+<li class="chapter" data-level="8.4" data-path="reshape.html"><a href="reshape.html#-5"><i class="fa fa-check"></i><b>8.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="visulization.html"><a href="visulization.html"><i class="fa fa-check"></i><b>9</b> 绘图和可视化</a><ul>
+<li class="chapter" data-level="9.1" data-path="visulization.html"><a href="visulization.html#matplotlib-api"><i class="fa fa-check"></i><b>9.1</b> matplotlib API入门</a></li>
+<li class="chapter" data-level="9.2" data-path="visulization.html"><a href="visulization.html#pandasseaborn"><i class="fa fa-check"></i><b>9.2</b> 使用pandas和seaborn绘图</a></li>
+<li class="chapter" data-level="9.3" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i><b>9.3</b> 其它的Python可视化工具</a></li>
+<li class="chapter" data-level="9.4" data-path="visulization.html"><a href="visulization.html#-6"><i class="fa fa-check"></i><b>9.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="apply.html"><a href="apply.html"><i class="fa fa-check"></i><b>10</b> 数据聚合与分组运算</a><ul>
+<li class="chapter" data-level="10.1" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>10.1</b> GroupBy机制</a></li>
+<li class="chapter" data-level="10.2" data-path="apply.html"><a href="apply.html#section-10.2"><i class="fa fa-check"></i><b>10.2</b> 数据聚合</a></li>
+<li class="chapter" data-level="10.3" data-path="apply.html"><a href="apply.html#apply"><i class="fa fa-check"></i><b>10.3</b> apply：一般性的“拆分－应用－合并”</a></li>
+<li class="chapter" data-level="10.4" data-path="apply.html"><a href="apply.html#section-10.4"><i class="fa fa-check"></i><b>10.4</b> 透视表和交叉表</a></li>
+<li class="chapter" data-level="10.5" data-path="apply.html"><a href="apply.html#-7"><i class="fa fa-check"></i><b>10.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="timeSeries.html"><a href="timeSeries.html"><i class="fa fa-check"></i><b>11</b> 时间序列</a><ul>
+<li class="chapter" data-level="11.1" data-path="timeSeries.html"><a href="timeSeries.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 日期和时间数据类型及工具</a></li>
+<li class="chapter" data-level="11.2" data-path="timeSeries.html"><a href="timeSeries.html#section-11.2"><i class="fa fa-check"></i><b>11.2</b> 时间序列基础</a></li>
+<li class="chapter" data-level="11.3" data-path="timeSeries.html"><a href="timeSeries.html#section-11.3"><i class="fa fa-check"></i><b>11.3</b> 日期的范围、频率以及移动</a></li>
+<li class="chapter" data-level="11.4" data-path="timeSeries.html"><a href="timeSeries.html#section-11.4"><i class="fa fa-check"></i><b>11.4</b> 时区处理</a></li>
+<li class="chapter" data-level="11.5" data-path="timeSeries.html"><a href="timeSeries.html#section-11.5"><i class="fa fa-check"></i><b>11.5</b> 时区本地化和转换</a></li>
+<li class="chapter" data-level="11.6" data-path="timeSeries.html"><a href="timeSeries.html#section-11.6"><i class="fa fa-check"></i><b>11.6</b> 时期及其算术运算</a></li>
+<li class="chapter" data-level="11.7" data-path="timeSeries.html"><a href="timeSeries.html#section-11.7"><i class="fa fa-check"></i><b>11.7</b> 重采样及频率转换</a></li>
+<li class="chapter" data-level="11.8" data-path="timeSeries.html"><a href="timeSeries.html#section-11.8"><i class="fa fa-check"></i><b>11.8</b> 移动窗口函数</a></li>
+<li class="chapter" data-level="11.9" data-path="timeSeries.html"><a href="timeSeries.html#-8"><i class="fa fa-check"></i><b>11.9</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="adPandas.html"><a href="adPandas.html"><i class="fa fa-check"></i><b>12</b> pandas高级应用</a><ul>
+<li class="chapter" data-level="12.1" data-path="adPandas.html"><a href="adPandas.html#section-12.1"><i class="fa fa-check"></i><b>12.1</b> 分类数据</a></li>
+<li class="chapter" data-level="12.2" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>12.2</b> GroupBy高级应用</a></li>
+<li class="chapter" data-level="12.3" data-path="adPandas.html"><a href="adPandas.html#section-12.3"><i class="fa fa-check"></i><b>12.3</b> 链式编程技术</a></li>
+<li class="chapter" data-level="12.4" data-path="adPandas.html"><a href="adPandas.html#-9"><i class="fa fa-check"></i><b>12.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="buildModels.html"><a href="buildModels.html"><i class="fa fa-check"></i><b>13</b> Python建模库介绍</a><ul>
+<li class="chapter" data-level="13.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>13.1</b> pandas与模型代码的接口</a></li>
+<li class="chapter" data-level="13.2" data-path="buildModels.html"><a href="buildModels.html#patsy"><i class="fa fa-check"></i><b>13.2</b> 用Patsy创建模型描述</a></li>
+<li class="chapter" data-level="13.3" data-path="preparation.html"><a href="preparation.html#statsmodels"><i class="fa fa-check"></i><b>13.3</b> statsmodels介绍</a></li>
+<li class="chapter" data-level="13.4" data-path="preparation.html"><a href="preparation.html#scikit-learn"><i class="fa fa-check"></i><b>13.4</b> scikit-learn介绍</a></li>
+<li class="chapter" data-level="13.5" data-path="buildModels.html"><a href="buildModels.html#section-13.5"><i class="fa fa-check"></i><b>13.5</b> 继续学习</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="dsCases.html"><a href="dsCases.html"><i class="fa fa-check"></i><b>14</b> 数据分析案例</a><ul>
+<li class="chapter" data-level="14.1" data-path="dsCases.html"><a href="dsCases.html#bitlyusa.gov"><i class="fa fa-check"></i><b>14.1</b> 来自Bitly的USA.gov数据</a></li>
+<li class="chapter" data-level="14.2" data-path="dsCases.html"><a href="dsCases.html#movielens-1m"><i class="fa fa-check"></i><b>14.2</b> MovieLens 1M数据集</a></li>
+<li class="chapter" data-level="14.3" data-path="dsCases.html"><a href="dsCases.html#section-14.3"><i class="fa fa-check"></i><b>14.3</b> 1880-2010年间全美婴儿姓名</a></li>
+<li class="chapter" data-level="14.4" data-path="dsCases.html"><a href="dsCases.html#usda"><i class="fa fa-check"></i><b>14.4</b> USDA食品数据库</a></li>
+<li class="chapter" data-level="14.5" data-path="dsCases.html"><a href="dsCases.html#section-14.5"><i class="fa fa-check"></i><b>14.5</b> 2012联邦选举委员会数据库</a></li>
+<li class="chapter" data-level="14.6" data-path="dsCases.html"><a href="dsCases.html#-10"><i class="fa fa-check"></i><b>14.6</b> 总结</a></li>
+</ul></li>
+<li class="appendix"><span><b>附录</b></span></li>
+<li class="chapter" data-level="A" data-path="adNumpy.html"><a href="adNumpy.html"><i class="fa fa-check"></i><b>A</b> NumPy高级应用</a><ul>
+<li class="chapter" data-level="A.1" data-path="numpy.html"><a href="numpy.html#ndarray"><i class="fa fa-check"></i><b>A.1</b> ndarray对象的内部机理</a></li>
+<li class="chapter" data-level="A.2" data-path="03-structure.html"><a href="#section-A.2"><i class="fa fa-check"></i><b>A.2</b> 高级数组操作</a></li>
+<li class="chapter" data-level="A.3" data-path="03-structure.html"><a href="#section-A.3"><i class="fa fa-check"></i><b>A.3</b> 广播</a></li>
+<li class="chapter" data-level="A.4" data-path="adNumpy.html"><a href="adNumpy.html#ufunc"><i class="fa fa-check"></i><b>A.4</b> ufunc高级应用</a></li>
+<li class="chapter" data-level="A.5" data-path="03-structure.html"><a href="#section-A.5"><i class="fa fa-check"></i><b>A.5</b> 结构化和记录式数组</a></li>
+<li class="chapter" data-level="A.6" data-path="03-structure.html"><a href="#section-A.6"><i class="fa fa-check"></i><b>A.6</b> 更多有关排序的话题</a></li>
+<li class="chapter" data-level="A.7" data-path="adNumpy.html"><a href="adNumpy.html#numbanumpy"><i class="fa fa-check"></i><b>A.7</b> 用Numba编写快速NumPy函数</a></li>
+<li class="chapter" data-level="A.8" data-path="03-structure.html"><a href="#section-A.8"><i class="fa fa-check"></i><b>A.8</b> 高级数组输入输出</a></li>
+<li class="chapter" data-level="A.9" data-path="03-structure.html"><a href="#section-A.9"><i class="fa fa-check"></i><b>A.9</b> 性能建议</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="moreInfo.html"><a href="moreInfo.html"><i class="fa fa-check"></i><b>B</b> 更多关于IPython的内容</a><ul>
+<li class="chapter" data-level="B.1" data-path="03-structure.html"><a href="#section-B.1"><i class="fa fa-check"></i><b>B.1</b> 使用命令历史</a></li>
+<li class="chapter" data-level="B.2" data-path="03-structure.html"><a href="#section-B.2"><i class="fa fa-check"></i><b>B.2</b> 与操作系统交互</a></li>
+<li class="chapter" data-level="B.3" data-path="03-structure.html"><a href="#section-B.3"><i class="fa fa-check"></i><b>B.3</b> 软件开发工具</a></li>
+<li class="chapter" data-level="B.4" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.4</b> 使用IPython高效开发的技巧</a></li>
+<li class="chapter" data-level="B.5" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.5</b> IPython高级功能</a></li>
+<li class="chapter" data-level="B.6" data-path="moreInfo.html"><a href="moreInfo.html#-11"><i class="fa fa-check"></i><b>B.6</b> 总结</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">利用Python进行数据分析（第二版）中文翻译</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="structure" class="section level1">
+<h1><span class="header-section-number">第 3 章</span> Python的数据结构、函数和文件</h1>
+<p>本章讨论Python的内置功能，这些功能本书会用到很多。虽然扩展库，比如pandas和Numpy，使处理大数据集很方便，但它们是和Python的内置数据处理工具一同使用的。</p>
+<p>我们会从Python最基础的数据结构开始：元组、列表、字典和集合。然后会讨论创建你自己的、可重复使用的Python函数。最后，会学习Python的文件对象，以及如何与本地硬盘交互。</p>
+<p>Python的数据结构简单而强大。通晓它们才能成为熟练的Python程序员。</p>
+<div id="section-3.1" class="section level2">
+<h2><span class="header-section-number">3.1</span> 元组</h2>
+<p>元组是一个固定长度，不可改变的Python序列对象。创建元组的最简单方式，是用逗号分隔一列值：</p>
+<pre><code>In [1]: tup = 4, 5, 6
+
+In [2]: tup
+Out[2]: (4, 5, 6)</code></pre>
+<p>当用复杂的表达式定义元组，最好将值放到圆括号内，如下所示：</p>
+<pre><code>In [3]: nested_tup = (4, 5, 6), (7, 8)
+
+In [4]: nested_tup
+Out[4]: ((4, 5, 6), (7, 8))</code></pre>
+<p>用<code>tuple</code>可以将任意序列或迭代器转换成元组：</p>
+<pre><code>In [5]: tuple([4, 0, 2])
+Out[5]: (4, 0, 2)
+
+In [6]: tup = tuple(&#39;string&#39;)
+
+In [7]: tup
+Out[7]: (&#39;s&#39;, &#39;t&#39;, &#39;r&#39;, &#39;i&#39;, &#39;n&#39;, &#39;g&#39;)</code></pre>
+<p>可以用方括号访问元组中的元素。和C、C++、JAVA等语言一样，序列是从0开始的：</p>
+<pre><code>In [8]: tup[0]
+Out[8]: &#39;s&#39;</code></pre>
+<p>元组中存储的对象可能是可变对象。一旦创建了元组，元组中的对象就不能修改了：</p>
+<pre><code>In [9]: tup = tuple([&#39;foo&#39;, [1, 2], True])
+
+In [10]: tup[2] = False
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-10-c7308343b841&gt; in &lt;module&gt;()
+----&gt; 1 tup[2] = False
+TypeError: &#39;tuple&#39; object does not support item assignment</code></pre>
+<p>如果元组中的某个对象是可变的，比如列表，可以在原位进行修改：</p>
+<pre><code>In [11]: tup[1].append(3)
+
+In [12]: tup
+Out[12]: (&#39;foo&#39;, [1, 2, 3], True)</code></pre>
+<p>可以用加号运算符将元组串联起来：</p>
+<pre><code>In [13]: (4, None, &#39;foo&#39;) + (6, 0) + (&#39;bar&#39;,)
+Out[13]: (4, None, &#39;foo&#39;, 6, 0, &#39;bar&#39;)</code></pre>
+<p>元组乘以一个整数，像列表一样，会将几个元组的复制串联起来：</p>
+<pre><code>In [14]: (&#39;foo&#39;, &#39;bar&#39;) * 4
+Out[14]: (&#39;foo&#39;, &#39;bar&#39;, &#39;foo&#39;, &#39;bar&#39;, &#39;foo&#39;, &#39;bar&#39;, &#39;foo&#39;, &#39;bar&#39;)</code></pre>
+<p>对象本身并没有被复制，只是引用了它。</p>
+<div id="section-3.1.1" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> 拆分元组</h3>
+<p>如果你想将元组赋值给类似元组的变量，Python会试图拆分等号右边的值：</p>
+<pre><code>In [15]: tup = (4, 5, 6)
+
+In [16]: a, b, c = tup
+
+In [17]: b
+Out[17]: 5</code></pre>
+<p>即使含有元组的元组也会被拆分：</p>
+<pre><code>In [18]: tup = 4, 5, (6, 7)
+
+In [19]: a, b, (c, d) = tup
+
+In [20]: d
+Out[20]: 7</code></pre>
+<p>使用这个功能，你可以很容易地替换变量的名字，其它语言可能是这样：</p>
+<pre><code>tmp = a
+a = b
+b = tmp</code></pre>
+<p>但是在Python中，替换可以这样做：</p>
+<pre><code>In [21]: a, b = 1, 2
+
+In [22]: a
+Out[22]: 1
+
+In [23]: b
+Out[23]: 2
+
+In [24]: b, a = a, b
+
+In [25]: a
+Out[25]: 2
+
+In [26]: b
+Out[26]: 1</code></pre>
+<p>变量拆分常用来迭代元组或列表序列：</p>
+<pre><code>In [27]: seq = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
+
+In [28]: for a, b, c in seq:
+   ....:     print(&#39;a={0}, b={1}, c={2}&#39;.format(a, b, c))
+a=1, b=2, c=3
+a=4, b=5, c=6
+a=7, b=8, c=9</code></pre>
+<p>另一个常见用法是从函数返回多个值。后面会详解。</p>
+<p>Python最近新增了更多高级的元组拆分功能，允许从元组的开头“摘取”几个元素。它使用了特殊的语法<code>*rest</code>，这也用在函数签名中以抓取任意长度列表的位置参数：</p>
+<pre><code>In [29]: values = 1, 2, 3, 4, 5
+
+In [30]: a, b, *rest = values
+
+In [31]: a, b
+Out[31]: (1, 2)
+
+In [32]: rest
+Out[32]: [3, 4, 5]</code></pre>
+<p><code>rest</code>的部分是想要舍弃的部分，rest的名字不重要。作为惯用写法，许多Python程序员会将不需要的变量使用下划线：</p>
+<pre><code>In [33]: a, b, *_ = values</code></pre>
+</div>
+<div id="tuple" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> tuple方法</h3>
+<p>因为元组的大小和内容不能修改，它的实例方法都很轻量。其中一个很有用的就是<code>count</code>（也适用于列表），它可以统计某个值得出现频率：</p>
+<pre><code>In [34]: a = (1, 2, 2, 2, 3, 4, 2)
+
+In [35]: a.count(2)
+Out[35]: 4</code></pre>
+</div>
+</div>
+<div id="section-3.2" class="section level2">
+<h2><span class="header-section-number">3.2</span> 列表</h2>
+<p>与元组对比，列表的长度可变、内容可以被修改。你可以用方括号定义，或用<code>list</code>函数：</p>
+<pre><code>In [36]: a_list = [2, 3, 7, None]
+
+In [37]: tup = (&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;)
+
+In [38]: b_list = list(tup)
+
+In [39]: b_list
+Out[39]: [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;]
+
+In [40]: b_list[1] = &#39;peekaboo&#39;
+
+In [41]: b_list
+Out[41]: [&#39;foo&#39;, &#39;peekaboo&#39;, &#39;baz&#39;]</code></pre>
+<p>列表和元组的语义接近，在许多函数中可以交叉使用。</p>
+<p><code>list</code>函数常用来在数据处理中实体化迭代器或生成器：</p>
+<pre><code>In [42]: gen = range(10)
+
+In [43]: gen
+Out[43]: range(0, 10)
+
+In [44]: list(gen)
+Out[44]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+<div id="section-3.2.1" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> 添加和删除元素</h3>
+<p>可以用<code>append</code>在列表末尾添加元素：</p>
+<pre><code>In [45]: b_list.append(&#39;dwarf&#39;)
+
+In [46]: b_list
+Out[46]: [&#39;foo&#39;, &#39;peekaboo&#39;, &#39;baz&#39;, &#39;dwarf&#39;]</code></pre>
+<p><code>insert</code>可以在特定的位置插入元素：</p>
+<pre><code>In [47]: b_list.insert(1, &#39;red&#39;)
+
+In [48]: b_list
+Out[48]: [&#39;foo&#39;, &#39;red&#39;, &#39;peekaboo&#39;, &#39;baz&#39;, &#39;dwarf&#39;]</code></pre>
+<p>插入的序号必须在0和列表长度之间。</p>
+<blockquote>
+<p>警告：与<code>append</code>相比，<code>insert</code>耗费的计算量大，因为对后续元素的引用必须在内部迁移，以便为新元素提供空间。如果要在序列的头部和尾部插入元素，你可能需要使用<code>collections.deque</code>，一个双尾部队列。</p>
+</blockquote>
+<p>insert的逆运算是pop，它移除并返回指定位置的元素：</p>
+<pre><code>In [49]: b_list.pop(2)
+Out[49]: &#39;peekaboo&#39;
+
+In [50]: b_list
+Out[50]: [&#39;foo&#39;, &#39;red&#39;, &#39;baz&#39;, &#39;dwarf&#39;]</code></pre>
+<p>可以用<code>remove</code>去除某个值，<code>remove</code>会先寻找第一个值并除去：</p>
+<pre><code>In [51]: b_list.append(&#39;foo&#39;)
+
+In [52]: b_list
+Out[52]: [&#39;foo&#39;, &#39;red&#39;, &#39;baz&#39;, &#39;dwarf&#39;, &#39;foo&#39;]
+
+In [53]: b_list.remove(&#39;foo&#39;)
+
+In [54]: b_list
+Out[54]: [&#39;red&#39;, &#39;baz&#39;, &#39;dwarf&#39;, &#39;foo&#39;]</code></pre>
+<p>如果不考虑性能，使用<code>append</code>和<code>remove</code>，可以把Python的列表当做完美的“多重集”数据结构。</p>
+<p>用<code>in</code>可以检查列表是否包含某个值：</p>
+<pre><code>In [55]: &#39;dwarf&#39; in b_list
+Out[55]: True</code></pre>
+<p>否定<code>in</code>可以再加一个not：</p>
+<pre><code>In [56]: &#39;dwarf&#39; not in b_list
+Out[56]: False</code></pre>
+<p>在列表中检查是否存在某个值远比字典和集合速度慢，因为Python是线性搜索列表中的值，但在字典和集合中，在同样的时间内还可以检查其它项（基于哈希表）。</p>
+</div>
+<div id="section-3.2.2" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> 串联和组合列表</h3>
+<p>与元组类似，可以用加号将两个列表串联起来：</p>
+<pre><code>In [57]: [4, None, &#39;foo&#39;] + [7, 8, (2, 3)]
+Out[57]: [4, None, &#39;foo&#39;, 7, 8, (2, 3)]</code></pre>
+<p>如果已经定义了一个列表，用<code>extend</code>方法可以追加多个元素：</p>
+<pre><code>In [58]: x = [4, None, &#39;foo&#39;]
+
+In [59]: x.extend([7, 8, (2, 3)])
+
+In [60]: x
+Out[60]: [4, None, &#39;foo&#39;, 7, 8, (2, 3)]</code></pre>
+<p>通过加法将列表串联的计算量较大，因为要新建一个列表，并且要复制对象。用<code>extend</code>追加元素，尤其是到一个大列表中，更为可取。因此：</p>
+<pre><code>everything = []
+for chunk in list_of_lists:
+    everything.extend(chunk)</code></pre>
+<p>要比串联方法快：</p>
+<pre><code>everything = []
+for chunk in list_of_lists:
+    everything = everything + chunk</code></pre>
+</div>
+<div id="section-3.2.3" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> 排序</h3>
+<p>你可以用<code>sort</code>函数将一个列表原地排序（不创建新的对象）：</p>
+<pre><code>In [61]: a = [7, 2, 5, 1, 3]
+
+In [62]: a.sort()
+
+In [63]: a
+Out[63]: [1, 2, 3, 5, 7]</code></pre>
+<p><code>sort</code>有一些选项，有时会很好用。其中之一是二级排序key，可以用这个key进行排序。例如，我们可以按长度对字符串进行排序：</p>
+<pre><code>In [64]: b = [&#39;saw&#39;, &#39;small&#39;, &#39;He&#39;, &#39;foxes&#39;, &#39;six&#39;]
+
+In [65]: b.sort(key=len)
+
+In [66]: b
+Out[66]: [&#39;He&#39;, &#39;saw&#39;, &#39;six&#39;, &#39;small&#39;, &#39;foxes&#39;]</code></pre>
+<p>稍后，我们会学习<code>sorted</code>函数，它可以产生一个排好序的序列副本。</p>
+</div>
+<div id="section-3.2.4" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> 二分搜索和维护已排序的列表</h3>
+<p><code>bisect</code>模块支持二分查找，和向已排序的列表插入值。<code>bisect.bisect</code>可以找到插入值后仍保证排序的位置，<code>bisect.insort</code>是向这个位置插入值：</p>
+<pre><code>In [67]: import bisect
+
+In [68]: c = [1, 2, 2, 2, 3, 4, 7]
+
+In [69]: bisect.bisect(c, 2)
+Out[69]: 4
+
+In [70]: bisect.bisect(c, 5)
+Out[70]: 6
+
+In [71]: bisect.insort(c, 6)
+
+In [72]: c
+Out[72]: [1, 2, 2, 2, 3, 4, 6, 7]</code></pre>
+<blockquote>
+<p>注意：<code>bisect</code>模块不会检查列表是否已排好序，进行检查的话会耗费大量计算。因此，对未排序的列表使用<code>bisect</code>不会产生错误，但结果不一定正确。</p>
+</blockquote>
+</div>
+<div id="section-3.2.5" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> 切片</h3>
+<p>用切边可以选取大多数序列类型的一部分，切片的基本形式是在方括号中使用<code>start:stop</code>：</p>
+<pre><code>In [73]: seq = [7, 2, 3, 7, 5, 6, 0, 1]
+
+In [74]: seq[1:5]
+Out[74]: [2, 3, 7, 5]</code></pre>
+<p>切片也可以被序列赋值：</p>
+<pre><code>In [75]: seq[3:4] = [6, 3]
+
+In [76]: seq
+Out[76]: [7, 2, 3, 6, 3, 5, 6, 0, 1]</code></pre>
+<p>切片的起始元素是包括的，不包含结束元素。因此，结果中包含的元素个数是<code>stop - start</code>。</p>
+<p><code>start</code>或<code>stop</code>都可以被省略，省略之后，分别默认序列的开头和结尾：</p>
+<pre><code>In [77]: seq[:5]
+Out[77]: [7, 2, 3, 6, 3]
+
+In [78]: seq[3:]
+Out[78]: [6, 3, 5, 6, 0, 1]</code></pre>
+<p>负数表明从后向前切片：</p>
+<pre><code>In [79]: seq[-4:]
+Out[79]: [5, 6, 0, 1]
+
+In [80]: seq[-6:-2]
+Out[80]: [6, 3, 5, 6]</code></pre>
+<p>需要一段时间来熟悉使用切片，尤其是当你之前学的是R或MATLAB。图3-1展示了正整数和负整数的切片。在图中，指数标示在边缘以表明切片是在哪里开始哪里结束的。</p>
+<div class="figure">
+<img src="" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>图3-1 Python切片演示</p>
+<p>在第二个冒号后面使用<code>step</code>，可以隔一个取一个元素：</p>
+<pre><code>In [81]: seq[::2]
+Out[81]: [7, 3, 3, 6, 1]</code></pre>
+<p>一个聪明的方法是使用<code>-1</code>，它可以将列表或元组颠倒过来：</p>
+<pre><code>In [82]: seq[::-1]
+Out[82]: [1, 0, 6, 5, 3, 6, 3, 2, 7]</code></pre>
+</div>
+</div>
+<div id="section-3.3" class="section level2">
+<h2><span class="header-section-number">3.3</span> 序列函数</h2>
+<p>Python有一些有用的序列函数。</p>
+<div id="enumerate" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> enumerate函数</h3>
+<p>迭代一个序列时，你可能想跟踪当前项的序号。手动的方法可能是下面这样：</p>
+<pre><code>i = 0
+for value in collection:
+   # do something with value
+   i += 1</code></pre>
+<p>因为这么做很常见，Python内建了一个<code>enumerate</code>函数，可以返回<code>(i, value)</code>元组序列：</p>
+<pre><code>for i, value in enumerate(collection):
+   # do something with value</code></pre>
+<p>当你索引数据时，使用<code>enumerate</code>的一个好方法是计算序列（唯一的）<code>dict</code>映射到位置的值：</p>
+<pre><code>In [83]: some_list = [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;]
+
+In [84]: mapping = {}
+
+In [85]: for i, v in enumerate(some_list):
+   ....:     mapping[v] = i
+
+In [86]: mapping
+Out[86]: {&#39;bar&#39;: 1, &#39;baz&#39;: 2, &#39;foo&#39;: 0}</code></pre>
+</div>
+<div id="sorted" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> sorted函数</h3>
+<p><code>sorted</code>函数可以从任意序列的元素返回一个新的排好序的列表：</p>
+<pre><code>In [87]: sorted([7, 1, 2, 6, 0, 3, 2])
+Out[87]: [0, 1, 2, 2, 3, 6, 7]
+
+In [88]: sorted(&#39;horse race&#39;)
+Out[88]: [&#39; &#39;, &#39;a&#39;, &#39;c&#39;, &#39;e&#39;, &#39;e&#39;, &#39;h&#39;, &#39;o&#39;, &#39;r&#39;, &#39;r&#39;, &#39;s&#39;]</code></pre>
+<p><code>sorted</code>函数可以接受和<code>sort</code>相同的参数。</p>
+</div>
+<div id="zip" class="section level3">
+<h3><span class="header-section-number">3.3.3</span> zip函数</h3>
+<p><code>zip</code>可以将多个列表、元组或其它序列成对组合成一个元组列表：</p>
+<pre><code>In [89]: seq1 = [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;]
+
+In [90]: seq2 = [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;]
+
+In [91]: zipped = zip(seq1, seq2)
+
+In [92]: list(zipped)
+Out[92]: [(&#39;foo&#39;, &#39;one&#39;), (&#39;bar&#39;, &#39;two&#39;), (&#39;baz&#39;, &#39;three&#39;)]</code></pre>
+<p><code>zip</code>可以处理任意多的序列，元素的个数取决于最短的序列：</p>
+<pre><code>In [93]: seq3 = [False, True]
+
+In [94]: list(zip(seq1, seq2, seq3))
+Out[94]: [(&#39;foo&#39;, &#39;one&#39;, False), (&#39;bar&#39;, &#39;two&#39;, True)]</code></pre>
+<p><code>zip</code>的常见用法之一是同时迭代多个序列，可能结合<code>enumerate</code>使用：</p>
+<pre><code>In [95]: for i, (a, b) in enumerate(zip(seq1, seq2)):
+   ....:     print(&#39;{0}: {1}, {2}&#39;.format(i, a, b))
+   ....:
+0: foo, one
+1: bar, two
+2: baz, three</code></pre>
+<p>给出一个“被压缩的”序列，<code>zip</code>可以被用来解压序列。也可以当作把行的列表转换为列的列表。这个方法看起来有点神奇：</p>
+<pre><code>In [96]: pitchers = [(&#39;Nolan&#39;, &#39;Ryan&#39;), (&#39;Roger&#39;, &#39;Clemens&#39;),
+   ....:             (&#39;Schilling&#39;, &#39;Curt&#39;)]
+
+In [97]: first_names, last_names = zip(*pitchers)
+
+In [98]: first_names
+Out[98]: (&#39;Nolan&#39;, &#39;Roger&#39;, &#39;Schilling&#39;)
+
+In [99]: last_names
+Out[99]: (&#39;Ryan&#39;, &#39;Clemens&#39;, &#39;Curt&#39;)</code></pre>
+</div>
+<div id="reversed" class="section level3">
+<h3><span class="header-section-number">3.3.4</span> reversed函数</h3>
+<p><code>reversed</code>可以从后向前迭代一个序列：</p>
+<pre><code>In [100]: list(reversed(range(10)))
+Out[100]: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</code></pre>
+<p>要记住<code>reversed</code>是一个生成器（后面详细介绍），只有实体化（即列表或for循环）之后才能创建翻转的序列。</p>
+</div>
+</div>
+<div id="section-3.4" class="section level2">
+<h2><span class="header-section-number">3.4</span> 字典</h2>
+<p>字典可能是Python最为重要的数据结构。它更为常见的名字是哈希映射或关联数组。它是键值对的大小可变集合，键和值都是Python对象。创建字典的方法之一是使用尖括号，用冒号分隔键和值：</p>
+<pre><code>In [101]: empty_dict = {}
+
+In [102]: d1 = {&#39;a&#39; : &#39;some value&#39;, &#39;b&#39; : [1, 2, 3, 4]}
+
+In [103]: d1
+Out[103]: {&#39;a&#39;: &#39;some value&#39;, &#39;b&#39;: [1, 2, 3, 4]}</code></pre>
+<p>你可以像访问列表或元组中的元素一样，访问、插入或设定字典中的元素：</p>
+<pre><code>In [104]: d1[7] = &#39;an integer&#39;
+
+In [105]: d1
+Out[105]: {&#39;a&#39;: &#39;some value&#39;, &#39;b&#39;: [1, 2, 3, 4], 7: &#39;an integer&#39;}
+
+In [106]: d1[&#39;b&#39;]
+Out[106]: [1, 2, 3, 4]</code></pre>
+<p>你可以用检查列表和元组是否包含某个值得方法，检查字典中是否包含某个键：</p>
+<pre><code>In [107]: &#39;b&#39; in d1
+Out[107]: True</code></pre>
+<p>可以用<code>del</code>关键字或<code>pop</code>方法（返回值得同时删除键）删除值：</p>
+<pre><code>In [108]: d1[5] = &#39;some value&#39;
+
+In [109]: d1
+Out[109]: 
+{&#39;a&#39;: &#39;some value&#39;,
+ &#39;b&#39;: [1, 2, 3, 4],
+ 7: &#39;an integer&#39;,
+ 5: &#39;some value&#39;}
+
+In [110]: d1[&#39;dummy&#39;] = &#39;another value&#39;
+
+In [111]: d1
+Out[111]: 
+{&#39;a&#39;: &#39;some value&#39;,
+ &#39;b&#39;: [1, 2, 3, 4],
+ 7: &#39;an integer&#39;,
+ 5: &#39;some value&#39;,
+ &#39;dummy&#39;: &#39;another value&#39;}
+
+In [112]: del d1[5]
+
+In [113]: d1
+Out[113]: 
+{&#39;a&#39;: &#39;some value&#39;,
+ &#39;b&#39;: [1, 2, 3, 4],
+ 7: &#39;an integer&#39;,
+ &#39;dummy&#39;: &#39;another value&#39;}
+
+In [114]: ret = d1.pop(&#39;dummy&#39;)
+
+In [115]: ret
+Out[115]: &#39;another value&#39;
+
+In [116]: d1
+Out[116]: {&#39;a&#39;: &#39;some value&#39;, &#39;b&#39;: [1, 2, 3, 4], 7: &#39;an integer&#39;}</code></pre>
+<p><code>keys</code>和<code>values</code>是字典的键和值的迭代器方法。虽然键值对没有顺序，这两个方法可以用相同的顺序输出键和值：</p>
+<pre><code>In [117]: list(d1.keys())
+Out[117]: [&#39;a&#39;, &#39;b&#39;, 7]
+
+In [118]: list(d1.values())
+Out[118]: [&#39;some value&#39;, [1, 2, 3, 4], &#39;an integer&#39;]</code></pre>
+<p>用<code>update</code>方法可以将一个字典与另一个融合：</p>
+<pre><code>In [119]: d1.update({&#39;b&#39; : &#39;foo&#39;, &#39;c&#39; : 12})
+
+In [120]: d1
+Out[120]: {&#39;a&#39;: &#39;some value&#39;, &#39;b&#39;: &#39;foo&#39;, 7: &#39;an integer&#39;, &#39;c&#39;: 12}</code></pre>
+<p><code>update</code>方法是原地改变字典，因此任何传递给<code>update</code>的键的旧的值都会被舍弃。</p>
+<div id="section-3.4.1" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> 用序列创建字典</h3>
+<p>常常，你可能想将两个序列配对组合成字典。下面是一种写法：</p>
+<pre><code>mapping = {}
+for key, value in zip(key_list, value_list):
+    mapping[key] = value</code></pre>
+<p>因为字典本质上是2元元组的集合，dict可以接受2元元组的列表：</p>
+<pre><code>In [121]: mapping = dict(zip(range(5), reversed(range(5))))
+
+In [122]: mapping
+Out[122]: {0: 4, 1: 3, 2: 2, 3: 1, 4: 0}</code></pre>
+<p>后面会谈到<code>dict comprehensions</code>，另一种构建字典的优雅方式。</p>
+</div>
+<div id="section-3.4.2" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> 默认值</h3>
+<p>下面的逻辑很常见：</p>
+<pre><code>if key in some_dict:
+    value = some_dict[key]
+else:
+    value = default_value</code></pre>
+<p>因此，dict的方法get和pop可以取默认值进行返回，上面的if-else语句可以简写成下面：</p>
+<pre><code>value = some_dict.get(key, default_value)</code></pre>
+<p>get默认会返回None，如果不存在键，pop会抛出一个例外。关于设定值，常见的情况是在字典的值是属于其它集合，如列表。例如，你可以通过首字母，将一个列表中的单词分类：</p>
+<pre><code>In [123]: words = [&#39;apple&#39;, &#39;bat&#39;, &#39;bar&#39;, &#39;atom&#39;, &#39;book&#39;]
+
+In [124]: by_letter = {}
+
+In [125]: for word in words:
+   .....:     letter = word[0]
+   .....:     if letter not in by_letter:
+   .....:         by_letter[letter] = [word]
+   .....:     else:
+   .....:         by_letter[letter].append(word)
+   .....:
+
+In [126]: by_letter
+Out[126]: {&#39;a&#39;: [&#39;apple&#39;, &#39;atom&#39;], &#39;b&#39;: [&#39;bat&#39;, &#39;bar&#39;, &#39;book&#39;]}</code></pre>
+<p><code>setdefault</code>方法就正是干这个的。前面的for循环可以改写为：</p>
+<pre><code>for word in words:
+    letter = word[0]
+    by_letter.setdefault(letter, []).append(word)</code></pre>
+<p><code>collections</code>模块有一个很有用的类，<code>defaultdict</code>，它可以进一步简化上面。传递类型或函数以生成每个位置的默认值：</p>
+<pre><code>from collections import defaultdict
+by_letter = defaultdict(list)
+for word in words:
+    by_letter[word[0]].append(word)</code></pre>
+</div>
+<div id="section-3.4.3" class="section level3">
+<h3><span class="header-section-number">3.4.3</span> 有效的键类型</h3>
+<p>字典的值可以是任意Python对象，而键通常是不可变的标量类型（整数、浮点型、字符串）或元组（元组中的对象必须是不可变的）。这被称为“可哈希性”。可以用<code>hash</code>函数检测一个对象是否是可哈希的（可被用作字典的键）：</p>
+<pre><code>In [127]: hash(&#39;string&#39;)
+Out[127]: 5023931463650008331
+
+In [128]: hash((1, 2, (2, 3)))
+Out[128]: 1097636502276347782
+
+In [129]: hash((1, 2, [2, 3])) # fails because lists are mutable
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-129-800cd14ba8be&gt; in &lt;module&gt;()
+----&gt; 1 hash((1, 2, [2, 3])) # fails because lists are mutable
+TypeError: unhashable type: &#39;list&#39;</code></pre>
+<p>要用列表当做键，一种方法是将列表转化为元组，只要内部元素可以被哈希，它也就可以被哈希：</p>
+<pre><code>In [130]: d = {}
+
+In [131]: d[tuple([1, 2, 3])] = 5
+
+In [132]: d
+Out[132]: {(1, 2, 3): 5}</code></pre>
+</div>
+</div>
+<div id="section-3.5" class="section level2">
+<h2><span class="header-section-number">3.5</span> 集合</h2>
+<p>集合是无序的不可重复的元素的集合。你可以把它当做字典，但是只有键没有值。可以用两种方式创建集合：通过set函数或使用尖括号set语句：</p>
+<pre><code>In [133]: set([2, 2, 2, 1, 3, 3])
+Out[133]: {1, 2, 3}
+
+In [134]: {2, 2, 2, 1, 3, 3}
+Out[134]: {1, 2, 3}</code></pre>
+<p>集合支持合并、交集、差分和对称差等数学集合运算。考虑两个示例集合：</p>
+<pre><code>In [135]: a = {1, 2, 3, 4, 5}
+
+In [136]: b = {3, 4, 5, 6, 7, 8}</code></pre>
+<p>合并是取两个集合中不重复的元素。可以用<code>union</code>方法，或者<code>|</code>运算符：</p>
+<pre><code>In [137]: a.union(b)
+Out[137]: {1, 2, 3, 4, 5, 6, 7, 8}
+
+In [138]: a | b
+Out[138]: {1, 2, 3, 4, 5, 6, 7, 8}</code></pre>
+<p>交集的元素包含在两个集合中。可以用<code>intersection</code>或<code>&amp;</code>运算符：</p>
+<pre><code>In [139]: a.intersection(b)
+Out[139]: {3, 4, 5}
+
+In [140]: a &amp; b
+Out[140]: {3, 4, 5}</code></pre>
+<p>表3-1列出了常用的集合方法。</p>
+<div class="figure">
+<img src="" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>表3-1 Python的集合操作</p>
+<p>所有逻辑集合操作都有另外原地实现方法，它可以直接用结果替代集合的内容。对于大的集合，这么做效率更高：</p>
+<pre><code>In [141]: c = a.copy()
+
+In [142]: c |= b
+
+In [143]: c
+Out[143]: {1, 2, 3, 4, 5, 6, 7, 8}
+
+In [144]: d = a.copy()
+
+In [145]: d &amp;= b
+
+In [146]: d
+Out[146]: {3, 4, 5}</code></pre>
+<p>与字典类似，集合元素通常都是不可变的。要获得类似列表的元素，必须转换成元组：</p>
+<pre><code>In [147]: my_data = [1, 2, 3, 4]
+
+In [148]: my_set = {tuple(my_data)}
+
+In [149]: my_set
+Out[149]: {(1, 2, 3, 4)}</code></pre>
+<p>你还可以检测一个集合是否是另一个集合的子集或父集：</p>
+<pre><code>In [150]: a_set = {1, 2, 3, 4, 5}
+
+In [151]: {1, 2, 3}.issubset(a_set)
+Out[151]: True
+
+In [152]: a_set.issuperset({1, 2, 3})
+Out[152]: True</code></pre>
+<p>集合的内容相同时，集合才对等：</p>
+<pre><code>In [153]: {1, 2, 3} == {3, 2, 1}
+Out[153]: True</code></pre>
+</div>
+<div id="section-3.6" class="section level2">
+<h2><span class="header-section-number">3.6</span> 列表、集合和字典推导式</h2>
+<p>列表推导式是Python最受喜爱的特性之一。它允许用户方便的从一个集合过滤元素，形成列表，在传递参数的过程中还可以修改元素。形式如下：</p>
+<pre><code>[expr for val in collection if condition]</code></pre>
+<p>它等同于下面的for循环;</p>
+<pre><code>result = []
+for val in collection:
+    if condition:
+        result.append(expr)</code></pre>
+<p>filter条件可以被忽略，只留下表达式就行。例如，给定一个字符串列表，我们可以过滤出长度在2及以下的字符串，并将其转换成大写：</p>
+<pre><code>In [154]: strings = [&#39;a&#39;, &#39;as&#39;, &#39;bat&#39;, &#39;car&#39;, &#39;dove&#39;, &#39;python&#39;]
+
+In [155]: [x.upper() for x in strings if len(x) &gt; 2]
+Out[155]: [&#39;BAT&#39;, &#39;CAR&#39;, &#39;DOVE&#39;, &#39;PYTHON&#39;]</code></pre>
+<p>用相似的方法，还可以推导集合和字典。字典的推导式如下所示：</p>
+<pre><code>dict_comp = {key-expr : value-expr for value in collection if condition}</code></pre>
+<p>集合的推导式与列表很像，只不过用的是尖括号：</p>
+<pre><code>set_comp = {expr for value in collection if condition}</code></pre>
+<p>与列表推导式类似，集合与字典的推导也很方便，而且使代码的读写都很容易。来看前面的字符串列表。假如我们只想要字符串的长度，用集合推导式的方法非常方便：</p>
+<pre><code>In [156]: unique_lengths = {len(x) for x in strings}
+
+In [157]: unique_lengths
+Out[157]: {1, 2, 3, 4, 6}</code></pre>
+<p><code>map</code>函数可以进一步简化：</p>
+<pre><code>In [158]: set(map(len, strings))
+Out[158]: {1, 2, 3, 4, 6}</code></pre>
+<p>作为一个字典推导式的例子，我们可以创建一个字符串的查找映射表以确定它在列表中的位置：</p>
+<pre><code>In [159]: loc_mapping = {val : index for index, val in enumerate(strings)}
+
+In [160]: loc_mapping
+Out[160]: {&#39;a&#39;: 0, &#39;as&#39;: 1, &#39;bat&#39;: 2, &#39;car&#39;: 3, &#39;dove&#39;: 4, &#39;python&#39;: 5}</code></pre>
+</div>
+<div id="section-3.7" class="section level2">
+<h2><span class="header-section-number">3.7</span> 嵌套列表推导式</h2>
+<p>假设我们有一个包含列表的列表，包含了一些英文名和西班牙名：</p>
+<pre><code>In [161]: all_data = [[&#39;John&#39;, &#39;Emily&#39;, &#39;Michael&#39;, &#39;Mary&#39;, &#39;Steven&#39;],
+   .....:             [&#39;Maria&#39;, &#39;Juan&#39;, &#39;Javier&#39;, &#39;Natalia&#39;, &#39;Pilar&#39;]]</code></pre>
+<p>你可能是从一些文件得到的这些名字，然后想按照语言进行分类。现在假设我们想用一个列表包含所有的名字，这些名字中包含两个或更多的e。可以用for循环来做：</p>
+<pre><code>names_of_interest = []
+for names in all_data:
+    enough_es = [name for name in names if name.count(&#39;e&#39;) &gt;= 2]
+    names_of_interest.extend(enough_es)</code></pre>
+<p>可以用嵌套列表推导式的方法，将这些写在一起，如下所示：</p>
+<pre><code>In [162]: result = [name for names in all_data for name in names
+   .....:           if name.count(&#39;e&#39;) &gt;= 2]
+
+In [163]: result
+Out[163]: [&#39;Steven&#39;]</code></pre>
+<p>嵌套列表推导式看起来有些复杂。列表推导式的for部分是根据嵌套的顺序，过滤条件还是放在最后。下面是另一个例子，我们将一个整数元组的列表扁平化成了一个整数列表：</p>
+<pre><code>In [164]: some_tuples = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
+
+In [165]: flattened = [x for tup in some_tuples for x in tup]
+
+In [166]: flattened
+Out[166]: [1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+<p>记住，for表达式的顺序是与嵌套for循环的顺序一样（而不是列表推导式的顺序）：</p>
+<pre><code>flattened = []
+
+for tup in some_tuples:
+    for x in tup:
+        flattened.append(x)</code></pre>
+<p>你可以有任意多级别的嵌套，但是如果你有两三个以上的嵌套，你就应该考虑下代码可读性的问题了。分辨列表推导式的列表推导式中的语法也是很重要的：</p>
+<pre><code>In [167]: [[x for x in tup] for tup in some_tuples]
+Out[167]: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]</code></pre>
+<p>这段代码产生了一个列表的列表，而不是扁平化的只包含元素的列表。</p>
+</div>
+<div id="section-3.8" class="section level2">
+<h2><span class="header-section-number">3.8</span> 函数</h2>
+<p>函数是Python中最主要也是最重要的代码组织和复用手段。作为最重要的原则，如果你要重复使用相同或非常类似的代码，就需要写一个函数。通过给函数起一个名字，还可以提高代码的可读性。</p>
+<p>函数使用<code>def</code>关键字声明，用<code>return</code>关键字返回值：</p>
+<pre><code>def my_function(x, y, z=1.5):
+    if z &gt; 1:
+        return z * (x + y)
+    else:
+        return z / (x + y)</code></pre>
+<p>同时拥有多条return语句也是可以的。如果到达函数末尾时没有遇到任何一条return语句，则返回None。</p>
+<p>函数可以有一些位置参数（positional）和一些关键字参数（keyword）。关键字参数通常用于指定默认值或可选参数。在上面的函数中，x和y是位置参数，而z则是关键字参数。也就是说，该函数可以下面这两种方式进行调用：</p>
+<pre><code>my_function(5, 6, z=0.7)
+my_function(3.14, 7, 3.5)
+my_function(10, 20)</code></pre>
+<p>函数参数的主要限制在于：关键字参数必须位于位置参数（如果有的话）之后。你可以任何顺序指定关键字参数。也就是说，你不用死记硬背函数参数的顺序，只要记得它们的名字就可以了。</p>
+<blockquote>
+<p>笔记：也可以用关键字传递位置参数。前面的例子，也可以写为：</p>
+<pre><code>my_function(x=5, y=6, z=7)
+my_function(y=6, x=5, z=7)</code></pre>
+<p>这种写法可以提高可读性。</p>
+</blockquote>
+<div id="section-3.8.1" class="section level3">
+<h3><span class="header-section-number">3.8.1</span> 命名空间、作用域，和局部函数</h3>
+<p>函数可以访问两种不同作用域中的变量：全局（global）和局部（local）。Python有一种更科学的用于描述变量作用域的名称，即命名空间（namespace）。任何在函数中赋值的变量默认都是被分配到局部命名空间（local namespace）中的。局部命名空间是在函数被调用时创建的，函数参数会立即填入该命名空间。在函数执行完毕之后，局部命名空间就会被销毁（会有一些例外的情况，具体请参见后面介绍闭包的那一节）。看看下面这个函数：</p>
+<pre><code>def func():
+    a = []
+    for i in range(5):
+        a.append(i)</code></pre>
+<p>调用func()之后，首先会创建出空列表a，然后添加5个元素，最后a会在该函数退出的时候被销毁。假如我们像下面这样定义a：</p>
+<pre><code>a = []
+def func():
+    for i in range(5):
+        a.append(i)</code></pre>
+<p>虽然可以在函数中对全局变量进行赋值操作，但是那些变量必须用global关键字声明成全局的才行：</p>
+<pre><code>In [168]: a = None
+
+In [169]: def bind_a_variable():
+   .....:     global a
+   .....:     a = []
+   .....: bind_a_variable()
+   .....:
+
+In [170]: print(a)
+[]</code></pre>
+<blockquote>
+<p>注意：我常常建议人们不要频繁使用global关键字。因为全局变量一般是用于存放系统的某些状态的。如果你发现自己用了很多，那可能就说明得要来点儿面向对象编程了（即使用类）。</p>
+</blockquote>
+</div>
+<div id="section-3.8.2" class="section level3">
+<h3><span class="header-section-number">3.8.2</span> 返回多个值</h3>
+<p>在我第一次用Python编程时（之前已经习惯了Java和C++），最喜欢的一个功能是：函数可以返回多个值。下面是一个简单的例子：</p>
+<pre><code>def f():
+    a = 5
+    b = 6
+    c = 7
+    return a, b, c
+
+a, b, c = f()</code></pre>
+<p>在数据分析和其他科学计算应用中，你会发现自己常常这么干。该函数其实只返回了一个对象，也就是一个元组，最后该元组会被拆包到各个结果变量中。在上面的例子中，我们还可以这样写：</p>
+<pre><code>return_value = f()</code></pre>
+<p>这里的return_value将会是一个含有3个返回值的三元元组。此外，还有一种非常具有吸引力的多值返回方式——返回字典：</p>
+<pre><code>def f():
+    a = 5
+    b = 6
+    c = 7
+    return {&#39;a&#39; : a, &#39;b&#39; : b, &#39;c&#39; : c}</code></pre>
+<p>取决于工作内容，第二种方法可能很有用。</p>
+</div>
+<div id="section-3.8.3" class="section level3">
+<h3><span class="header-section-number">3.8.3</span> 函数也是对象</h3>
+<p>由于Python函数都是对象，因此，在其他语言中较难表达的一些设计思想在Python中就要简单很多了。假设我们有下面这样一个字符串数组，希望对其进行一些数据清理工作并执行一堆转换：</p>
+<pre><code>In [171]: states = [&#39;   Alabama &#39;, &#39;Georgia!&#39;, &#39;Georgia&#39;, &#39;georgia&#39;, &#39;FlOrIda&#39;,
+   .....:           &#39;south   carolina##&#39;, &#39;West virginia?&#39;]</code></pre>
+<p>不管是谁，只要处理过由用户提交的调查数据，就能明白这种乱七八糟的数据是怎么一回事。为了得到一组能用于分析工作的格式统一的字符串，需要做很多事情：去除空白符、删除各种标点符号、正确的大写格式等。做法之一是使用内建的字符串方法和正则表达式<code>re</code>模块：</p>
+<pre><code>import re
+
+def clean_strings(strings):
+    result = []
+    for value in strings:
+        value = value.strip()
+        value = re.sub(&#39;[!#?]&#39;, &#39;&#39;, value)
+        value = value.title()
+        result.append(value)
+    return result</code></pre>
+<p>结果如下所示：</p>
+<pre><code>In [173]: clean_strings(states)
+Out[173]: 
+[&#39;Alabama&#39;,
+ &#39;Georgia&#39;,
+ &#39;Georgia&#39;,
+ &#39;Georgia&#39;,
+ &#39;Florida&#39;,
+ &#39;South   Carolina&#39;,
+ &#39;West Virginia&#39;]</code></pre>
+<p>其实还有另外一种不错的办法：将需要在一组给定字符串上执行的所有运算做成一个列表：</p>
+<pre><code>def remove_punctuation(value):
+    return re.sub(&#39;[!#?]&#39;, &#39;&#39;, value)
+
+clean_ops = [str.strip, remove_punctuation, str.title]
+
+def clean_strings(strings, ops):
+    result = []
+    for value in strings:
+        for function in ops:
+            value = function(value)
+        result.append(value)
+    return result</code></pre>
+<p>然后我们就有了：</p>
+<pre><code>In [175]: clean_strings(states, clean_ops)
+Out[175]: 
+[&#39;Alabama&#39;,
+ &#39;Georgia&#39;,
+ &#39;Georgia&#39;,
+ &#39;Georgia&#39;,
+ &#39;Florida&#39;,
+ &#39;South   Carolina&#39;,
+ &#39;West Virginia&#39;]</code></pre>
+<p>这种多函数模式使你能在很高的层次上轻松修改字符串的转换方式。此时的clean_strings也更具可复用性！</p>
+<p>还可以将函数用作其他函数的参数，比如内置的map函数，它用于在一组数据上应用一个函数：</p>
+<pre><code>In [176]: for x in map(remove_punctuation, states):
+   .....:     print(x)
+Alabama 
+Georgia
+Georgia
+georgia
+FlOrIda
+south   carolina
+West virginia</code></pre>
+</div>
+<div id="lambda" class="section level3">
+<h3><span class="header-section-number">3.8.4</span> 匿名（lambda）函数</h3>
+<p>Python支持一种被称为匿名的、或lambda函数。它仅由单条语句组成，该语句的结果就是返回值。它是通过lambda关键字定义的，这个关键字没有别的含义，仅仅是说“我们正在声明的是一个匿名函数”。</p>
+<pre><code>def short_function(x):
+    return x * 2
+
+equiv_anon = lambda x: x * 2</code></pre>
+<p>本书其余部分一般将其称为lambda函数。它们在数据分析工作中非常方便，因为你会发现很多数据转换函数都以函数作为参数的。直接传入lambda函数比编写完整函数声明要少输入很多字（也更清晰），甚至比将lambda函数赋值给一个变量还要少输入很多字。看看下面这个简单得有些傻的例子：</p>
+<pre><code>def apply_to_list(some_list, f):
+    return [f(x) for x in some_list]
+
+ints = [4, 0, 1, 5, 6]
+apply_to_list(ints, lambda x: x * 2)</code></pre>
+<p>虽然你可以直接编写[x *2for x in ints]，但是这里我们可以非常轻松地传入一个自定义运算给apply_to_list函数。</p>
+<p>再来看另外一个例子。假设有一组字符串，你想要根据各字符串不同字母的数量对其进行排序：</p>
+<pre><code>In [177]: strings = [&#39;foo&#39;, &#39;card&#39;, &#39;bar&#39;, &#39;aaaa&#39;, &#39;abab&#39;]</code></pre>
+<p>这里，我们可以传入一个lambda函数到列表的sort方法：</p>
+<pre><code>In [178]: strings.sort(key=lambda x: len(set(list(x))))
+
+In [179]: strings
+Out[179]: [&#39;aaaa&#39;, &#39;foo&#39;, &#39;abab&#39;, &#39;bar&#39;, &#39;card&#39;]</code></pre>
+<blockquote>
+<p>笔记：lambda函数之所以会被称为匿名函数，与def声明的函数不同，原因之一就是这种函数对象本身是没有提供名称<strong>name</strong>属性。</p>
+</blockquote>
+</div>
+<div id="section-3.8.5" class="section level3">
+<h3><span class="header-section-number">3.8.5</span> 柯里化：部分参数应用</h3>
+<p>柯里化（currying）是一个有趣的计算机科学术语，它指的是通过“部分参数应用”（partial argument application）从现有函数派生出新函数的技术。例如，假设我们有一个执行两数相加的简单函数：</p>
+<pre><code>def add_numbers(x, y):
+    return x + y</code></pre>
+<p>通过这个函数，我们可以派生出一个新的只有一个参数的函数——add_five，它用于对其参数加5：</p>
+<pre><code>add_five = lambda y: add_numbers(5, y)</code></pre>
+<p>add_numbers的第二个参数称为“柯里化的”（curried）。这里没什么特别花哨的东西，因为我们其实就只是定义了一个可以调用现有函数的新函数而已。内置的functools模块可以用partial函数将此过程简化：</p>
+<pre><code>from functools import partial
+add_five = partial(add_numbers, 5)</code></pre>
+</div>
+</div>
+<div id="section-3.9" class="section level2">
+<h2><span class="header-section-number">3.9</span> 生成器</h2>
+<p>能以一种一致的方式对序列进行迭代（比如列表中的对象或文件中的行）是Python的一个重要特点。这是通过一种叫做迭代器协议（iterator protocol，它是一种使对象可迭代的通用方式）的方式实现的，一个原生的使对象可迭代的方法。比如说，对字典进行迭代可以得到其所有的键：</p>
+<pre><code>In [180]: some_dict = {&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}
+
+In [181]: for key in some_dict:
+   .....:     print(key)
+a
+b
+c</code></pre>
+<p>当你编写for key in some_dict时，Python解释器首先会尝试从some_dict创建一个迭代器：</p>
+<pre><code>In [182]: dict_iterator = iter(some_dict)
+
+In [183]: dict_iterator
+Out[183]: &lt;dict_keyiterator at 0x7fbbd5a9f908&gt;</code></pre>
+<p>迭代器是一种特殊对象，它可以在诸如for循环之类的上下文中向Python解释器输送对象。大部分能接受列表之类的对象的方法也都可以接受任何可迭代对象。比如min、max、sum等内置方法以及list、tuple等类型构造器：</p>
+<pre><code>In [184]: list(dict_iterator)
+Out[184]: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</code></pre>
+<p>生成器（generator）是构造新的可迭代对象的一种简单方式。一般的函数执行之后只会返回单个值，而生成器则是以延迟的方式返回一个值序列，即每返回一个值之后暂停，直到下一个值被请求时再继续。要创建一个生成器，只需将函数中的return替换为yeild即可：</p>
+<pre><code>def squares(n=10):
+    print(&#39;Generating squares from 1 to {0}&#39;.format(n ** 2))
+    for i in range(1, n + 1):
+        yield i ** 2</code></pre>
+<p>调用该生成器时，没有任何代码会被立即执行：</p>
+<pre><code>In [186]: gen = squares()
+
+In [187]: gen
+Out[187]: &lt;generator object squares at 0x7fbbd5ab4570&gt;</code></pre>
+<p>直到你从该生成器中请求元素时，它才会开始执行其代码：</p>
+<pre><code>In [188]: for x in gen:
+   .....:     print(x, end=&#39; &#39;)
+Generating squares from 1 to 100
+1 4 9 16 25 36 49 64 81 100</code></pre>
+<div id="section-3.9.1" class="section level3">
+<h3><span class="header-section-number">3.9.1</span> 生成器表达式</h3>
+<p>另一种更简洁的构造生成器的方法是使用生成器表达式（generator expression）。这是一种类似于列表、字典、集合推导式的生成器。其创建方式为，把列表推导式两端的方括号改成圆括号：</p>
+<pre><code>In [189]: gen = (x ** 2 for x in range(100))
+
+In [190]: gen
+Out[190]: &lt;generator object &lt;genexpr&gt; at 0x7fbbd5ab29e8&gt;</code></pre>
+<p>它跟下面这个冗长得多的生成器是完全等价的：</p>
+<pre><code>def _make_gen():
+    for x in range(100):
+        yield x ** 2
+gen = _make_gen()</code></pre>
+<p>生成器表达式也可以取代列表推导式，作为函数参数：</p>
+<pre><code>In [191]: sum(x ** 2 for x in range(100))
+Out[191]: 328350
+
+In [192]: dict((i, i **2) for i in range(5))
+Out[192]: {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}</code></pre>
+</div>
+<div id="itertools" class="section level3">
+<h3><span class="header-section-number">3.9.2</span> itertools模块</h3>
+<p>标准库itertools模块中有一组用于许多常见数据算法的生成器。例如，groupby可以接受任何序列和一个函数。它根据函数的返回值对序列中的连续元素进行分组。下面是一个例子：</p>
+<pre><code>In [193]: import itertools
+
+In [194]: first_letter = lambda x: x[0]
+
+In [195]: names = [&#39;Alan&#39;, &#39;Adam&#39;, &#39;Wes&#39;, &#39;Will&#39;, &#39;Albert&#39;, &#39;Steven&#39;]
+
+In [196]: for letter, names in itertools.groupby(names, first_letter):
+   .....:     print(letter, list(names)) # names is a generator
+A [&#39;Alan&#39;, &#39;Adam&#39;]
+W [&#39;Wes&#39;, &#39;Will&#39;]
+A [&#39;Albert&#39;]
+S [&#39;Steven&#39;]</code></pre>
+<p>表3-2中列出了一些我经常用到的itertools函数。建议参阅Python官方文档，进一步学习。</p>
+<div class="figure">
+<img src="" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>表3-2 一些有用的itertools函数</p>
+</div>
+</div>
+<div id="section-3.10" class="section level2">
+<h2><span class="header-section-number">3.10</span> 错误和异常处理</h2>
+<p>优雅地处理Python的错误和异常是构建健壮程序的重要部分。在数据分析中，许多函数函数只用于部分输入。例如，Python的float函数可以将字符串转换成浮点数，但输入有误时，有<code>ValueError</code>错误：</p>
+<pre><code>In [197]: float(&#39;1.2345&#39;)
+Out[197]: 1.2345
+
+In [198]: float(&#39;something&#39;)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+&lt;ipython-input-198-439904410854&gt; in &lt;module&gt;()
+----&gt; 1 float(&#39;something&#39;)
+ValueError: could not convert string to float: &#39;something&#39;</code></pre>
+<p>假如想优雅地处理float的错误，让它返回输入值。我们可以写一个函数，在try/except中调用float：</p>
+<pre><code>def attempt_float(x):
+    try:
+        return float(x)
+    except:
+        return x</code></pre>
+<p>当float(x)抛出异常时，才会执行except的部分：</p>
+<pre><code>In [200]: attempt_float(&#39;1.2345&#39;)
+Out[200]: 1.2345
+
+In [201]: attempt_float(&#39;something&#39;)
+Out[201]: &#39;something&#39;</code></pre>
+<p>你可能注意到float抛出的异常不仅是ValueError：</p>
+<pre><code>In [202]: float((1, 2))
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-202-842079ebb635&gt; in &lt;module&gt;()
+----&gt; 1 float((1, 2))
+TypeError: float() argument must be a string or a number, not &#39;tuple&#39;</code></pre>
+<p>你可能只想处理ValueError，TypeError错误（输入不是字符串或数值）可能是合理的bug。可以写一个异常类型：</p>
+<pre><code>def attempt_float(x):
+    try:
+        return float(x)
+    except ValueError:
+        return x</code></pre>
+<p>然后有：</p>
+<pre><code>In [204]: attempt_float((1, 2))
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-204-9bdfd730cead&gt; in &lt;module&gt;()
+----&gt; 1 attempt_float((1, 2))
+&lt;ipython-input-203-3e06b8379b6b&gt; in attempt_float(x)
+      1 def attempt_float(x):
+      2     try:
+----&gt; 3         return float(x)
+      4     except ValueError:
+      5         return x
+TypeError: float() argument must be a string or a number, not &#39;tuple&#39;</code></pre>
+<p>可以用元组包含多个异常：</p>
+<pre><code>def attempt_float(x):
+    try:
+        return float(x)
+    except (TypeError, ValueError):
+        return x</code></pre>
+<p>某些情况下，你可能不想抑制异常，你想无论try部分的代码是否成功，都执行一段代码。可以使用finally：</p>
+<pre><code>f = open(path, &#39;w&#39;)
+
+try:
+    write_to_file(f)
+finally:
+    f.close()</code></pre>
+<p>这里，文件处理f总会被关闭。相似的，你可以用else让只在try部分成功的情况下，才执行代码：</p>
+<pre><code>f = open(path, &#39;w&#39;)
+
+try:
+    write_to_file(f)
+except:
+    print(&#39;Failed&#39;)
+else:
+    print(&#39;Succeeded&#39;)
+finally:
+    f.close()</code></pre>
+<div id="ipython" class="section level3">
+<h3><span class="header-section-number">3.10.1</span> IPython的异常</h3>
+<p>如果是在%run一个脚本或一条语句时抛出异常，IPython默认会打印完整的调用栈（traceback），在栈的每个点都会有几行上下文：</p>
+<pre><code>In [10]: %run examples/ipython_bug.py
+---------------------------------------------------------------------------
+AssertionError                            Traceback (most recent call last)
+/home/wesm/code/pydata-book/examples/ipython_bug.py in &lt;module&gt;()
+     13     throws_an_exception()
+     14
+---&gt; 15 calling_things()
+
+/home/wesm/code/pydata-book/examples/ipython_bug.py in calling_things()
+     11 def calling_things():
+     12     works_fine()
+---&gt; 13     throws_an_exception()
+     14
+     15 calling_things()
+
+/home/wesm/code/pydata-book/examples/ipython_bug.py in throws_an_exception()
+      7     a = 5
+      8     b = 6
+----&gt; 9     assert(a + b == 10)
+     10
+     11 def calling_things():
+
+AssertionError:</code></pre>
+<p>自身就带有文本是相对于Python标准解释器的极大优点。你可以用魔术命令<code>%xmode</code>，从Plain（与Python标准解释器相同）到Verbose（带有函数的参数值）控制文本显示的数量。后面可以看到，发生错误之后，（用%debug或%pdb magics）可以进入stack进行事后调试。</p>
+</div>
+</div>
+<div id="section-3.11" class="section level2">
+<h2><span class="header-section-number">3.11</span> 文件和操作系统</h2>
+<p>本书的代码示例大多使用诸如pandas.read_csv之类的高级工具将磁盘上的数据文件读入Python数据结构。但我们还是需要了解一些有关Python文件处理方面的基础知识。好在它本来就很简单，这也是Python在文本和文件处理方面的如此流行的原因之一。</p>
+<p>为了打开一个文件以便读写，可以使用内置的open函数以及一个相对或绝对的文件路径：</p>
+<pre><code>In [207]: path = &#39;examples/segismundo.txt&#39;
+
+In [208]: f = open(path)</code></pre>
+<p>默认情况下，文件是以只读模式（‘r’）打开的。然后，我们就可以像处理列表那样来处理这个文件句柄f了，比如对行进行迭代：</p>
+<pre><code>for line in f:
+    pass</code></pre>
+<p>从文件中取出的行都带有完整的行结束符（EOL），因此你常常会看到下面这样的代码（得到一组没有EOL的行）：</p>
+<pre><code>In [209]: lines = [x.rstrip() for x in open(path)]
+
+In [210]: lines
+Out[210]: 
+[&#39;Sueña el rico en su riqueza,&#39;,
+ &#39;que más cuidados le ofrece;&#39;,
+ &#39;&#39;,
+ &#39;sueña el pobre que padece&#39;,
+ &#39;su miseria y su pobreza;&#39;,
+ &#39;&#39;,
+ &#39;sueña el que a medrar empieza,&#39;,
+ &#39;sueña el que afana y pretende,&#39;,
+ &#39;sueña el que agravia y ofende,&#39;,
+ &#39;&#39;,
+ &#39;y en el mundo, en conclusión,&#39;,
+ &#39;todos sueñan lo que son,&#39;,
+ &#39;aunque ninguno lo entiende.&#39;,
+ &#39;&#39;]</code></pre>
+<p>如果使用open创建文件对象，一定要用close关闭它。关闭文件可以返回操作系统资源：</p>
+<pre><code>In [211]: f.close()</code></pre>
+<p>用with语句可以可以更容易地清理打开的文件：</p>
+<pre><code>In [212]: with open(path) as f:
+   .....:     lines = [x.rstrip() for x in f]</code></pre>
+<p>这样可以在退出代码块时，自动关闭文件。</p>
+<p>如果输入f =open(path,‘w’)，就会有一个新文件被创建在examples/segismundo.txt，并覆盖掉该位置原来的任何数据。另外有一个x文件模式，它可以创建可写的文件，但是如果文件路径存在，就无法创建。表3-3列出了所有的读/写模式。</p>
+<div class="figure">
+<img src="//upload-images.jianshu.io/upload_images/7178691-28274484129f0ea7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>表3-3 Python的文件模式</p>
+<p>对于可读文件，一些常用的方法是read、seek和tell。read会从文件返回字符。字符的内容是由文件的编码决定的（如UTF-8），如果是二进制模式打开的就是原始字节：</p>
+<pre><code>In [213]: f = open(path)
+
+In [214]: f.read(10)
+Out[214]: &#39;Sueña el r&#39;
+
+In [215]: f2 = open(path, &#39;rb&#39;)  # Binary mode
+
+In [216]: f2.read(10)
+Out[216]: b&#39;Sue\xc3\xb1a el &#39;</code></pre>
+<p>read模式会将文件句柄的位置提前，提前的数量是读取的字节数。tell可以给出当前的位置：</p>
+<pre><code>In [217]: f.tell()
+Out[217]: 11
+
+In [218]: f2.tell()
+Out[218]: 10</code></pre>
+<p>尽管我们从文件读取了10个字符，位置却是11，这是因为用默认的编码用了这么多字节才解码了这10个字符。你可以用sys模块检查默认的编码：</p>
+<pre><code>In [219]: import sys
+
+In [220]: sys.getdefaultencoding()
+Out[220]: &#39;utf-8&#39;</code></pre>
+<p>seek将文件位置更改为文件中的指定字节：</p>
+<pre><code>In [221]: f.seek(3)
+Out[221]: 3
+
+In [222]: f.read(1)
+Out[222]: &#39;ñ&#39;</code></pre>
+<p>最后，关闭文件：</p>
+<pre><code>In [223]: f.close()
+
+In [224]: f2.close()</code></pre>
+<p>向文件写入，可以使用文件的write或writelines方法。例如，我们可以创建一个无空行版的prof_mod.py：</p>
+<pre><code>In [225]: with open(&#39;tmp.txt&#39;, &#39;w&#39;) as handle:
+   .....:     handle.writelines(x for x in open(path) if len(x) &gt; 1)
+
+In [226]: with open(&#39;tmp.txt&#39;) as f:
+   .....:     lines = f.readlines()
+
+In [227]: lines
+Out[227]: 
+[&#39;Sueña el rico en su riqueza,\n&#39;,
+ &#39;que más cuidados le ofrece;\n&#39;,
+ &#39;sueña el pobre que padece\n&#39;,
+ &#39;su miseria y su pobreza;\n&#39;,
+ &#39;sueña el que a medrar empieza,\n&#39;,
+ &#39;sueña el que afana y pretende,\n&#39;,
+ &#39;sueña el que agravia y ofende,\n&#39;,
+ &#39;y en el mundo, en conclusión,\n&#39;,
+ &#39;todos sueñan lo que son,\n&#39;,
+ &#39;aunque ninguno lo entiende.\n&#39;]</code></pre>
+<p>表3-4列出了一些最常用的文件方法。</p>
+<div class="figure">
+<img src="//upload-images.jianshu.io/upload_images/7178691-d25bd6e730afeb39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>表3-4 Python重要的文件方法或属性</p>
+<div id="unicode" class="section level3">
+<h3><span class="header-section-number">3.11.1</span> 文件的字节和Unicode</h3>
+<p>Python文件的默认操作是“文本模式”，也就是说，你需要处理Python的字符串（即Unicode）。它与“二进制模式”相对，文件模式加一个b。我们来看上一节的文件（UTF-8编码、包含非ASCII字符）：</p>
+<pre><code>In [230]: with open(path) as f:
+   .....:     chars = f.read(10)
+
+In [231]: chars
+Out[231]: &#39;Sueña el r&#39;</code></pre>
+<p>UTF-8是长度可变的Unicode编码，所以当我从文件请求一定数量的字符时，Python会从文件读取足够多（可能少至10或多至40字节）的字节进行解码。如果以“rb”模式打开文件，则读取确切的请求字节数：</p>
+<pre><code>In [232]: with open(path, &#39;rb&#39;) as f:
+   .....:     data = f.read(10)
+
+In [233]: data
+Out[233]: b&#39;Sue\xc3\xb1a el &#39;</code></pre>
+<p>取决于文本的编码，你可以将字节解码为str对象，但只有当每个编码的Unicode字符都完全成形时才能这么做：</p>
+<pre><code>In [234]: data.decode(&#39;utf8&#39;)
+Out[234]: &#39;Sueña el &#39;
+
+In [235]: data[:4].decode(&#39;utf8&#39;)
+---------------------------------------------------------------------------
+UnicodeDecodeError                        Traceback (most recent call last)
+&lt;ipython-input-235-300e0af10bb7&gt; in &lt;module&gt;()
+----&gt; 1 data[:4].decode(&#39;utf8&#39;)
+UnicodeDecodeError: &#39;utf-8&#39; codec can&#39;t decode byte 0xc3 in position 3: unexpecte
+d end of data</code></pre>
+<p>文本模式结合了open的编码选项，提供了一种更方便的方法将Unicode转换为另一种编码：</p>
+<pre><code>In [236]: sink_path = &#39;sink.txt&#39;
+
+In [237]: with open(path) as source:
+   .....:     with open(sink_path, &#39;xt&#39;, encoding=&#39;iso-8859-1&#39;) as sink:
+   .....:         sink.write(source.read())
+
+In [238]: with open(sink_path, encoding=&#39;iso-8859-1&#39;) as f:
+   .....:     print(f.read(10))
+Sueña el r</code></pre>
+<p>注意，不要在二进制模式中使用seek。如果文件位置位于定义Unicode字符的字节的中间位置，读取后面会产生错误：</p>
+<pre><code>In [240]: f = open(path)
+
+In [241]: f.read(5)
+Out[241]: &#39;Sueña&#39;
+
+In [242]: f.seek(4)
+Out[242]: 4
+
+In [243]: f.read(1)
+---------------------------------------------------------------------------
+UnicodeDecodeError                        Traceback (most recent call last)
+&lt;ipython-input-243-7841103e33f5&gt; in &lt;module&gt;()
+----&gt; 1 f.read(1)
+/miniconda/envs/book-env/lib/python3.6/codecs.py in decode(self, input, final)
+    319         # decode input (taking the buffer into account)
+    320         data = self.buffer + input
+--&gt; 321         (result, consumed) = self._buffer_decode(data, self.errors, final
+)
+    322         # keep undecoded input until the next call
+    323         self.buffer = data[consumed:]
+UnicodeDecodeError: &#39;utf-8&#39; codec can&#39;t decode byte 0xb1 in position 0: invalid s
+tart byte
+
+In [244]: f.close()</code></pre>
+<p>如果你经常要对非ASCII字符文本进行数据分析，通晓Python的Unicode功能是非常重要的。更多内容，参阅Python官方文档。</p>
+</div>
+</div>
+<div id="section-3.12" class="section level2">
+<h2><span class="header-section-number">3.12</span> 总结</h2>
+<p>我们已经学过了Python的基础、环境和语法，接下来学习NumPy和Python的面向数组计算。</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="numpy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/openbiox/Cookbook-for-R-Chinese/edit/master/book/03-structure.Rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

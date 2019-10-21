@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>B 更多关于IPython的内容 | 利用Python进行数据分析（第二版）中文翻译</title>
+  <meta name="description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="B 更多关于IPython的内容 | 利用Python进行数据分析（第二版）中文翻译" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="github-repo" content="openbiox/py4ds-CN" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="B 更多关于IPython的内容 | 利用Python进行数据分析（第二版）中文翻译" />
+  
+  <meta name="twitter:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  
+
+<meta name="author" content="作者：Wes McKinney，翻译：SeanCheney，校对与维护：王诗翔" />
+
+
+<meta name="date" content="2019-10-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="adNumpy.html"/>
+
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">利用Python进行数据分析（第二版）</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#section-0.1"><i class="fa fa-check"></i><b>0.1</b> 问题与贡献</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#section-0.2"><i class="fa fa-check"></i><b>0.2</b> 许可</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#section-0.3"><i class="fa fa-check"></i><b>0.3</b> 致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>作者简介</a></li>
+<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> 准备工作</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e79a84e58685e5aeb9"><i class="fa fa-check"></i>本书的内容</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>为什么要使用Python进行数据分析</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>重要的Python库</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e5ae89e8a385e5928ce8aebee7bdae"><i class="fa fa-check"></i>安装和设置</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e7a4bee58cbae5928ce4bc9ae8aeae"><i class="fa fa-check"></i>社区和会议</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e5afbce888aa"><i class="fa fa-check"></i>本书导航</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Python 语法基础，IPython 和 Jupyter Notebooks</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python解释器</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i>IPython基础</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python语法基础</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#unicode"><i class="fa fa-check"></i>字节和Unicode</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#e68ea7e588b6e6b581"><i class="fa fa-check"></i>控制流</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>3</b> Python的数据结构、函数和文件</a><ul>
+<li class="chapter" data-level="3.1" data-path="structure.html"><a href="structure.html#section-3.1"><i class="fa fa-check"></i><b>3.1</b> 元组</a></li>
+<li class="chapter" data-level="3.2" data-path="structure.html"><a href="structure.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 列表</a></li>
+<li class="chapter" data-level="3.3" data-path="structure.html"><a href="structure.html#section-3.3"><i class="fa fa-check"></i><b>3.3</b> 序列函数</a></li>
+<li class="chapter" data-level="3.4" data-path="structure.html"><a href="structure.html#section-3.4"><i class="fa fa-check"></i><b>3.4</b> 字典</a></li>
+<li class="chapter" data-level="3.5" data-path="structure.html"><a href="structure.html#section-3.5"><i class="fa fa-check"></i><b>3.5</b> 集合</a></li>
+<li class="chapter" data-level="3.6" data-path="structure.html"><a href="structure.html#section-3.6"><i class="fa fa-check"></i><b>3.6</b> 列表、集合和字典推导式</a></li>
+<li class="chapter" data-level="3.7" data-path="structure.html"><a href="structure.html#section-3.7"><i class="fa fa-check"></i><b>3.7</b> 嵌套列表推导式</a></li>
+<li class="chapter" data-level="3.8" data-path="structure.html"><a href="structure.html#section-3.8"><i class="fa fa-check"></i><b>3.8</b> 函数</a></li>
+<li class="chapter" data-level="3.9" data-path="structure.html"><a href="structure.html#section-3.9"><i class="fa fa-check"></i><b>3.9</b> 生成器</a></li>
+<li class="chapter" data-level="3.10" data-path="structure.html"><a href="structure.html#section-3.10"><i class="fa fa-check"></i><b>3.10</b> 错误和异常处理</a></li>
+<li class="chapter" data-level="3.11" data-path="structure.html"><a href="structure.html#section-3.11"><i class="fa fa-check"></i><b>3.11</b> 文件和操作系统</a></li>
+<li class="chapter" data-level="3.12" data-path="structure.html"><a href="structure.html#section-3.12"><i class="fa fa-check"></i><b>3.12</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="preparation.html"><a href="preparation.html#numpy"><i class="fa fa-check"></i><b>4</b> NumPy基础：数组和矢量计算</a><ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4.1</b> NumPy的ndarray：一种多维数组对象</a></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 通用函数：快速的元素级数组函数</a></li>
+<li class="chapter" data-level="4.3" data-path="numpy.html"><a href="numpy.html#section-4.3"><i class="fa fa-check"></i><b>4.3</b> 利用数组进行数据处理</a></li>
+<li class="chapter" data-level="4.4" data-path="numpy.html"><a href="numpy.html#section-4.4"><i class="fa fa-check"></i><b>4.4</b> 用于数组的文件输入输出</a></li>
+<li class="chapter" data-level="4.5" data-path="numpy.html"><a href="numpy.html#section-4.5"><i class="fa fa-check"></i><b>4.5</b> 线性代数</a></li>
+<li class="chapter" data-level="4.6" data-path="numpy.html"><a href="numpy.html#section-4.6"><i class="fa fa-check"></i><b>4.6</b> 伪随机数生成</a></li>
+<li class="chapter" data-level="4.7" data-path="numpy.html"><a href="numpy.html#section-4.7"><i class="fa fa-check"></i><b>4.7</b> 示例：随机漫步</a></li>
+<li class="chapter" data-level="4.8" data-path="numpy.html"><a href="numpy.html#-1"><i class="fa fa-check"></i><b>4.8</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5</b> pandas入门</a><ul>
+<li class="chapter" data-level="5.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5.1</b> pandas的数据结构介绍</a></li>
+<li class="chapter" data-level="5.2" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>5.2</b> 基本功能</a></li>
+<li class="chapter" data-level="5.3" data-path="pandas.html"><a href="pandas.html#section-5.3"><i class="fa fa-check"></i><b>5.3</b> 汇总和计算描述统计</a></li>
+<li class="chapter" data-level="5.4" data-path="pandas.html"><a href="pandas.html#-2"><i class="fa fa-check"></i><b>5.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data2file.html"><a href="data2file.html"><i class="fa fa-check"></i><b>6</b> 数据加载、存储与文件格式</a><ul>
+<li class="chapter" data-level="6.1" data-path="data2file.html"><a href="data2file.html#section-6.1"><i class="fa fa-check"></i><b>6.1</b> 读写文本格式的数据</a></li>
+<li class="chapter" data-level="6.2" data-path="data2file.html"><a href="data2file.html#section-6.2"><i class="fa fa-check"></i><b>6.2</b> 二进制数据格式</a></li>
+<li class="chapter" data-level="6.3" data-path="data2file.html"><a href="data2file.html#web-apis"><i class="fa fa-check"></i><b>6.3</b> Web APIs交互</a></li>
+<li class="chapter" data-level="6.4" data-path="data2file.html"><a href="data2file.html#section-6.4"><i class="fa fa-check"></i><b>6.4</b> 数据库交互</a></li>
+<li class="chapter" data-level="6.5" data-path="data2file.html"><a href="data2file.html#-3"><i class="fa fa-check"></i><b>6.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>7</b> 数据清洗和准备</a><ul>
+<li class="chapter" data-level="7.1" data-path="tidy.html"><a href="tidy.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 处理缺失数据</a></li>
+<li class="chapter" data-level="7.2" data-path="tidy.html"><a href="tidy.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 数据转换</a></li>
+<li class="chapter" data-level="7.3" data-path="tidy.html"><a href="tidy.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 字符串操作</a></li>
+<li class="chapter" data-level="7.4" data-path="tidy.html"><a href="tidy.html#-4"><i class="fa fa-check"></i><b>7.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reshape.html"><a href="reshape.html"><i class="fa fa-check"></i><b>8</b> 数据规整：聚合、合并和重塑</a><ul>
+<li class="chapter" data-level="8.1" data-path="reshape.html"><a href="reshape.html#section-8.1"><i class="fa fa-check"></i><b>8.1</b> 层次化索引</a></li>
+<li class="chapter" data-level="8.2" data-path="reshape.html"><a href="reshape.html#section-8.2"><i class="fa fa-check"></i><b>8.2</b> 合并数据集</a></li>
+<li class="chapter" data-level="8.3" data-path="reshape.html"><a href="reshape.html#section-8.3"><i class="fa fa-check"></i><b>8.3</b> 重塑和轴向旋转</a></li>
+<li class="chapter" data-level="8.4" data-path="reshape.html"><a href="reshape.html#-5"><i class="fa fa-check"></i><b>8.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="visulization.html"><a href="visulization.html"><i class="fa fa-check"></i><b>9</b> 绘图和可视化</a><ul>
+<li class="chapter" data-level="9.1" data-path="visulization.html"><a href="visulization.html#matplotlib-api"><i class="fa fa-check"></i><b>9.1</b> matplotlib API入门</a></li>
+<li class="chapter" data-level="9.2" data-path="visulization.html"><a href="visulization.html#pandasseaborn"><i class="fa fa-check"></i><b>9.2</b> 使用pandas和seaborn绘图</a></li>
+<li class="chapter" data-level="9.3" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i><b>9.3</b> 其它的Python可视化工具</a></li>
+<li class="chapter" data-level="9.4" data-path="visulization.html"><a href="visulization.html#-6"><i class="fa fa-check"></i><b>9.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="apply.html"><a href="apply.html"><i class="fa fa-check"></i><b>10</b> 数据聚合与分组运算</a><ul>
+<li class="chapter" data-level="10.1" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>10.1</b> GroupBy机制</a></li>
+<li class="chapter" data-level="10.2" data-path="apply.html"><a href="apply.html#section-10.2"><i class="fa fa-check"></i><b>10.2</b> 数据聚合</a></li>
+<li class="chapter" data-level="10.3" data-path="apply.html"><a href="apply.html#apply"><i class="fa fa-check"></i><b>10.3</b> apply：一般性的“拆分－应用－合并”</a></li>
+<li class="chapter" data-level="10.4" data-path="apply.html"><a href="apply.html#section-10.4"><i class="fa fa-check"></i><b>10.4</b> 透视表和交叉表</a></li>
+<li class="chapter" data-level="10.5" data-path="apply.html"><a href="apply.html#-7"><i class="fa fa-check"></i><b>10.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="timeSeries.html"><a href="timeSeries.html"><i class="fa fa-check"></i><b>11</b> 时间序列</a><ul>
+<li class="chapter" data-level="11.1" data-path="timeSeries.html"><a href="timeSeries.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 日期和时间数据类型及工具</a></li>
+<li class="chapter" data-level="11.2" data-path="timeSeries.html"><a href="timeSeries.html#section-11.2"><i class="fa fa-check"></i><b>11.2</b> 时间序列基础</a></li>
+<li class="chapter" data-level="11.3" data-path="timeSeries.html"><a href="timeSeries.html#section-11.3"><i class="fa fa-check"></i><b>11.3</b> 日期的范围、频率以及移动</a></li>
+<li class="chapter" data-level="11.4" data-path="timeSeries.html"><a href="timeSeries.html#section-11.4"><i class="fa fa-check"></i><b>11.4</b> 时区处理</a></li>
+<li class="chapter" data-level="11.5" data-path="timeSeries.html"><a href="timeSeries.html#section-11.5"><i class="fa fa-check"></i><b>11.5</b> 时区本地化和转换</a></li>
+<li class="chapter" data-level="11.6" data-path="timeSeries.html"><a href="timeSeries.html#section-11.6"><i class="fa fa-check"></i><b>11.6</b> 时期及其算术运算</a></li>
+<li class="chapter" data-level="11.7" data-path="timeSeries.html"><a href="timeSeries.html#section-11.7"><i class="fa fa-check"></i><b>11.7</b> 重采样及频率转换</a></li>
+<li class="chapter" data-level="11.8" data-path="timeSeries.html"><a href="timeSeries.html#section-11.8"><i class="fa fa-check"></i><b>11.8</b> 移动窗口函数</a></li>
+<li class="chapter" data-level="11.9" data-path="timeSeries.html"><a href="timeSeries.html#-8"><i class="fa fa-check"></i><b>11.9</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="adPandas.html"><a href="adPandas.html"><i class="fa fa-check"></i><b>12</b> pandas高级应用</a><ul>
+<li class="chapter" data-level="12.1" data-path="adPandas.html"><a href="adPandas.html#section-12.1"><i class="fa fa-check"></i><b>12.1</b> 分类数据</a></li>
+<li class="chapter" data-level="12.2" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>12.2</b> GroupBy高级应用</a></li>
+<li class="chapter" data-level="12.3" data-path="adPandas.html"><a href="adPandas.html#section-12.3"><i class="fa fa-check"></i><b>12.3</b> 链式编程技术</a></li>
+<li class="chapter" data-level="12.4" data-path="adPandas.html"><a href="adPandas.html#-9"><i class="fa fa-check"></i><b>12.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="buildModels.html"><a href="buildModels.html"><i class="fa fa-check"></i><b>13</b> Python建模库介绍</a><ul>
+<li class="chapter" data-level="13.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>13.1</b> pandas与模型代码的接口</a></li>
+<li class="chapter" data-level="13.2" data-path="buildModels.html"><a href="buildModels.html#patsy"><i class="fa fa-check"></i><b>13.2</b> 用Patsy创建模型描述</a></li>
+<li class="chapter" data-level="13.3" data-path="preparation.html"><a href="preparation.html#statsmodels"><i class="fa fa-check"></i><b>13.3</b> statsmodels介绍</a></li>
+<li class="chapter" data-level="13.4" data-path="preparation.html"><a href="preparation.html#scikit-learn"><i class="fa fa-check"></i><b>13.4</b> scikit-learn介绍</a></li>
+<li class="chapter" data-level="13.5" data-path="buildModels.html"><a href="buildModels.html#section-13.5"><i class="fa fa-check"></i><b>13.5</b> 继续学习</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="dsCases.html"><a href="dsCases.html"><i class="fa fa-check"></i><b>14</b> 数据分析案例</a><ul>
+<li class="chapter" data-level="14.1" data-path="dsCases.html"><a href="dsCases.html#bitlyusa.gov"><i class="fa fa-check"></i><b>14.1</b> 来自Bitly的USA.gov数据</a></li>
+<li class="chapter" data-level="14.2" data-path="dsCases.html"><a href="dsCases.html#movielens-1m"><i class="fa fa-check"></i><b>14.2</b> MovieLens 1M数据集</a></li>
+<li class="chapter" data-level="14.3" data-path="dsCases.html"><a href="dsCases.html#section-14.3"><i class="fa fa-check"></i><b>14.3</b> 1880-2010年间全美婴儿姓名</a></li>
+<li class="chapter" data-level="14.4" data-path="dsCases.html"><a href="dsCases.html#usda"><i class="fa fa-check"></i><b>14.4</b> USDA食品数据库</a></li>
+<li class="chapter" data-level="14.5" data-path="dsCases.html"><a href="dsCases.html#section-14.5"><i class="fa fa-check"></i><b>14.5</b> 2012联邦选举委员会数据库</a></li>
+<li class="chapter" data-level="14.6" data-path="dsCases.html"><a href="dsCases.html#-10"><i class="fa fa-check"></i><b>14.6</b> 总结</a></li>
+</ul></li>
+<li class="appendix"><span><b>附录</b></span></li>
+<li class="chapter" data-level="A" data-path="adNumpy.html"><a href="adNumpy.html"><i class="fa fa-check"></i><b>A</b> NumPy高级应用</a><ul>
+<li class="chapter" data-level="A.1" data-path="numpy.html"><a href="numpy.html#ndarray"><i class="fa fa-check"></i><b>A.1</b> ndarray对象的内部机理</a></li>
+<li class="chapter" data-level="A.2" data-path="16-supp2.html"><a href="#section-A.2"><i class="fa fa-check"></i><b>A.2</b> 高级数组操作</a></li>
+<li class="chapter" data-level="A.3" data-path="16-supp2.html"><a href="#section-A.3"><i class="fa fa-check"></i><b>A.3</b> 广播</a></li>
+<li class="chapter" data-level="A.4" data-path="adNumpy.html"><a href="adNumpy.html#ufunc"><i class="fa fa-check"></i><b>A.4</b> ufunc高级应用</a></li>
+<li class="chapter" data-level="A.5" data-path="16-supp2.html"><a href="#section-A.5"><i class="fa fa-check"></i><b>A.5</b> 结构化和记录式数组</a></li>
+<li class="chapter" data-level="A.6" data-path="16-supp2.html"><a href="#section-A.6"><i class="fa fa-check"></i><b>A.6</b> 更多有关排序的话题</a></li>
+<li class="chapter" data-level="A.7" data-path="adNumpy.html"><a href="adNumpy.html#numbanumpy"><i class="fa fa-check"></i><b>A.7</b> 用Numba编写快速NumPy函数</a></li>
+<li class="chapter" data-level="A.8" data-path="16-supp2.html"><a href="#section-A.8"><i class="fa fa-check"></i><b>A.8</b> 高级数组输入输出</a></li>
+<li class="chapter" data-level="A.9" data-path="16-supp2.html"><a href="#section-A.9"><i class="fa fa-check"></i><b>A.9</b> 性能建议</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="moreInfo.html"><a href="moreInfo.html"><i class="fa fa-check"></i><b>B</b> 更多关于IPython的内容</a><ul>
+<li class="chapter" data-level="B.1" data-path="16-supp2.html"><a href="#section-B.1"><i class="fa fa-check"></i><b>B.1</b> 使用命令历史</a></li>
+<li class="chapter" data-level="B.2" data-path="16-supp2.html"><a href="#section-B.2"><i class="fa fa-check"></i><b>B.2</b> 与操作系统交互</a></li>
+<li class="chapter" data-level="B.3" data-path="16-supp2.html"><a href="#section-B.3"><i class="fa fa-check"></i><b>B.3</b> 软件开发工具</a></li>
+<li class="chapter" data-level="B.4" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.4</b> 使用IPython高效开发的技巧</a></li>
+<li class="chapter" data-level="B.5" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.5</b> IPython高级功能</a></li>
+<li class="chapter" data-level="B.6" data-path="moreInfo.html"><a href="moreInfo.html#-11"><i class="fa fa-check"></i><b>B.6</b> 总结</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">利用Python进行数据分析（第二版）中文翻译</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="moreInfo" class="section level1">
+<h1><span class="header-section-number">B</span> 更多关于IPython的内容</h1>
+<p>第2章中，我们学习了IPython shell和Jupyter notebook的基础。本章中，我们会探索IPython更深层次的功能，可以从控制台或在jupyter使用。</p>
+<div id="section-16.1" class="section level2">
+<h2><span class="header-section-number">B.1</span> 使用命令历史</h2>
+<p>Ipython维护了一个位于磁盘的小型数据库，用于保存执行的每条指令。它的用途有：</p>
+<ul>
+<li>只用最少的输入，就能搜索、补全和执行先前运行过的指令；</li>
+<li>在不同session间保存命令历史；</li>
+<li>将日志输入/输出历史到一个文件</li>
+</ul>
+<p>这些功能在shell中，要比notebook更为有用，因为notebook从设计上是将输入和输出的代码放到每个代码格子中。</p>
+<div id="section-16.1.1" class="section level3">
+<h3><span class="header-section-number">B.1.1</span> 搜索和重复使用命令历史</h3>
+<p>Ipython可以让你搜索和执行之前的代码或其他命令。这个功能非常有用，因为你可能需要重复执行同样的命令，例如%run命令，或其它代码。假设你必须要执行：</p>
+<pre><code>In[7]: %run first/second/third/data_script.py</code></pre>
+<p>运行成功，然后检查结果，发现计算有错。解决完问题，然后修改了data_script.py，你就可以输入一些%run命令，然后按Ctrl+P或上箭头。这样就可以搜索历史命令，匹配输入字符的命令。多次按Ctrl+P或上箭头，会继续搜索命令。如果你要执行你想要执行的命令，不要害怕。你可以按下Ctrl-N或下箭头，向前移动历史命令。这样做了几次后，你可以不假思索地按下这些键！</p>
+<p>Ctrl-R可以带来如同Unix风格shell（比如bash shell）的readline的部分增量搜索功能。在Windows上，readline功能是被IPython模仿的。要使用这个功能，先按Ctrl-R，然后输入一些包含于输入行的想要搜索的字符：</p>
+<pre><code>In [1]: a_command = foo(x, y, z)
+
+(reverse-i-search)`com&#39;: a_command = foo(x, y, z)</code></pre>
+<p>Ctrl-R会循环历史，找到匹配字符的每一行。</p>
+</div>
+<div id="section-16.1.2" class="section level3">
+<h3><span class="header-section-number">B.1.2</span> 输入和输出变量</h3>
+<textarea class="textarea small-font" id="baidu_translate_input" data-height="70" style="height: 70px; overflow: hidden;">
+</textarea>
+<p><a href="javascript:void(0);" title="添加到收藏夹"></a></p>
+<p>忘记将函数调用的结果分配给变量是非常烦人的。IPython的一个session会在一个特殊变量，存储输入和输出Python对象的引用。前面两个输出会分别存储在<em>（一个下划线）和</em>_（两个下划线）变量：</p>
+<pre><code>In [24]: 2 ** 27
+Out[24]: 134217728
+
+In [25]: _
+Out[25]: 134217728</code></pre>
+<p>输入变量是存储在名字类似_iX的变量中，X是输入行的编号。对于每个输入变量，都有一个对应的输出变量_X。因此在输入第27行之后，会有两个新变量_27 （输出）和_i27（输入）:</p>
+<pre><code>In [26]: foo = &#39;bar&#39;
+
+In [27]: foo
+Out[27]: &#39;bar&#39;
+
+In [28]: _i27
+Out[28]: u&#39;foo&#39;
+
+In [29]: _27
+Out[29]: &#39;bar&#39;</code></pre>
+<p>因为输入变量是字符串，它们可以用Python的exec关键字再次执行：</p>
+<pre><code>In [30]: exec(_i27)</code></pre>
+<p>这里，_i27是在In [27]输入的代码。</p>
+<p>有几个魔术函数可以让你利用输入和输出历史。%hist可以打印所有或部分的输入历史，加上或不加上编号。%reset可以清理交互命名空间，或输入和输出缓存。%xdel魔术函数可以去除IPython中对一个特别对象的所有引用。对于关于这些魔术方法的更多内容，请查看文档。</p>
+<blockquote>
+<p>警告：当处理非常大的数据集时，要记住IPython的输入和输出的历史会造成被引用的对象不被垃圾回收（释放内存），即使你使用del关键字从交互命名空间删除变量。在这种情况下，小心使用xdel %和%reset可以帮助你避免陷入内存问题。</p>
+</blockquote>
+</div>
+</div>
+<div id="section-16.2" class="section level2">
+<h2><span class="header-section-number">B.2</span> 与操作系统交互</h2>
+<p>IPython的另一个功能是无缝连接文件系统和操作系统。这意味着，在同时做其它事时，无需退出IPython，就可以像Windows或Unix使用命令行操作，包括shell命令、更改目录、用Python对象（列表或字符串）存储结果。它还有简单的命令别名和目录书签功能。</p>
+<p>表B-1总结了调用shell命令的魔术函数和语法。我会在下面几节介绍这些功能。</p>
+<div class="figure">
+<img src="//upload-images.jianshu.io/upload_images/7178691-4da7ee14be2da211.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>表B-1 IPython系统相关命令</p>
+<div id="shell" class="section level3">
+<h3><span class="header-section-number">B.2.1</span> Shell命令和别名</h3>
+<p>用叹号开始一行，是告诉IPython执行叹号后面的所有内容。这意味着你可以删除文件（取决于操作系统，用rm或del）、改变目录或执行任何其他命令。</p>
+<p>通过给变量加上叹号，你可以在一个变量中存储命令的控制台输出。例如，在我联网的基于Linux的主机上，我可以获得IP地址为Python变量：</p>
+<pre><code>In [1]: ip_info = !ifconfig wlan0 | grep &quot;inet &quot;
+
+In [2]: ip_info[0].strip()
+Out[2]: &#39;inet addr:10.0.0.11  Bcast:10.0.0.255  Mask:255.255.255.0&#39;</code></pre>
+<p>返回的Python对象ip_info实际上是一个自定义的列表类型，它包含着多种版本的控制台输出。</p>
+<p>当使用！，IPython还可以替换定义在当前环境的Python值。要这么做，可以在变量名前面加上$符号：</p>
+<pre><code>In [3]: foo = &#39;test*&#39;
+
+In [4]: !ls $foo
+test4.py  test.py  test.xml</code></pre>
+<p>%alias魔术函数可以自定义shell命令的快捷方式。看一个简单的例子：</p>
+<pre><code>In [1]: %alias ll ls -l
+
+In [2]: ll /usr
+total 332
+drwxr-xr-x   2 root root  69632 2012-01-29 20:36 bin/
+drwxr-xr-x   2 root root   4096 2010-08-23 12:05 games/
+drwxr-xr-x 123 root root  20480 2011-12-26 18:08 include/
+drwxr-xr-x 265 root root 126976 2012-01-29 20:36 lib/
+drwxr-xr-x  44 root root  69632 2011-12-26 18:08 lib32/
+lrwxrwxrwx   1 root root      3 2010-08-23 16:02 lib64 -&gt; lib/
+drwxr-xr-x  15 root root   4096 2011-10-13 19:03 local/
+drwxr-xr-x   2 root root  12288 2012-01-12 09:32 sbin/
+drwxr-xr-x 387 root root  12288 2011-11-04 22:53 share/
+drwxrwsr-x  24 root src    4096 2011-07-17 18:38 src/</code></pre>
+<p>你可以执行多个命令，就像在命令行中一样，只需用分号隔开：</p>
+<pre><code>In [558]: %alias test_alias (cd examples; ls; cd ..)
+
+In [559]: test_alias
+macrodata.csv  spx.csv  tips.csv</code></pre>
+<p>当session结束，你定义的别名就会失效。要创建恒久的别名，需要使用配置。</p>
+</div>
+<div id="section-16.2.2" class="section level3">
+<h3><span class="header-section-number">B.2.2</span> 目录书签系统</h3>
+<p>IPython有一个简单的目录书签系统，可以让你保存常用目录的别名，这样在跳来跳去的时候会非常方便。例如，假设你想创建一个书签，指向本书的补充内容：</p>
+<pre><code>In [6]: %bookmark py4da /home/wesm/code/pydata-book</code></pre>
+<p>这么做之后，当使用%cd魔术命令，就可以使用定义的书签：</p>
+<pre><code>In [7]: cd py4da
+(bookmark:py4da) -&gt; /home/wesm/code/pydata-book
+/home/wesm/code/pydata-book</code></pre>
+<p>如果书签的名字，与当前工作目录的一个目录重名，你可以使用-b标志来覆写，使用书签的位置。使用%bookmark的-l选项，可以列出所有的书签：</p>
+<pre><code>In [8]: %bookmark -l
+Current bookmarks:
+py4da -&gt; /home/wesm/code/pydata-book-source</code></pre>
+<p>书签，和别名不同，在session之间是保持的。</p>
+</div>
+</div>
+<div id="section-16.3" class="section level2">
+<h2><span class="header-section-number">B.3</span> 软件开发工具</h2>
+<p>除了作为优秀的交互式计算和数据探索环境，IPython也是有效的Python软件开发工具。在数据分析中，最重要的是要有正确的代码。幸运的是，IPython紧密集成了和加强了Python内置的pdb调试器。第二，需要快速的代码。对于这点，IPython有易于使用的代码计时和分析工具。我会详细介绍这些工具。</p>
+<div id="section-16.3.1" class="section level3">
+<h3><span class="header-section-number">B.3.1</span> 交互调试器</h3>
+<p>IPython的调试器用tab补全、语法增强、逐行异常追踪增强了pdb。调试代码的最佳时间就是刚刚发生错误。异常发生之后就输入%debug，就启动了调试器，进入抛出异常的堆栈框架：</p>
+<pre><code>In [2]: run examples/ipython_bug.py
+---------------------------------------------------------------------------
+AssertionError                            Traceback (most recent call last)
+/home/wesm/code/pydata-book/examples/ipython_bug.py in &lt;module&gt;()
+     13     throws_an_exception()
+     14
+---&gt; 15 calling_things()
+
+/home/wesm/code/pydata-book/examples/ipython_bug.py in calling_things()
+11 def calling_things():
+     12     works_fine()
+---&gt; 13     throws_an_exception()
+     14
+     15 calling_things()
+
+/home/wesm/code/pydata-book/examples/ipython_bug.py in throws_an_exception()
+      7     a = 5
+      8     b = 6
+----&gt; 9     assert(a + b == 10)
+     10
+     11 def calling_things():
+
+AssertionError:
+
+In [3]: %debug
+&gt; /home/wesm/code/pydata-book/examples/ipython_bug.py(9)throws_an_exception()
+      8     b = 6
+----&gt; 9     assert(a + b == 10)
+     10
+
+ipdb&gt;</code></pre>
+<p>一旦进入调试器，你就可以执行任意的Python代码，在每个堆栈框架中检查所有的对象和数据（解释器会保持它们活跃）。默认是从错误发生的最低级开始。通过u（up）和d（down），你可以在不同等级的堆栈踪迹切换：</p>
+<pre><code>ipdb&gt; u
+&gt; /home/wesm/code/pydata-book/examples/ipython_bug.py(13)calling_things()
+     12     works_fine()
+---&gt; 13     throws_an_exception()
+     14</code></pre>
+<p>执行%pdb命令，可以在发生任何异常时让IPython自动启动调试器，许多用户会发现这个功能非常好用。</p>
+<p>用调试器帮助开发代码也很容易，特别是当你希望设置断点或在函数和脚本间移动，以检查每个阶段的状态。有多种方法可以实现。第一种是使用%run和-d，它会在执行传入脚本的任何代码之前调用调试器。你必须马上按s（step）以进入脚本：</p>
+<pre><code>In [5]: run -d examples/ipython_bug.py
+Breakpoint 1 at /home/wesm/code/pydata-book/examples/ipython_bug.py:1
+NOTE: Enter &#39;c&#39; at the ipdb&gt;  prompt to start your script.
+&gt; &lt;string&gt;(1)&lt;module&gt;()
+
+ipdb&gt; s
+--Call--
+&gt; /home/wesm/code/pydata-book/examples/ipython_bug.py(1)&lt;module&gt;()
+1---&gt; 1 def works_fine():
+      2     a = 5
+      3     b = 6</code></pre>
+<p>然后，你就可以决定如何工作。例如，在前面的异常，我们可以设置一个断点，就在调用works_fine之前，然后运行脚本，在遇到断点时按c（continue）：</p>
+<pre><code>ipdb&gt; b 12
+ipdb&gt; c
+&gt; /home/wesm/code/pydata-book/examples/ipython_bug.py(12)calling_things()
+     11 def calling_things():
+2--&gt; 12     works_fine()
+     13     throws_an_exception()</code></pre>
+<p>这时，你可以step进入works_fine()，或通过按n（next）执行works_fine()，进入下一行：</p>
+<pre><code>ipdb&gt; n
+&gt; /home/wesm/code/pydata-book/examples/ipython_bug.py(13)calling_things()
+2    12     works_fine()
+---&gt; 13     throws_an_exception()
+     14</code></pre>
+<p>然后，我们可以进入throws_an_exception，到达发生错误的一行，查看变量。注意，调试器的命令是在变量名之前，在变量名前面加叹号！可以查看内容：</p>
+<pre><code>ipdb&gt; s
+--Call--
+&gt; /home/wesm/code/pydata-book/examples/ipython_bug.py(6)throws_an_exception()
+      5
+----&gt; 6 def throws_an_exception():
+      7     a = 5
+
+ipdb&gt; n
+&gt; /home/wesm/code/pydata-book/examples/ipython_bug.py(7)throws_an_exception()
+      6 def throws_an_exception():
+----&gt; 7     a = 5
+      8     b = 6
+
+ipdb&gt; n
+&gt; /home/wesm/code/pydata-book/examples/ipython_bug.py(8)throws_an_exception()
+      7     a = 5
+----&gt; 8     b = 6
+      9     assert(a + b == 10)
+
+ipdb&gt; n
+&gt; /home/wesm/code/pydata-book/examples/ipython_bug.py(9)throws_an_exception()
+      8     b = 6
+----&gt; 9     assert(a + b == 10)
+     10
+
+ipdb&gt; !a
+5
+ipdb&gt; !b
+6</code></pre>
+<p>提高使用交互式调试器的熟练度需要练习和经验。表B-2,列出了所有调试器命令。如果你习惯了IDE，你可能觉得终端的调试器在一开始会不顺手，但会觉得越来越好用。一些Python的IDEs有很好的GUI调试器，选择顺手的就好。</p>
+<div class="figure">
+<img src="" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>表B-2 IPython调试器命令</p>
+</div>
+<div id="section-16.3.2" class="section level3">
+<h3><span class="header-section-number">B.3.2</span> 使用调试器的其它方式</h3>
+<p>还有一些其它工作可以用到调试器。第一个是使用特殊的set_trace函数（根据pdb.set_trace命名的），这是一个简装的断点。还有两种方法是你可能想用的（像我一样，将其添加到IPython的配置）：</p>
+<pre><code>from IPython.core.debugger import Pdb
+
+def set_trace():
+    Pdb(color_scheme=&#39;Linux&#39;).set_trace(sys._getframe().f_back)
+
+def debug(f, *args, **kwargs):
+    pdb = Pdb(color_scheme=&#39;Linux&#39;)
+    return pdb.runcall(f, *args, **kwargs)</code></pre>
+<p>第一个函数set_trace非常简单。如果你想暂时停下来进行仔细检查（比如发生异常之前），可以在代码的任何位置使用set_trace：</p>
+<pre><code>In [7]: run examples/ipython_bug.py
+&gt; /home/wesm/code/pydata-book/examples/ipython_bug.py(16)calling_things()
+     15     set_trace()
+---&gt; 16     throws_an_exception()
+     17</code></pre>
+<p>按c（continue）可以让代码继续正常行进。</p>
+<p>我们刚看的debug函数，可以让你方便的在调用任何函数时使用调试器。假设我们写了一个下面的函数，想逐步分析它的逻辑：</p>
+<pre><code>def f(x, y, z=1):
+    tmp = x + y
+    return tmp / z</code></pre>
+<p>普通地使用f，就会像f(1, 2, z=3)。而要想进入f，将f作为第一个参数传递给debug，再将位置和关键词参数传递给f：</p>
+<pre><code>In [6]: debug(f, 1, 2, z=3)
+&gt; &lt;ipython-input&gt;(2)f()
+      1 def f(x, y, z):
+----&gt; 2     tmp = x + y
+      3     return tmp / z
+
+ipdb&gt;</code></pre>
+<p>这两个简单方法节省了我平时的大量时间。</p>
+<p>最后，调试器可以和%run一起使用。脚本通过运行%run -d，就可以直接进入调试器，随意设置断点并启动脚本：</p>
+<pre><code>In [1]: %run -d examples/ipython_bug.py
+Breakpoint 1 at /home/wesm/code/pydata-book/examples/ipython_bug.py:1
+NOTE: Enter &#39;c&#39; at the ipdb&gt;  prompt to start your script.
+&gt; &lt;string&gt;(1)&lt;module&gt;()
+
+ipdb&gt;</code></pre>
+<p>加上-b和行号，可以预设一个断点：</p>
+<pre><code>In [2]: %run -d -b2 examples/ipython_bug.py
+
+Breakpoint 1 at /home/wesm/code/pydata-book/examples/ipython_bug.py:2
+NOTE: Enter &#39;c&#39; at the ipdb&gt;  prompt to start your script.
+&gt; &lt;string&gt;(1)&lt;module&gt;()
+
+ipdb&gt; c
+&gt; /home/wesm/code/pydata-book/examples/ipython_bug.py(2)works_fine()
+      1 def works_fine():
+1---&gt; 2     a = 5
+      3     b = 6
+
+ipdb&gt;</code></pre>
+</div>
+<div id="time--timeit" class="section level3">
+<h3><span class="header-section-number">B.3.3</span> 代码计时：%time 和 %timeit</h3>
+<p>对于大型和长时间运行的数据分析应用，你可能希望测量不同组件或单独函数调用语句的执行时间。你可能想知道哪个函数占用的时间最长。幸运的是，IPython可以让你开发和测试代码时，很容易地获得这些信息。</p>
+<p>手动用time模块和它的函数time.clock和time.time给代码计时，既单调又重复，因为必须要写一些无趣的模板化代码：</p>
+<pre><code>import time
+start = time.time()
+for i in range(iterations):
+    # some code to run here
+elapsed_per = (time.time() - start) / iterations</code></pre>
+<p>因为这是一个很普通的操作，IPython有两个魔术函数，%time和%timeit，可以自动化这个过程。</p>
+<p>%time会运行一次语句，报告总共的执行时间。假设我们有一个大的字符串列表，我们想比较不同的可以挑选出特定开头字符串的方法。这里有一个含有600000字符串的列表，和两个方法，用以选出foo开头的字符串：</p>
+<pre><code># a very large list of strings
+strings = [&#39;foo&#39;, &#39;foobar&#39;, &#39;baz&#39;, &#39;qux&#39;,
+           &#39;python&#39;, &#39;Guido Van Rossum&#39;] * 100000
+
+method1 = [x for x in strings if x.startswith(&#39;foo&#39;)]
+
+method2 = [x for x in strings if x[:3] == &#39;foo&#39;]</code></pre>
+<p>看起来它们的性能应该是同级别的，但事实呢？用%time进行一下测量：</p>
+<pre><code>In [561]: %time method1 = [x for x in strings if x.startswith(&#39;foo&#39;)]
+CPU times: user 0.19 s, sys: 0.00 s, total: 0.19 s
+Wall time: 0.19 s
+
+In [562]: %time method2 = [x for x in strings if x[:3] == &#39;foo&#39;]
+CPU times: user 0.09 s, sys: 0.00 s, total: 0.09 s
+Wall time: 0.09 s</code></pre>
+<p>Wall time（wall-clock time的简写）是主要关注的。第一个方法是第二个方法的两倍多，但是这种测量方法并不准确。如果用%time多次测量，你就会发现结果是变化的。要想更准确，可以使用%timeit魔术函数。给出任意一条语句，它能多次运行这条语句以得到一个更为准确的时间：</p>
+<pre><code>In [563]: %timeit [x for x in strings if x.startswith(&#39;foo&#39;)]
+10 loops, best of 3: 159 ms per loop
+
+In [564]: %timeit [x for x in strings if x[:3] == &#39;foo&#39;]
+10 loops, best of 3: 59.3 ms per loop</code></pre>
+<p>这个例子说明了解Python标准库、NumPy、pandas和其它库的性能是很有价值的。在大型数据分析中，这些毫秒的时间就会累积起来！</p>
+<p>%timeit特别适合分析执行时间短的语句和函数，即使是微秒或纳秒。这些时间可能看起来毫不重要，但是一个20微秒的函数执行1百万次就比一个5微秒的函数长15秒。在上一个例子中，我们可以直接比较两个字符串操作，以了解它们的性能特点：</p>
+<pre><code>In [565]: x = &#39;foobar&#39;
+
+In [566]: y = &#39;foo&#39;
+
+In [567]: %timeit x.startswith(y)
+1000000 loops, best of 3: 267 ns per loop
+
+In [568]: %timeit x[:3] == y
+10000000 loops, best of 3: 147 ns per loop</code></pre>
+</div>
+<div id="prunrun--p" class="section level3">
+<h3><span class="header-section-number">B.3.4</span> 基础分析：%prun和%run -p</h3>
+<p>分析代码与代码计时关系很紧密，除了它关注的是“时间花在了哪里”。Python主要的分析工具是cProfile模块，它并不局限于IPython。cProfile会执行一个程序或任意的代码块，并会跟踪每个函数执行的时间。</p>
+<p>使用cProfile的通常方式是在命令行中运行一整段程序，输出每个函数的累积时间。假设我们有一个简单的在循环中进行线型代数运算的脚本（计算一系列的100×100矩阵的最大绝对特征值）：</p>
+<pre><code>import numpy as np
+from numpy.linalg import eigvals
+
+def run_experiment(niter=100):
+    K = 100
+    results = []
+    for _ in xrange(niter):
+        mat = np.random.randn(K, K)
+        max_eigenvalue = np.abs(eigvals(mat)).max()
+        results.append(max_eigenvalue)
+    return results
+some_results = run_experiment()
+print &#39;Largest one we saw: %s&#39; % np.max(some_results)</code></pre>
+<p>你可以用cProfile运行这个脚本，使用下面的命令行：</p>
+<pre><code>python -m cProfile cprof_example.py</code></pre>
+<p>运行之后，你会发现输出是按函数名排序的。这样要看出谁耗费的时间多有点困难，最好用-s指定排序：</p>
+<pre><code>$ python -m cProfile -s cumulative cprof_example.py
+Largest one we saw: 11.923204422
+    15116 function calls (14927 primitive calls) in 0.720 seconds
+
+Ordered by: cumulative time
+
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     1    0.001    0.001    0.721    0.721 cprof_example.py:1(&lt;module&gt;)
+   100    0.003    0.000    0.586    0.006 linalg.py:702(eigvals)
+   200    0.572    0.003    0.572    0.003 {numpy.linalg.lapack_lite.dgeev}
+     1    0.002    0.002    0.075    0.075 __init__.py:106(&lt;module&gt;)
+   100    0.059    0.001    0.059    0.001 {method &#39;randn&#39;)
+     1    0.000    0.000    0.044    0.044 add_newdocs.py:9(&lt;module&gt;)
+     2    0.001    0.001    0.037    0.019 __init__.py:1(&lt;module&gt;)
+     2    0.003    0.002    0.030    0.015 __init__.py:2(&lt;module&gt;)
+     1    0.000    0.000    0.030    0.030 type_check.py:3(&lt;module&gt;)
+     1    0.001    0.001    0.021    0.021 __init__.py:15(&lt;module&gt;)
+     1    0.013    0.013    0.013    0.013 numeric.py:1(&lt;module&gt;)
+     1    0.000    0.000    0.009    0.009 __init__.py:6(&lt;module&gt;)
+     1    0.001    0.001    0.008    0.008 __init__.py:45(&lt;module&gt;)
+   262    0.005    0.000    0.007    0.000 function_base.py:3178(add_newdoc)
+   100    0.003    0.000    0.005    0.000 linalg.py:162(_assertFinite)</code></pre>
+<p>只显示出前15行。扫描cumtime列，可以容易地看出每个函数用了多少时间。如果一个函数调用了其它函数，计时并不会停止。cProfile会记录每个函数的起始和结束时间，使用它们进行计时。</p>
+<p>除了在命令行中使用，cProfile也可以在程序中使用，分析任意代码块，而不必运行新进程。Ipython的%prun和%run -p，有便捷的接口实现这个功能。%prun使用类似cProfile的命令行选项，但是可以分析任意Python语句，而不用整个py文件：</p>
+<pre><code>In [4]: %prun -l 7 -s cumulative run_experiment()
+         4203 function calls in 0.643 seconds
+
+Ordered by: cumulative time
+List reduced from 32 to 7 due to restriction &lt;7&gt;
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     1    0.000    0.000    0.643    0.643 &lt;string&gt;:1(&lt;module&gt;)
+     1    0.001    0.001    0.643    0.643 cprof_example.py:4(run_experiment)
+   100    0.003    0.000    0.583    0.006 linalg.py:702(eigvals)
+   200    0.569    0.003    0.569    0.003 {numpy.linalg.lapack_lite.dgeev}
+   100    0.058    0.001    0.058    0.001 {method &#39;randn&#39;}
+   100    0.003    0.000    0.005    0.000 linalg.py:162(_assertFinite)
+   200    0.002    0.000    0.002    0.000 {method &#39;all&#39; of &#39;numpy.ndarray&#39;}</code></pre>
+<p>相似的，调用<code>%run -p -s cumulative cprof_example.py</code>有和命令行相似的作用，只是你不用离开Ipython。</p>
+<p>在Jupyter notebook中，你可以使用%%prun魔术方法（两个%）来分析一整段代码。这会弹出一个带有分析输出的独立窗口。便于快速回答一些问题，比如“为什么这段代码用了这么长时间”？</p>
+<p>使用IPython或Jupyter，还有一些其它工具可以让分析工作更便于理解。其中之一是SnakeViz（<a href="https://link.jianshu.com?t=https%3A%2F%2Fgithub.com%2Fjiffyclub%2Fsnakeviz%2F">https://github.com/jiffyclub/snakeviz/</a>），它会使用d3.js产生一个分析结果的交互可视化界面。</p>
+</div>
+<div id="section-16.3.5" class="section level3">
+<h3><span class="header-section-number">B.3.5</span> 逐行分析函数</h3>
+<p>有些情况下，用%prun（或其它基于cProfile的分析方法）得到的信息，不能获得函数执行时间的整个过程，或者结果过于复杂，加上函数名，很难进行解读。对于这种情况，有一个小库叫做line_profiler（可以通过PyPI或包管理工具获得）。它包含IPython插件，可以启用一个新的魔术函数%lprun，可以对一个函数或多个函数进行逐行分析。你可以通过修改IPython配置（查看IPython文档或本章后面的配置小节）加入下面这行，启用这个插件：</p>
+<pre><code># A list of dotted module names of IPython extensions to load.
+c.TerminalIPythonApp.extensions = [&#39;line_profiler&#39;]</code></pre>
+<p>你还可以运行命令：</p>
+<pre><code>%load_ext line_profiler</code></pre>
+<p>line_profiler也可以在程序中使用（查看完整文档），但是在IPython中使用是最为强大的。假设你有一个带有下面代码的模块prof_mod，做一些NumPy数组操作：</p>
+<pre><code>from numpy.random import randn
+
+def add_and_sum(x, y):
+    added = x + y
+    summed = added.sum(axis=1)
+    return summed
+
+def call_function():
+    x = randn(1000, 1000)
+    y = randn(1000, 1000)
+    return add_and_sum(x, y)</code></pre>
+<p>如果想了解add_and_sum函数的性能，%prun可以给出下面内容：</p>
+<pre><code>In [569]: %run prof_mod
+
+In [570]: x = randn(3000, 3000)
+
+In [571]: y = randn(3000, 3000)
+
+In [572]: %prun add_and_sum(x, y)
+         4 function calls in 0.049 seconds
+   Ordered by: internal time
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.036    0.036    0.046    0.046 prof_mod.py:3(add_and_sum)
+        1    0.009    0.009    0.009    0.009 {method &#39;sum&#39; of &#39;numpy.ndarray&#39;}
+        1    0.003    0.003    0.049    0.049 &lt;string&gt;:1(&lt;module&gt;)</code></pre>
+<p>上面的做法启发性不大。激活了IPython插件line_profiler，新的命令%lprun就能用了。使用中的不同点是，我们必须告诉%lprun要分析的函数是哪个。语法是：</p>
+<pre><code>%lprun -f func1 -f func2 statement_to_profile</code></pre>
+<p>我们想分析add_and_sum，运行：</p>
+<pre><code>In [573]: %lprun -f add_and_sum add_and_sum(x, y)
+Timer unit: 1e-06 s
+File: prof_mod.py
+Function: add_and_sum at line 3
+Total time: 0.045936 s
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     3                                           def add_and_sum(x, y):
+     4         1        36510  36510.0     79.5      added = x + y
+     5         1         9425   9425.0     20.5      summed = added.sum(axis=1)
+     6         1            1      1.0      0.0      return summed</code></pre>
+<p>这样就容易诠释了。我们分析了和代码语句中一样的函数。看之前的模块代码，我们可以调用call_function并对它和add_and_sum进行分析，得到一个完整的代码性能概括：</p>
+<pre><code>In [574]: %lprun -f add_and_sum -f call_function call_function()
+Timer unit: 1e-06 s
+File: prof_mod.py
+Function: add_and_sum at line 3
+Total time: 0.005526 s
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     3                                           def add_and_sum(x, y):
+     4         1         4375   4375.0     79.2      added = x + y
+     5         1         1149   1149.0     20.8      summed = added.sum(axis=1)
+     6         1            2      2.0      0.0      return summed
+File: prof_mod.py
+Function: call_function at line 8
+Total time: 0.121016 s
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     8                                           def call_function():
+     9         1        57169  57169.0     47.2      x = randn(1000, 1000)
+    10         1        58304  58304.0     48.2      y = randn(1000, 1000)
+    11         1         5543   5543.0      4.6      return add_and_sum(x, y)</code></pre>
+<p>我的经验是用%prun (cProfile)进行宏观分析，%lprun (line_profiler)做微观分析。最好对这两个工具都了解清楚。</p>
+<blockquote>
+<p>笔记：使用%lprun必须要指明函数名的原因是追踪每行的执行时间的损耗过多。追踪无用的函数会显著地改变结果。</p>
+</blockquote>
+</div>
+</div>
+<div id="ipython" class="section level2">
+<h2><span class="header-section-number">B.4</span> 使用IPython高效开发的技巧</h2>
+<p>方便快捷地写代码、调试和使用是每个人的目标。除了代码风格，流程细节（比如代码重载）也需要一些调整。</p>
+<p>因此，这一节的内容更像是门艺术而不是科学，还需要你不断的试验，以达成高效。最终，你要能结构优化代码，并且能省时省力地检查程序或函数的结果。我发现用IPython设计的软件比起命令行，要更适合工作。尤其是当发生错误时，你需要检查自己或别人写的数月或数年前写的代码的错误。</p>
+<div id="section-16.4.1" class="section level3">
+<h3><span class="header-section-number">B.4.1</span> 重载模块依赖</h3>
+<p>在Python中，当你输入imimport some_lib，some_lib中的代码就会被执行，所有的变量、函数和定义的引入，就会被存入到新创建的some_lib模块命名空间。当下一次输入some_lib，就会得到一个已存在的模块命名空间的引用。潜在的问题是当你%run一个脚本，它依赖于另一个模块，而这个模块做过修改，就会产生问题。假设我在test_script.py中有如下代码：</p>
+<pre><code>import some_lib
+
+x = 5
+y = [1, 2, 3, 4]
+result = some_lib.get_answer(x, y)</code></pre>
+<p>如果你运行过了%run test_script.py，然后修改了some_lib.py，下一次再执行%run test_script.py，还会得到旧版本的some_lib.py，这是因为Python模块系统的“一次加载”机制。这一点区分了Python和其它数据分析环境，比如MATLAB，它会自动传播代码修改。解决这个问题，有多种方法。第一种是在标准库importlib模块中使用reload函数：</p>
+<pre><code>import some_lib
+import importlib
+
+importlib.reload(some_lib)</code></pre>
+<p>这可以保证每次运行test_script.py时可以加载最新的some_lib.py。很明显，如果依赖更深，在各处都使用reload是非常麻烦的。对于这个问题，IPython有一个特殊的dreload函数（它不是魔术函数）重载深层的模块。如果我运行过some_lib.py，然后输入dreload(some_lib)，就会尝试重载some_lib和它的依赖。不过，这个方法不适用于所有场景，但比重启IPython强多了。</p>
+</div>
+<div id="section-16.4.2" class="section level3">
+<h3><span class="header-section-number">B.4.2</span> 代码设计技巧</h3>
+<p>对于这单，没有简单的对策，但是有一些原则，是我在工作中发现很好用的。</p>
+</div>
+<div id="section-16.4.3" class="section level3">
+<h3><span class="header-section-number">B.4.3</span> 保持相关对象和数据活跃</h3>
+<p>为命令行写一个下面示例中的程序是很少见的：</p>
+<pre><code>from my_functions import g
+
+def f(x, y):
+    return g(x + y)
+
+def main():
+    x = 6
+    y = 7.5
+    result = x + y
+
+if __name__ == &#39;__main__&#39;:
+    main()</code></pre>
+<p>在IPython中运行这个程序会发生问题，你发现是什么了吗？运行之后，任何定义在main函数中的结果和对象都不能在IPython中被访问到。更好的方法是将main中的代码直接在模块的命名空间中执行（或者在<code>__name__ == '__main__':</code>中，如果你想让这个模块可以被引用）。这样，当你%rundiamante，就可以查看所有定义在main中的变量。这等价于在Jupyter notebook的代码格中定义一个顶级变量。</p>
+</div>
+<div id="section-16.4.4" class="section level3">
+<h3><span class="header-section-number">B.4.4</span> 扁平优于嵌套</h3>
+<p>深层嵌套的代码总让我联想到洋葱皮。当测试或调试一个函数时，你需要剥多少层洋葱皮才能到达目标代码呢？“扁平优于嵌套”是Python之禅的一部分，它也适用于交互式代码开发。尽量将函数和类去耦合和模块化，有利于测试（如果你是在写单元测试）、调试和交互式使用。</p>
+</div>
+<div id="section-16.4.5" class="section level3">
+<h3><span class="header-section-number">B.4.5</span> 克服对大文件的恐惧</h3>
+<p>如果你之前是写JAVA（或者其它类似的语言），你可能被告知要让文件简短。在多数语言中，这都是合理的建议：太长会让人感觉是坏代码，意味着重构和重组是必要的。但是，在用IPython开发时，运行10个相关联的小文件（小于100行），比起两个或三个长文件，会让你更头疼。更少的文件意味着重载更少的模块和更少的编辑时在文件中跳转。我发现维护大模块，每个模块都是紧密组织的，会更实用和Pythonic。经过方案迭代，有时会将大文件分解成小文件。</p>
+<p>我不建议极端化这条建议，那样会形成一个单独的超大文件。找到一个合理和直观的大型代码模块库和封装结构往往需要一点工作，但这在团队工作中非常重要。每个模块都应该结构紧密，并且应该能直观地找到负责每个功能领域功能和类。</p>
+</div>
+</div>
+<div id="ipython" class="section level2">
+<h2><span class="header-section-number">B.5</span> IPython高级功能</h2>
+<p>要全面地使用IPython系统需要用另一种稍微不同的方式写代码，或深入IPython的配置。</p>
+<div id="ipython" class="section level3">
+<h3><span class="header-section-number">B.5.1</span> 让类是对IPython友好的</h3>
+<p>IPython会尽可能地在控制台美化展示每个字符串。对于许多对象，比如字典、列表和元组，内置的pprint模块可以用来美化格式。但是，在用户定义的类中，你必自己生成字符串。假设有一个下面的简单的类：</p>
+<pre><code>class Message:
+    def __init__(self, msg):
+        self.msg = msg</code></pre>
+<p>如果这么写，就会发现默认的输出不够美观：</p>
+<pre><code>In [576]: x = Message(&#39;I have a secret&#39;)
+
+In [577]: x
+Out[577]: &lt;__main__.Message instance at 0x60ebbd8&gt;</code></pre>
+<p>IPython会接收<strong>repr</strong>魔术方法返回的字符串（通过output = repr(obj)），并在控制台打印出来。因此，我们可以添加一个简单的<strong>repr</strong>方法到前面的类中，以得到一个更有用的输出：</p>
+<pre><code>class Message:
+    def __init__(self, msg):
+        self.msg = msg
+
+    def __repr__(self):
+        return &#39;Message: %s&#39; % self.msg
+In [579]: x = Message(&#39;I have a secret&#39;)
+
+In [580]: x
+Out[580]: Message: I have a secret</code></pre>
+</div>
+<div id="section-16.5.2" class="section level3">
+<h3><span class="header-section-number">B.5.2</span> 文件和配置</h3>
+<p>通过扩展配置系统，大多数IPython和Jupyter notebook的外观（颜色、提示符、行间距等等）和动作都是可以配置的。通过配置，你可以做到：</p>
+<ul>
+<li>改变颜色主题</li>
+<li>改变输入和输出提示符，或删除输出之后、输入之前的空行</li>
+<li>执行任意Python语句（例如，引入总是要使用的代码或者每次加载IPython都要运行的内容）</li>
+<li>启用IPython总是要运行的插件，比如line_profiler中的%lprun魔术函数</li>
+<li>启用Jupyter插件</li>
+<li>定义自己的魔术函数或系统别名</li>
+</ul>
+<p>IPython的配置存储在特殊的ipython_config.py文件中，它通常是在用户home目录的.ipython/文件夹中。配置是通过一个特殊文件。当你启动IPython，就会默认加载这个存储在profile_default文件夹中的默认文件。因此，在我的Linux系统，完整的IPython配置文件路径是：</p>
+<pre><code>/home/wesm/.ipython/profile_default/ipython_config.py</code></pre>
+<p>要启动这个文件，运行下面的命令：</p>
+<pre><code>ipython profile create</code></pre>
+<p>这个文件中的内容留给读者自己探索。这个文件有注释，解释了每个配置选项的作用。另一点，可以有多个配置文件。假设你想要另一个IPython配置文件，专门是为另一个应用或项目的。创建一个新的配置文件很简单，如下所示：</p>
+<pre><code>ipython profile create secret_project</code></pre>
+<p>做完之后，在新创建的profile_secret_project目录便捷配置文件，然后如下启动IPython：</p>
+<pre><code>$ ipython --profile=secret_project
+Python 3.5.1 | packaged by conda-forge | (default, May 20 2016, 05:22:56)
+Type &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+?         -&gt; Introduction and overview of IPython&#39;s features.
+%quickref -&gt; Quick reference.
+help      -&gt; Python&#39;s own help system.
+object?   -&gt; Details about &#39;object&#39;, use &#39;object??&#39; for extra details.
+
+IPython profile: secret_project</code></pre>
+<p>和之前一样，IPython的文档是一个极好的学习配置文件的资源。</p>
+<p>配置Jupyter有些不同，因为你可以使用除了Python的其它语言。要创建一个类似的Jupyter配置文件，运行：</p>
+<pre><code>jupyter notebook --generate-config</code></pre>
+<p>这样会在home目录的.jupyter/jupyter_notebook_config.py创建配置文件。编辑完之后，可以将它重命名：</p>
+<pre><code>$ mv ~/.jupyter/jupyter_notebook_config.py ~/.jupyter/my_custom_config.py</code></pre>
+<p>打开Jupyter之后，你可以添加–config参数：</p>
+<pre><code> jupyter notebook --config=~/.jupyter/my_custom_config.py</code></pre>
+</div>
+</div>
+<div id="-11" class="section level2">
+<h2><span class="header-section-number">B.6</span> 总结</h2>
+<p>学习过本书中的代码案例，你的Python技能得到了一定的提升，我建议你持续学习IPython和Jupyter。因为这两个项目的设计初衷就是提高生产率的，你可能还会发现一些工具，可以让你更便捷地使用Python和计算库。</p>
+<p>你可以在nbviewer（<a href="https://link.jianshu.com?t=https%3A%2F%2Fnbviewer.jupyter.org%2F">https://nbviewer.jupyter.org/</a>）上找到更多有趣的Jupyter notebooks。</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="adNumpy.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/openbiox/Cookbook-for-R-Chinese/edit/master/book/16-supp2.Rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

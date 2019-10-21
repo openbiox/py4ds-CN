@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 12 章 pandas高级应用 | 利用Python进行数据分析（第二版）中文翻译</title>
+  <meta name="description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 12 章 pandas高级应用 | 利用Python进行数据分析（第二版）中文翻译" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="github-repo" content="openbiox/py4ds-CN" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 12 章 pandas高级应用 | 利用Python进行数据分析（第二版）中文翻译" />
+  
+  <meta name="twitter:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  
+
+<meta name="author" content="作者：Wes McKinney，翻译：SeanCheney，校对与维护：王诗翔" />
+
+
+<meta name="date" content="2019-10-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="timeSeries.html"/>
+<link rel="next" href="buildModels.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">利用Python进行数据分析（第二版）</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#section-0.1"><i class="fa fa-check"></i><b>0.1</b> 问题与贡献</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#section-0.2"><i class="fa fa-check"></i><b>0.2</b> 许可</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#section-0.3"><i class="fa fa-check"></i><b>0.3</b> 致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>作者简介</a></li>
+<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> 准备工作</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e79a84e58685e5aeb9"><i class="fa fa-check"></i>本书的内容</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>为什么要使用Python进行数据分析</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>重要的Python库</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e5ae89e8a385e5928ce8aebee7bdae"><i class="fa fa-check"></i>安装和设置</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e7a4bee58cbae5928ce4bc9ae8aeae"><i class="fa fa-check"></i>社区和会议</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e5afbce888aa"><i class="fa fa-check"></i>本书导航</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Python 语法基础，IPython 和 Jupyter Notebooks</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python解释器</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i>IPython基础</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python语法基础</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#unicode"><i class="fa fa-check"></i>字节和Unicode</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#e68ea7e588b6e6b581"><i class="fa fa-check"></i>控制流</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>3</b> Python的数据结构、函数和文件</a><ul>
+<li class="chapter" data-level="3.1" data-path="structure.html"><a href="structure.html#section-3.1"><i class="fa fa-check"></i><b>3.1</b> 元组</a></li>
+<li class="chapter" data-level="3.2" data-path="structure.html"><a href="structure.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 列表</a></li>
+<li class="chapter" data-level="3.3" data-path="structure.html"><a href="structure.html#section-3.3"><i class="fa fa-check"></i><b>3.3</b> 序列函数</a></li>
+<li class="chapter" data-level="3.4" data-path="structure.html"><a href="structure.html#section-3.4"><i class="fa fa-check"></i><b>3.4</b> 字典</a></li>
+<li class="chapter" data-level="3.5" data-path="structure.html"><a href="structure.html#section-3.5"><i class="fa fa-check"></i><b>3.5</b> 集合</a></li>
+<li class="chapter" data-level="3.6" data-path="structure.html"><a href="structure.html#section-3.6"><i class="fa fa-check"></i><b>3.6</b> 列表、集合和字典推导式</a></li>
+<li class="chapter" data-level="3.7" data-path="structure.html"><a href="structure.html#section-3.7"><i class="fa fa-check"></i><b>3.7</b> 嵌套列表推导式</a></li>
+<li class="chapter" data-level="3.8" data-path="structure.html"><a href="structure.html#section-3.8"><i class="fa fa-check"></i><b>3.8</b> 函数</a></li>
+<li class="chapter" data-level="3.9" data-path="structure.html"><a href="structure.html#section-3.9"><i class="fa fa-check"></i><b>3.9</b> 生成器</a></li>
+<li class="chapter" data-level="3.10" data-path="structure.html"><a href="structure.html#section-3.10"><i class="fa fa-check"></i><b>3.10</b> 错误和异常处理</a></li>
+<li class="chapter" data-level="3.11" data-path="structure.html"><a href="structure.html#section-3.11"><i class="fa fa-check"></i><b>3.11</b> 文件和操作系统</a></li>
+<li class="chapter" data-level="3.12" data-path="structure.html"><a href="structure.html#section-3.12"><i class="fa fa-check"></i><b>3.12</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="preparation.html"><a href="preparation.html#numpy"><i class="fa fa-check"></i><b>4</b> NumPy基础：数组和矢量计算</a><ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4.1</b> NumPy的ndarray：一种多维数组对象</a></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 通用函数：快速的元素级数组函数</a></li>
+<li class="chapter" data-level="4.3" data-path="numpy.html"><a href="numpy.html#section-4.3"><i class="fa fa-check"></i><b>4.3</b> 利用数组进行数据处理</a></li>
+<li class="chapter" data-level="4.4" data-path="numpy.html"><a href="numpy.html#section-4.4"><i class="fa fa-check"></i><b>4.4</b> 用于数组的文件输入输出</a></li>
+<li class="chapter" data-level="4.5" data-path="numpy.html"><a href="numpy.html#section-4.5"><i class="fa fa-check"></i><b>4.5</b> 线性代数</a></li>
+<li class="chapter" data-level="4.6" data-path="numpy.html"><a href="numpy.html#section-4.6"><i class="fa fa-check"></i><b>4.6</b> 伪随机数生成</a></li>
+<li class="chapter" data-level="4.7" data-path="numpy.html"><a href="numpy.html#section-4.7"><i class="fa fa-check"></i><b>4.7</b> 示例：随机漫步</a></li>
+<li class="chapter" data-level="4.8" data-path="numpy.html"><a href="numpy.html#-1"><i class="fa fa-check"></i><b>4.8</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5</b> pandas入门</a><ul>
+<li class="chapter" data-level="5.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5.1</b> pandas的数据结构介绍</a></li>
+<li class="chapter" data-level="5.2" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>5.2</b> 基本功能</a></li>
+<li class="chapter" data-level="5.3" data-path="pandas.html"><a href="pandas.html#section-5.3"><i class="fa fa-check"></i><b>5.3</b> 汇总和计算描述统计</a></li>
+<li class="chapter" data-level="5.4" data-path="pandas.html"><a href="pandas.html#-2"><i class="fa fa-check"></i><b>5.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data2file.html"><a href="data2file.html"><i class="fa fa-check"></i><b>6</b> 数据加载、存储与文件格式</a><ul>
+<li class="chapter" data-level="6.1" data-path="data2file.html"><a href="data2file.html#section-6.1"><i class="fa fa-check"></i><b>6.1</b> 读写文本格式的数据</a></li>
+<li class="chapter" data-level="6.2" data-path="data2file.html"><a href="data2file.html#section-6.2"><i class="fa fa-check"></i><b>6.2</b> 二进制数据格式</a></li>
+<li class="chapter" data-level="6.3" data-path="data2file.html"><a href="data2file.html#web-apis"><i class="fa fa-check"></i><b>6.3</b> Web APIs交互</a></li>
+<li class="chapter" data-level="6.4" data-path="data2file.html"><a href="data2file.html#section-6.4"><i class="fa fa-check"></i><b>6.4</b> 数据库交互</a></li>
+<li class="chapter" data-level="6.5" data-path="data2file.html"><a href="data2file.html#-3"><i class="fa fa-check"></i><b>6.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>7</b> 数据清洗和准备</a><ul>
+<li class="chapter" data-level="7.1" data-path="tidy.html"><a href="tidy.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 处理缺失数据</a></li>
+<li class="chapter" data-level="7.2" data-path="tidy.html"><a href="tidy.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 数据转换</a></li>
+<li class="chapter" data-level="7.3" data-path="tidy.html"><a href="tidy.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 字符串操作</a></li>
+<li class="chapter" data-level="7.4" data-path="tidy.html"><a href="tidy.html#-4"><i class="fa fa-check"></i><b>7.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reshape.html"><a href="reshape.html"><i class="fa fa-check"></i><b>8</b> 数据规整：聚合、合并和重塑</a><ul>
+<li class="chapter" data-level="8.1" data-path="reshape.html"><a href="reshape.html#section-8.1"><i class="fa fa-check"></i><b>8.1</b> 层次化索引</a></li>
+<li class="chapter" data-level="8.2" data-path="reshape.html"><a href="reshape.html#section-8.2"><i class="fa fa-check"></i><b>8.2</b> 合并数据集</a></li>
+<li class="chapter" data-level="8.3" data-path="reshape.html"><a href="reshape.html#section-8.3"><i class="fa fa-check"></i><b>8.3</b> 重塑和轴向旋转</a></li>
+<li class="chapter" data-level="8.4" data-path="reshape.html"><a href="reshape.html#-5"><i class="fa fa-check"></i><b>8.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="visulization.html"><a href="visulization.html"><i class="fa fa-check"></i><b>9</b> 绘图和可视化</a><ul>
+<li class="chapter" data-level="9.1" data-path="visulization.html"><a href="visulization.html#matplotlib-api"><i class="fa fa-check"></i><b>9.1</b> matplotlib API入门</a></li>
+<li class="chapter" data-level="9.2" data-path="visulization.html"><a href="visulization.html#pandasseaborn"><i class="fa fa-check"></i><b>9.2</b> 使用pandas和seaborn绘图</a></li>
+<li class="chapter" data-level="9.3" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i><b>9.3</b> 其它的Python可视化工具</a></li>
+<li class="chapter" data-level="9.4" data-path="visulization.html"><a href="visulization.html#-6"><i class="fa fa-check"></i><b>9.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="apply.html"><a href="apply.html"><i class="fa fa-check"></i><b>10</b> 数据聚合与分组运算</a><ul>
+<li class="chapter" data-level="10.1" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>10.1</b> GroupBy机制</a></li>
+<li class="chapter" data-level="10.2" data-path="apply.html"><a href="apply.html#section-10.2"><i class="fa fa-check"></i><b>10.2</b> 数据聚合</a></li>
+<li class="chapter" data-level="10.3" data-path="apply.html"><a href="apply.html#apply"><i class="fa fa-check"></i><b>10.3</b> apply：一般性的“拆分－应用－合并”</a></li>
+<li class="chapter" data-level="10.4" data-path="apply.html"><a href="apply.html#section-10.4"><i class="fa fa-check"></i><b>10.4</b> 透视表和交叉表</a></li>
+<li class="chapter" data-level="10.5" data-path="apply.html"><a href="apply.html#-7"><i class="fa fa-check"></i><b>10.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="timeSeries.html"><a href="timeSeries.html"><i class="fa fa-check"></i><b>11</b> 时间序列</a><ul>
+<li class="chapter" data-level="11.1" data-path="timeSeries.html"><a href="timeSeries.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 日期和时间数据类型及工具</a></li>
+<li class="chapter" data-level="11.2" data-path="timeSeries.html"><a href="timeSeries.html#section-11.2"><i class="fa fa-check"></i><b>11.2</b> 时间序列基础</a></li>
+<li class="chapter" data-level="11.3" data-path="timeSeries.html"><a href="timeSeries.html#section-11.3"><i class="fa fa-check"></i><b>11.3</b> 日期的范围、频率以及移动</a></li>
+<li class="chapter" data-level="11.4" data-path="timeSeries.html"><a href="timeSeries.html#section-11.4"><i class="fa fa-check"></i><b>11.4</b> 时区处理</a></li>
+<li class="chapter" data-level="11.5" data-path="timeSeries.html"><a href="timeSeries.html#section-11.5"><i class="fa fa-check"></i><b>11.5</b> 时区本地化和转换</a></li>
+<li class="chapter" data-level="11.6" data-path="timeSeries.html"><a href="timeSeries.html#section-11.6"><i class="fa fa-check"></i><b>11.6</b> 时期及其算术运算</a></li>
+<li class="chapter" data-level="11.7" data-path="timeSeries.html"><a href="timeSeries.html#section-11.7"><i class="fa fa-check"></i><b>11.7</b> 重采样及频率转换</a></li>
+<li class="chapter" data-level="11.8" data-path="timeSeries.html"><a href="timeSeries.html#section-11.8"><i class="fa fa-check"></i><b>11.8</b> 移动窗口函数</a></li>
+<li class="chapter" data-level="11.9" data-path="timeSeries.html"><a href="timeSeries.html#-8"><i class="fa fa-check"></i><b>11.9</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="adPandas.html"><a href="adPandas.html"><i class="fa fa-check"></i><b>12</b> pandas高级应用</a><ul>
+<li class="chapter" data-level="12.1" data-path="adPandas.html"><a href="adPandas.html#section-12.1"><i class="fa fa-check"></i><b>12.1</b> 分类数据</a></li>
+<li class="chapter" data-level="12.2" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>12.2</b> GroupBy高级应用</a></li>
+<li class="chapter" data-level="12.3" data-path="adPandas.html"><a href="adPandas.html#section-12.3"><i class="fa fa-check"></i><b>12.3</b> 链式编程技术</a></li>
+<li class="chapter" data-level="12.4" data-path="adPandas.html"><a href="adPandas.html#-9"><i class="fa fa-check"></i><b>12.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="buildModels.html"><a href="buildModels.html"><i class="fa fa-check"></i><b>13</b> Python建模库介绍</a><ul>
+<li class="chapter" data-level="13.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>13.1</b> pandas与模型代码的接口</a></li>
+<li class="chapter" data-level="13.2" data-path="buildModels.html"><a href="buildModels.html#patsy"><i class="fa fa-check"></i><b>13.2</b> 用Patsy创建模型描述</a></li>
+<li class="chapter" data-level="13.3" data-path="preparation.html"><a href="preparation.html#statsmodels"><i class="fa fa-check"></i><b>13.3</b> statsmodels介绍</a></li>
+<li class="chapter" data-level="13.4" data-path="preparation.html"><a href="preparation.html#scikit-learn"><i class="fa fa-check"></i><b>13.4</b> scikit-learn介绍</a></li>
+<li class="chapter" data-level="13.5" data-path="buildModels.html"><a href="buildModels.html#section-13.5"><i class="fa fa-check"></i><b>13.5</b> 继续学习</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="dsCases.html"><a href="dsCases.html"><i class="fa fa-check"></i><b>14</b> 数据分析案例</a><ul>
+<li class="chapter" data-level="14.1" data-path="dsCases.html"><a href="dsCases.html#bitlyusa.gov"><i class="fa fa-check"></i><b>14.1</b> 来自Bitly的USA.gov数据</a></li>
+<li class="chapter" data-level="14.2" data-path="dsCases.html"><a href="dsCases.html#movielens-1m"><i class="fa fa-check"></i><b>14.2</b> MovieLens 1M数据集</a></li>
+<li class="chapter" data-level="14.3" data-path="dsCases.html"><a href="dsCases.html#section-14.3"><i class="fa fa-check"></i><b>14.3</b> 1880-2010年间全美婴儿姓名</a></li>
+<li class="chapter" data-level="14.4" data-path="dsCases.html"><a href="dsCases.html#usda"><i class="fa fa-check"></i><b>14.4</b> USDA食品数据库</a></li>
+<li class="chapter" data-level="14.5" data-path="dsCases.html"><a href="dsCases.html#section-14.5"><i class="fa fa-check"></i><b>14.5</b> 2012联邦选举委员会数据库</a></li>
+<li class="chapter" data-level="14.6" data-path="dsCases.html"><a href="dsCases.html#-10"><i class="fa fa-check"></i><b>14.6</b> 总结</a></li>
+</ul></li>
+<li class="appendix"><span><b>附录</b></span></li>
+<li class="chapter" data-level="A" data-path="adNumpy.html"><a href="adNumpy.html"><i class="fa fa-check"></i><b>A</b> NumPy高级应用</a><ul>
+<li class="chapter" data-level="A.1" data-path="numpy.html"><a href="numpy.html#ndarray"><i class="fa fa-check"></i><b>A.1</b> ndarray对象的内部机理</a></li>
+<li class="chapter" data-level="A.2" data-path="12-AdvancePandas.html"><a href="#section-A.2"><i class="fa fa-check"></i><b>A.2</b> 高级数组操作</a></li>
+<li class="chapter" data-level="A.3" data-path="12-AdvancePandas.html"><a href="#section-A.3"><i class="fa fa-check"></i><b>A.3</b> 广播</a></li>
+<li class="chapter" data-level="A.4" data-path="adNumpy.html"><a href="adNumpy.html#ufunc"><i class="fa fa-check"></i><b>A.4</b> ufunc高级应用</a></li>
+<li class="chapter" data-level="A.5" data-path="12-AdvancePandas.html"><a href="#section-A.5"><i class="fa fa-check"></i><b>A.5</b> 结构化和记录式数组</a></li>
+<li class="chapter" data-level="A.6" data-path="12-AdvancePandas.html"><a href="#section-A.6"><i class="fa fa-check"></i><b>A.6</b> 更多有关排序的话题</a></li>
+<li class="chapter" data-level="A.7" data-path="adNumpy.html"><a href="adNumpy.html#numbanumpy"><i class="fa fa-check"></i><b>A.7</b> 用Numba编写快速NumPy函数</a></li>
+<li class="chapter" data-level="A.8" data-path="12-AdvancePandas.html"><a href="#section-A.8"><i class="fa fa-check"></i><b>A.8</b> 高级数组输入输出</a></li>
+<li class="chapter" data-level="A.9" data-path="12-AdvancePandas.html"><a href="#section-A.9"><i class="fa fa-check"></i><b>A.9</b> 性能建议</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="moreInfo.html"><a href="moreInfo.html"><i class="fa fa-check"></i><b>B</b> 更多关于IPython的内容</a><ul>
+<li class="chapter" data-level="B.1" data-path="12-AdvancePandas.html"><a href="#section-B.1"><i class="fa fa-check"></i><b>B.1</b> 使用命令历史</a></li>
+<li class="chapter" data-level="B.2" data-path="12-AdvancePandas.html"><a href="#section-B.2"><i class="fa fa-check"></i><b>B.2</b> 与操作系统交互</a></li>
+<li class="chapter" data-level="B.3" data-path="12-AdvancePandas.html"><a href="#section-B.3"><i class="fa fa-check"></i><b>B.3</b> 软件开发工具</a></li>
+<li class="chapter" data-level="B.4" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.4</b> 使用IPython高效开发的技巧</a></li>
+<li class="chapter" data-level="B.5" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.5</b> IPython高级功能</a></li>
+<li class="chapter" data-level="B.6" data-path="moreInfo.html"><a href="moreInfo.html#-11"><i class="fa fa-check"></i><b>B.6</b> 总结</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">利用Python进行数据分析（第二版）中文翻译</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="adPandas" class="section level1">
+<h1><span class="header-section-number">第 12 章</span> pandas高级应用</h1>
+<p>前面的章节关注于不同类型的数据规整流程和NumPy、pandas与其它库的特点。随着时间的发展，pandas发展出了更多适合高级用户的功能。本章就要深入学习pandas的高级功能。</p>
+<div id="section-12.1" class="section level2">
+<h2><span class="header-section-number">12.1</span> 分类数据</h2>
+<p>这一节介绍的是pandas的分类类型。我会向你展示通过使用它，提高性能和内存的使用率。我还会介绍一些在统计和机器学习中使用分类数据的工具。</p>
+<div id="section-12.1.1" class="section level3">
+<h3><span class="header-section-number">12.1.1</span> 背景和目的</h3>
+<p>表中的一列通常会有重复的包含不同值的小集合的情况。我们已经学过了unique和value_counts，它们可以从数组提取出不同的值，并分别计算频率：</p>
+<pre><code>In [10]: import numpy as np; import pandas as pd
+
+In [11]: values = pd.Series([&#39;apple&#39;, &#39;orange&#39;, &#39;apple&#39;,
+   ....:                     &#39;apple&#39;] * 2)
+
+In [12]: values
+Out[12]: 
+0     apple
+1    orange
+2     apple
+3     apple
+4     apple
+5    orange
+6     apple
+7     apple
+dtype: object
+
+In [13]: pd.unique(values)
+Out[13]: array([&#39;apple&#39;, &#39;orange&#39;], dtype=object)
+
+In [14]: pd.value_counts(values)
+Out[14]: 
+apple     6
+orange    2
+dtype: int64</code></pre>
+<p>许多数据系统（数据仓库、统计计算或其它应用）都发展出了特定的表征重复值的方法，以进行高效的存储和计算。在数据仓库中，最好的方法是使用所谓的包含不同值得维表(Dimension Table)，将主要的参数存储为引用维表整数键：</p>
+<pre><code>In [15]: values = pd.Series([0, 1, 0, 0] * 2)
+
+In [16]: dim = pd.Series([&#39;apple&#39;, &#39;orange&#39;])
+
+In [17]: values
+Out[17]: 
+0    0
+1    1
+2    0
+3    0
+4    0
+5    1
+6    0
+7    0
+dtype: int64
+
+In [18]: dim
+Out[18]: 
+0     apple
+1    orange
+dtype: object</code></pre>
+<p>可以使用take方法存储原始的字符串Series：</p>
+<pre><code>In [19]: dim.take(values)
+Out[19]: 
+0     apple
+1    orange
+0     apple
+0     apple
+0     apple
+1    orange
+0     apple
+0     apple
+dtype: object</code></pre>
+<p>这种用整数表示的方法称为分类或字典编码表示法。不同值得数组称为分类、字典或数据级。本书中，我们使用分类的说法。表示分类的整数值称为分类编码或简单地称为编码。</p>
+<p>分类表示可以在进行分析时大大的提高性能。你也可以在保持编码不变的情况下，对分类进行转换。一些相对简单的转变例子包括：</p>
+<ul>
+<li>重命名分类。</li>
+<li>加入一个新的分类，不改变已经存在的分类的顺序或位置。</li>
+</ul>
+</div>
+<div id="pandas" class="section level3">
+<h3><span class="header-section-number">12.1.2</span> pandas的分类类型</h3>
+<p>pandas有一个特殊的分类类型，用于保存使用整数分类表示法的数据。看一个之前的Series例子：</p>
+<pre><code>In [20]: fruits = [&#39;apple&#39;, &#39;orange&#39;, &#39;apple&#39;, &#39;apple&#39;] * 2
+
+In [21]: N = len(fruits)
+
+In [22]: df = pd.DataFrame({&#39;fruit&#39;: fruits,
+   ....:                    &#39;basket_id&#39;: np.arange(N),
+   ....:                    &#39;count&#39;: np.random.randint(3, 15, size=N),
+   ....:                    &#39;weight&#39;: np.random.uniform(0, 4, size=N)},
+   ....:                   columns=[&#39;basket_id&#39;, &#39;fruit&#39;, &#39;count&#39;, &#39;weight&#39;])
+
+In [23]: df
+Out[23]: 
+   basket_id   fruit  count    weight
+0          0   apple      5  3.858058
+1          1  orange      8  2.612708
+2          2   apple      4  2.995627
+3          3   apple      7  2.614279
+4          4   apple     12  2.990859
+5          5  orange      8  3.845227
+6          6   apple      5  0.033553
+7          7   apple      4  0.425778</code></pre>
+<p>这里，df[‘fruit’]是一个Python字符串对象的数组。我们可以通过调用它，将它转变为分类：</p>
+<pre><code>In [24]: fruit_cat = df[&#39;fruit&#39;].astype(&#39;category&#39;)
+
+In [25]: fruit_cat
+Out[25]: 
+0     apple
+1    orange
+2     apple
+3     apple
+4     apple
+5    orange
+6     apple
+7     apple
+Name: fruit, dtype: category
+Categories (2, object): [apple, orange]</code></pre>
+<p>fruit_cat的值不是NumPy数组，而是一个pandas.Categorical实例：</p>
+<pre><code>In [26]: c = fruit_cat.values
+
+In [27]: type(c)
+Out[27]: pandas.core.categorical.Categorical</code></pre>
+<p>分类对象有categories和codes属性：</p>
+<pre><code>In [28]: c.categories
+Out[28]: Index([&#39;apple&#39;, &#39;orange&#39;], dtype=&#39;object&#39;)
+
+In [29]: c.codes
+Out[29]: array([0, 1, 0, 0, 0, 1, 0, 0], dtype=int8)</code></pre>
+<p>你可将DataFrame的列通过分配转换结果，转换为分类：</p>
+<pre><code>In [30]: df[&#39;fruit&#39;] = df[&#39;fruit&#39;].astype(&#39;category&#39;)
+
+In [31]: df.fruit
+Out[31]:
+0     apple
+1    orange
+2     apple
+3     apple
+4     apple
+5    orange
+6     apple
+7     apple
+Name: fruit, dtype: category
+Categories (2, object): [apple, orange]</code></pre>
+<p>你还可以从其它Python序列直接创建pandas.Categorical：</p>
+<pre><code>In [32]: my_categories = pd.Categorical([&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;, &#39;foo&#39;, &#39;bar&#39;])
+
+In [33]: my_categories
+Out[33]: 
+[foo, bar, baz, foo, bar]
+Categories (3, object): [bar, baz, foo]</code></pre>
+<p>如果你已经从其它源获得了分类编码，你还可以使用from_codes构造器：</p>
+<pre><code>In [34]: categories = [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;]
+
+In [35]: codes = [0, 1, 2, 0, 0, 1]
+
+In [36]: my_cats_2 = pd.Categorical.from_codes(codes, categories)
+
+In [37]: my_cats_2
+Out[37]: 
+[foo, bar, baz, foo, foo, bar]
+Categories (3, object): [foo, bar, baz]</code></pre>
+<p>与显示指定不同，分类变换不认定指定的分类顺序。因此取决于输入数据的顺序，categories数组的顺序会不同。当使用from_codes或其它的构造器时，你可以指定分类一个有意义的顺序：</p>
+<pre><code>In [38]: ordered_cat = pd.Categorical.from_codes(codes, categories,
+   ....:                                         ordered=True)
+
+In [39]: ordered_cat
+Out[39]: 
+[foo, bar, baz, foo, foo, bar]
+Categories (3, object): [foo &lt; bar &lt; baz]</code></pre>
+<p>输出[foo &lt; bar &lt; baz]指明‘foo’位于‘bar’的前面，以此类推。无序的分类实例可以通过as_ordered排序：</p>
+<pre><code>In [40]: my_cats_2.as_ordered()
+Out[40]: 
+[foo, bar, baz, foo, foo, bar]
+Categories (3, object): [foo &lt; bar &lt; baz]</code></pre>
+<p>最后要注意，分类数据不需要字符串，尽管我仅仅展示了字符串的例子。分类数组可以包括任意不可变类型。</p>
+</div>
+<div id="section-12.1.3" class="section level3">
+<h3><span class="header-section-number">12.1.3</span> 用分类进行计算</h3>
+<p>与非编码版本（比如字符串数组）相比，使用pandas的Categorical有些类似。某些pandas组件，比如groupby函数，更适合进行分类。还有一些函数可以使用有序标志位。</p>
+<p>来看一些随机的数值数据，使用pandas.qcut面元函数。它会返回pandas.Categorical，我们之前使用过pandas.cut，但没解释分类是如何工作的：</p>
+<pre><code>In [41]: np.random.seed(12345)
+
+In [42]: draws = np.random.randn(1000)
+
+In [43]: draws[:5]
+Out[43]: array([-0.2047,  0.4789, -0.5194, -0.5557,  1.9658])</code></pre>
+<p>计算这个数据的分位面元，提取一些统计信息：</p>
+<pre><code>In [44]: bins = pd.qcut(draws, 4)
+
+In [45]: bins
+Out[45]: 
+[(-0.684, -0.0101], (-0.0101, 0.63], (-0.684, -0.0101], (-0.684, -0.0101], (0.63,
+ 3.928], ..., (-0.0101, 0.63], (-0.684, -0.0101], (-2.95, -0.684], (-0.0101, 0.63
+], (0.63, 3.928]]
+Length: 1000
+Categories (4, interval[float64]): [(-2.95, -0.684] &lt; (-0.684, -0.0101] &lt; (-0.010
+1, 0.63] &lt;
+                                    (0.63, 3.928]]</code></pre>
+<p>虽然有用，确切的样本分位数与分位的名称相比，不利于生成汇总。我们可以使用labels参数qcut，实现目的：</p>
+<pre><code>In [46]: bins = pd.qcut(draws, 4, labels=[&#39;Q1&#39;, &#39;Q2&#39;, &#39;Q3&#39;, &#39;Q4&#39;])
+
+In [47]: bins
+Out[47]: 
+[Q2, Q3, Q2, Q2, Q4, ..., Q3, Q2, Q1, Q3, Q4]
+Length: 1000
+Categories (4, object): [Q1 &lt; Q2 &lt; Q3 &lt; Q4]
+
+In [48]: bins.codes[:10]
+Out[48]: array([1, 2, 1, 1, 3, 3, 2, 2, 3, 3], dtype=int8)</code></pre>
+<p>加上标签的面元分类不包含数据面元边界的信息，因此可以使用groupby提取一些汇总信息：</p>
+<pre><code>In [49]: bins = pd.Series(bins, name=&#39;quartile&#39;)
+
+In [50]: results = (pd.Series(draws)
+   ....:            .groupby(bins)
+   ....:            .agg([&#39;count&#39;, &#39;min&#39;, &#39;max&#39;])
+   ....:            .reset_index())
+
+In [51]: results
+Out[51]: 
+  quartile  count       min       max
+0       Q1    250 -2.949343 -0.685484
+1       Q2    250 -0.683066 -0.010115
+2       Q3    250 -0.010032  0.628894
+3       Q4    250  0.634238  3.927528</code></pre>
+<p>分位数列保存了原始的面元分类信息，包括排序：</p>
+<pre><code>In [52]: results[&#39;quartile&#39;]
+Out[52]:
+0    Q1
+1    Q2
+2    Q3
+3    Q4
+Name: quartile, dtype: category
+Categories (4, object): [Q1 &lt; Q2 &lt; Q3 &lt; Q4]</code></pre>
+</div>
+<div id="section-12.1.4" class="section level3">
+<h3><span class="header-section-number">12.1.4</span> 用分类提高性能</h3>
+<p>如果你是在一个特定数据集上做大量分析，将其转换为分类可以极大地提高效率。DataFrame列的分类使用的内存通常少的多。来看一些包含一千万元素的Series，和一些不同的分类：</p>
+<pre><code>In [53]: N = 10000000
+
+In [54]: draws = pd.Series(np.random.randn(N))
+
+In [55]: labels = pd.Series([&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;, &#39;qux&#39;] * (N // 4))</code></pre>
+<p>现在，将标签转换为分类：</p>
+<pre><code>In [56]: categories = labels.astype(&#39;category&#39;)</code></pre>
+<p>这时，可以看到标签使用的内存远比分类多：</p>
+<pre><code>In [57]: labels.memory_usage()
+Out[57]: 80000080
+
+In [58]: categories.memory_usage()
+Out[58]: 10000272</code></pre>
+<p>转换为分类不是没有代价的，但这是一次性的代价：</p>
+<pre><code>In [59]: %time _ = labels.astype(&#39;category&#39;)
+CPU times: user 490 ms, sys: 240 ms, total: 730 ms
+Wall time: 726 ms</code></pre>
+<p>GroupBy使用分类操作明显更快，是因为底层的算法使用整数编码数组，而不是字符串数组。</p>
+</div>
+<div id="section-12.1.5" class="section level3">
+<h3><span class="header-section-number">12.1.5</span> 分类方法</h3>
+<p>包含分类数据的Series有一些特殊的方法，类似于Series.str字符串方法。它还提供了方便的分类和编码的使用方法。看下面的Series：</p>
+<pre><code>In [60]: s = pd.Series([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;] * 2)
+
+In [61]: cat_s = s.astype(&#39;category&#39;)
+
+In [62]: cat_s
+Out[62]: 
+0    a
+1    b
+2    c
+3    d
+4    a
+5    b
+6    c
+7    d
+dtype: category
+Categories (4, object): [a, b, c, d]</code></pre>
+<p>特别的cat属性提供了分类方法的入口：</p>
+<pre><code>In [63]: cat_s.cat.codes
+Out[63]: 
+0    0
+1    1
+2    2
+3    3
+4    0
+5    1
+6    2
+7    3
+dtype: int8
+
+In [64]: cat_s.cat.categories
+Out[64]: Index([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;], dtype=&#39;object&#39;)</code></pre>
+<p>假设我们知道这个数据的实际分类集，超出了数据中的四个值。我们可以使用set_categories方法改变它们：</p>
+<pre><code>In [65]: actual_categories = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]
+
+In [66]: cat_s2 = cat_s.cat.set_categories(actual_categories)
+
+In [67]: cat_s2
+Out[67]: 
+0    a
+1    b
+2    c
+3    d
+4    a
+5    b
+6    c
+7    d
+dtype: category
+Categories (5, object): [a, b, c, d, e]</code></pre>
+<p>虽然数据看起来没变，新的分类将反映在它们的操作中。例如，如果有的话，value_counts表示分类：</p>
+<pre><code>In [68]: cat_s.value_counts()
+Out[68]: 
+d    2
+c    2
+b    2
+a    2
+dtype: int64
+
+In [69]: cat_s2.value_counts()
+Out[69]: 
+d    2
+c    2
+b    2
+a    2
+e    0
+dtype: int64</code></pre>
+<p>在打数据集中，分类经常作为节省内存和高性能的便捷工具。过滤完大DataFrame或Series之后，许多分类可能不会出现在数据中。我们可以使用remove_unused_categories方法删除没看到的分类：</p>
+<pre><code>In [70]: cat_s3 = cat_s[cat_s.isin([&#39;a&#39;, &#39;b&#39;])]
+
+In [71]: cat_s3
+Out[71]: 
+0    a
+1    b
+4    a
+5    b
+dtype: category
+Categories (4, object): [a, b, c, d]
+
+In [72]: cat_s3.cat.remove_unused_categories()
+Out[72]: 
+0    a
+1    b
+4    a
+5    b
+dtype: category
+Categories (2, object): [a, b]</code></pre>
+<p>表12-1列出了可用的分类方法。</p>
+<div class="figure">
+<img src="" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>表12-1 pandas的Series的分类方法</p>
+</div>
+<div id="section-12.1.6" class="section level3">
+<h3><span class="header-section-number">12.1.6</span> 为建模创建虚拟变量</h3>
+<p>当你使用统计或机器学习工具时，通常会将分类数据转换为虚拟变量，也称为one-hot编码。这包括创建一个不同类别的列的DataFrame；这些列包含给定分类的1s，其它为0。</p>
+<p>看前面的例子：</p>
+<pre><code>In [73]: cat_s = pd.Series([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;] * 2, dtype=&#39;category&#39;)</code></pre>
+<p>前面的第7章提到过，pandas.get_dummies函数可以转换这个以为分类数据为包含虚拟变量的DataFrame：</p>
+<pre><code>In [74]: pd.get_dummies(cat_s)
+Out[74]: 
+   a  b  c  d
+0  1  0  0  0
+1  0  1  0  0
+2  0  0  1  0
+3  0  0  0  1
+4  1  0  0  0
+5  0  1  0  0
+6  0  0  1  0
+7  0  0  0  1</code></pre>
+</div>
+</div>
+<div id="groupby" class="section level2">
+<h2><span class="header-section-number">12.2</span> GroupBy高级应用</h2>
+<p>尽管我们在第10章已经深度学习了Series和DataFrame的Groupby方法，还有一些方法也是很有用的。</p>
+<div id="groupby" class="section level3">
+<h3><span class="header-section-number">12.2.1</span> 分组转换和“解封”GroupBy</h3>
+<p>在第10章，我们在分组操作中学习了apply方法，进行转换。还有另一个transform方法，它与apply很像，但是对使用的函数有一定限制：</p>
+<ul>
+<li>它可以产生向分组形状广播标量值</li>
+<li>它可以产生一个和输入组形状相同的对象</li>
+<li>它不能修改输入</li>
+</ul>
+<p>来看一个简单的例子：</p>
+<pre><code>In [75]: df = pd.DataFrame({&#39;key&#39;: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;] * 4,
+   ....:                    &#39;value&#39;: np.arange(12.)})
+
+In [76]: df
+Out[76]: 
+   key  value
+0    a    0.0
+1    b    1.0
+2    c    2.0
+3    a    3.0
+4    b    4.0
+5    c    5.0
+6    a    6.0
+7    b    7.0
+8    c    8.0
+9    a    9.0
+10   b   10.0
+11   c   11.0</code></pre>
+<p>按键进行分组：</p>
+<pre><code>In [77]: g = df.groupby(&#39;key&#39;).value
+
+In [78]: g.mean()
+Out[78]: 
+key
+a    4.5
+b    5.5
+c    6.5
+Name: value, dtype: float64</code></pre>
+<p>假设我们想产生一个和df[‘value’]形状相同的Series，但值替换为按键分组的平均值。我们可以传递函数lambda x: x.mean()进行转换：</p>
+<pre><code>In [79]: g.transform(lambda x: x.mean())
+Out[79]: 
+0     4.5
+1     5.5
+2     6.5
+3     4.5
+4     5.5
+5     6.5
+6     4.5
+7     5.5
+8     6.5
+9     4.5
+10    5.5
+11    6.5
+Name: value, dtype: float64</code></pre>
+<p>对于内置的聚合函数，我们可以传递一个字符串假名作为GroupBy的agg方法：</p>
+<pre><code>In [80]: g.transform(&#39;mean&#39;)
+Out[80]: 
+0     4.5
+1     5.5
+2     6.5
+3     4.5
+4     5.5
+5     6.5
+6     4.5
+7     5.5
+8     6.5
+9     4.5
+10    5.5
+11    6.5
+Name: value, dtype: float64</code></pre>
+<p>与apply类似，transform的函数会返回Series，但是结果必须与输入大小相同。举个例子，我们可以用lambda函数将每个分组乘以2：</p>
+<pre><code>In [81]: g.transform(lambda x: x * 2)
+Out[81]: 
+0      0.0
+1      2.0
+2      4.0
+3      6.0
+4      8.0
+5     10.0
+6     12.0
+7     14.0
+8     16.0
+9     18.0
+10    20.0
+11    22.0
+Name: value, dtype: float64</code></pre>
+<p>再举一个复杂的例子，我们可以计算每个分组的降序排名：</p>
+<pre><code>In [82]: g.transform(lambda x: x.rank(ascending=False))
+Out[82]: 
+0     4.0
+1     4.0
+2     4.0
+3     3.0
+4     3.0
+5     3.0
+6     2.0
+7     2.0
+8     2.0
+9     1.0
+10    1.0
+11    1.0
+Name: value, dtype: float64</code></pre>
+<p>看一个由简单聚合构造的的分组转换函数：</p>
+<pre><code>def normalize(x):
+    return (x - x.mean()) / x.std()</code></pre>
+<p>我们用transform或apply可以获得等价的结果：</p>
+<pre><code>In [84]: g.transform(normalize)
+Out[84]: 
+0    -1.161895
+1    -1.161895
+2    -1.161895
+3    -0.387298
+4    -0.387298
+5    -0.387298
+6     0.387298
+7     0.387298
+8     0.387298
+9     1.161895
+10    1.161895
+11    1.161895
+Name: value, dtype: float64
+
+In [85]: g.apply(normalize)
+Out[85]: 
+0    -1.161895
+1    -1.161895
+2    -1.161895
+3    -0.387298
+4    -0.387298
+5    -0.387298
+6     0.387298
+7     0.387298
+8     0.387298
+9     1.161895
+10    1.161895
+11    1.161895
+Name: value, dtype: float64</code></pre>
+<p>内置的聚合函数，比如mean或sum，通常比apply函数快，也比transform快。这允许我们进行一个所谓的解封（unwrapped）分组操作：</p>
+<pre><code>In [86]: g.transform(&#39;mean&#39;)
+Out[86]: 
+0     4.5
+1     5.5
+2     6.5
+3     4.5
+4     5.5
+5     6.5
+6     4.5
+7     5.5
+8     6.5
+9     4.5
+10    5.5
+11    6.5
+Name: value, dtype: float64
+
+In [87]: normalized = (df[&#39;value&#39;] - g.transform(&#39;mean&#39;)) / g.transform(&#39;std&#39;)
+
+In [88]: normalized
+Out[88]: 
+0    -1.161895
+1    -1.161895
+2    -1.161895
+3    -0.387298
+4    -0.387298
+5    -0.387298
+6     0.387298
+7     0.387298
+8     0.387298
+9     1.161895
+10    1.161895
+11    1.161895
+Name: value, dtype: float64</code></pre>
+<p>解封分组操作可能包括多个分组聚合，但是矢量化操作还是会带来收益。</p>
+</div>
+<div id="section-12.2.2" class="section level3">
+<h3><span class="header-section-number">12.2.2</span> 分组的时间重采样</h3>
+<p>对于时间序列数据，resample方法从语义上是一个基于内在时间的分组操作。下面是一个示例表：</p>
+<pre><code>In [89]: N = 15
+
+In [90]: times = pd.date_range(&#39;2017-05-20 00:00&#39;, freq=&#39;1min&#39;, periods=N)
+
+In [91]: df = pd.DataFrame({&#39;time&#39;: times,
+   ....:                    &#39;value&#39;: np.arange(N)})
+
+In [92]: df
+Out[92]: 
+                  time  value
+0  2017-05-20 00:00:00      0
+1  2017-05-20 00:01:00      1
+2  2017-05-20 00:02:00      2
+3  2017-05-20 00:03:00      3
+4  2017-05-20 00:04:00      4
+5  2017-05-20 00:05:00      5
+6  2017-05-20 00:06:00      6
+7  2017-05-20 00:07:00      7
+8  2017-05-20 00:08:00      8
+9  2017-05-20 00:09:00      9
+10 2017-05-20 00:10:00     10
+11 2017-05-20 00:11:00     11
+12 2017-05-20 00:12:00     12
+13 2017-05-20 00:13:00     13
+14 2017-05-20 00:14:00     14</code></pre>
+<p>这里，我们可以用time作为索引，然后重采样：</p>
+<pre><code>In [93]: df.set_index(&#39;time&#39;).resample(&#39;5min&#39;).count()
+Out[93]: 
+                     value
+time                      
+2017-05-20 00:00:00      5
+2017-05-20 00:05:00      5
+2017-05-20 00:10:00      5</code></pre>
+<p>假设DataFrame包含多个时间序列，用一个额外的分组键的列进行标记：</p>
+<pre><code>In [94]: df2 = pd.DataFrame({&#39;time&#39;: times.repeat(3),
+   ....:                     &#39;key&#39;: np.tile([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], N),
+   ....:                     &#39;value&#39;: np.arange(N * 3.)})
+
+In [95]: df2[:7]
+Out[95]: 
+  key                time  value
+0   a 2017-05-20 00:00:00    0.0
+1   b 2017-05-20 00:00:00    1.0
+2   c 2017-05-20 00:00:00    2.0
+3   a 2017-05-20 00:01:00    3.0
+4   b 2017-05-20 00:01:00    4.0
+5   c 2017-05-20 00:01:00    5.0
+6   a 2017-05-20 00:02:00    6.0</code></pre>
+<p>要对每个key值进行相同的重采样，我们引入pandas.TimeGrouper对象：</p>
+<pre><code>In [96]: time_key = pd.TimeGrouper(&#39;5min&#39;)</code></pre>
+<p>我们然后设定时间索引，用key和time_key分组，然后聚合：</p>
+<pre><code>In [97]: resampled = (df2.set_index(&#39;time&#39;)
+   ....:              .groupby([&#39;key&#39;, time_key])
+   ....:              .sum())
+
+In [98]: resampled
+Out[98]: 
+                         value
+key time                      
+a   2017-05-20 00:00:00   30.0
+    2017-05-20 00:05:00  105.0
+    2017-05-20 00:10:00  180.0
+b   2017-05-20 00:00:00   35.0
+    2017-05-20 00:05:00  110.0
+    2017-05-20 00:10:00  185.0
+c   2017-05-20 00:00:00   40.0
+    2017-05-20 00:05:00  115.0
+    2017-05-20 00:10:00  190.0
+
+In [99]: resampled.reset_index()
+Out[99]:
+key                time  value
+0   a 2017-05-20 00:00:00   30.0
+1   a 2017-05-20 00:05:00  105.0
+2   a 2017-05-20 00:10:00  180.0
+3   b 2017-05-20 00:00:00   35.0
+4   b 2017-05-20 00:05:00  110.0
+5   b 2017-05-20 00:10:00  185.0
+6   c 2017-05-20 00:00:00   40.0
+7   c 2017-05-20 00:05:00  115.0
+8   c 2017-05-20 00:10:00  190.0</code></pre>
+<p>使用TimeGrouper的限制是时间必须是Series或DataFrame的索引。</p>
+</div>
+</div>
+<div id="section-12.3" class="section level2">
+<h2><span class="header-section-number">12.3</span> 链式编程技术</h2>
+<p>当对数据集进行一系列变换时，你可能发现创建的多个临时变量其实并没有在分析中用到。看下面的例子：</p>
+<pre><code>df = load_data()
+df2 = df[df[&#39;col2&#39;] &lt; 0]
+df2[&#39;col1_demeaned&#39;] = df2[&#39;col1&#39;] - df2[&#39;col1&#39;].mean()
+result = df2.groupby(&#39;key&#39;).col1_demeaned.std()</code></pre>
+<p>虽然这里没有使用真实的数据，这个例子却指出了一些新方法。首先，DataFrame.assign方法是一个df[k] = v形式的函数式的列分配方法。它不是就地修改对象，而是返回新的修改过的DataFrame。因此，下面的语句是等价的：</p>
+<pre><code># Usual non-functional way
+df2 = df.copy()
+df2[&#39;k&#39;] = v
+
+# Functional assign way
+df2 = df.assign(k=v)</code></pre>
+<p>就地分配可能会比assign快，但是assign可以方便地进行链式编程：</p>
+<pre><code>result = (df2.assign(col1_demeaned=df2.col1 - df2.col2.mean())
+          .groupby(&#39;key&#39;)
+          .col1_demeaned.std())</code></pre>
+<p>我使用外括号，这样便于添加换行符。</p>
+<p>使用链式编程时要注意，你可能会需要涉及临时对象。在前面的例子中，我们不能使用load_data的结果，直到它被赋值给临时变量df。为了这么做，assign和许多其它pandas函数可以接收类似函数的参数，即可调用对象（callable）。为了展示可调用对象，看一个前面例子的片段：</p>
+<pre><code>df = load_data()
+df2 = df[df[&#39;col2&#39;] &lt; 0]</code></pre>
+<p>它可以重写为：</p>
+<pre><code>df = (load_data()
+      [lambda x: x[&#39;col2&#39;] &lt; 0])</code></pre>
+<p>这里，load_data的结果没有赋值给某个变量，因此传递到[ ]的函数在这一步被绑定到了对象。</p>
+<p>我们可以把整个过程写为一个单链表达式：</p>
+<pre><code>result = (load_data()
+          [lambda x: x.col2 &lt; 0]
+          .assign(col1_demeaned=lambda x: x.col1 - x.col1.mean())
+          .groupby(&#39;key&#39;)
+          .col1_demeaned.std())</code></pre>
+<p>是否将代码写成这种形式只是习惯而已，将它分开成若干步可以提高可读性。</p>
+<div id="section-12.3.1" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> 管道方法</h3>
+<p>你可以用Python内置的pandas函数和方法，用带有可调用对象的链式编程做许多工作。但是，有时你需要使用自己的函数，或是第三方库的函数。这时就要用到管道方法。</p>
+<p>看下面的函数调用：</p>
+<pre><code>a = f(df, arg1=v1)
+b = g(a, v2, arg3=v3)
+c = h(b, arg4=v4)</code></pre>
+<p>当使用接收、返回Series或DataFrame对象的函数式，你可以调用pipe将其重写：</p>
+<pre><code>result = (df.pipe(f, arg1=v1)
+          .pipe(g, v2, arg3=v3)
+          .pipe(h, arg4=v4))</code></pre>
+<p>f(df)和df.pipe(f)是等价的，但是pipe使得链式声明更容易。</p>
+<p>pipe的另一个有用的地方是提炼操作为可复用的函数。看一个从列减去分组方法的例子：</p>
+<pre><code>g = df.groupby([&#39;key1&#39;, &#39;key2&#39;])
+df[&#39;col1&#39;] = df[&#39;col1&#39;] - g.transform(&#39;mean&#39;)</code></pre>
+<p>假设你想转换多列，并修改分组的键。另外，你想用链式编程做这个转换。下面就是一个方法：</p>
+<pre><code>def group_demean(df, by, cols):
+    result = df.copy()
+    g = df.groupby(by)
+    for c in cols:
+        result[c] = df[c] - g[c].transform(&#39;mean&#39;)
+    return result</code></pre>
+<p>然后可以写为：</p>
+<pre><code>result = (df[df.col1 &lt; 0]
+          .pipe(group_demean, [&#39;key1&#39;, &#39;key2&#39;], [&#39;col1&#39;]))</code></pre>
+</div>
+</div>
+<div id="-9" class="section level2">
+<h2><span class="header-section-number">12.4</span> 总结</h2>
+<p>和其它许多开源项目一样，pandas仍然在不断的变化和进步中。和本书中其它地方一样，这里的重点是放在接下来几年不会发生什么改变且稳定的功能。</p>
+<p>为了深入学习pandas的知识，我建议你学习官方文档，并阅读开发团队发布的更新文档。我们还邀请你加入pandas的开发工作：修改bug、创建新功能、完善文档。</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="timeSeries.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="buildModels.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/openbiox/Cookbook-for-R-Chinese/edit/master/book/12-AdvancePandas.Rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

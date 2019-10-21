@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 7 章 数据清洗和准备 | 利用Python进行数据分析（第二版）中文翻译</title>
+  <meta name="description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 7 章 数据清洗和准备 | 利用Python进行数据分析（第二版）中文翻译" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  <meta name="github-repo" content="openbiox/py4ds-CN" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 7 章 数据清洗和准备 | 利用Python进行数据分析（第二版）中文翻译" />
+  
+  <meta name="twitter:description" content="利用Python进行数据分析（第二版）中文，欢迎分享。" />
+  
+
+<meta name="author" content="作者：Wes McKinney，翻译：SeanCheney，校对与维护：王诗翔" />
+
+
+<meta name="date" content="2019-10-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data2file.html"/>
+<link rel="next" href="reshape.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./">利用Python进行数据分析（第二版）</a></strong></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#section-0.1"><i class="fa fa-check"></i><b>0.1</b> 问题与贡献</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#section-0.2"><i class="fa fa-check"></i><b>0.2</b> 许可</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#section-0.3"><i class="fa fa-check"></i><b>0.3</b> 致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>作者简介</a></li>
+<li class="chapter" data-level="1" data-path="preparation.html"><a href="preparation.html"><i class="fa fa-check"></i><b>1</b> 准备工作</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e79a84e58685e5aeb9"><i class="fa fa-check"></i>本书的内容</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>为什么要使用Python进行数据分析</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>重要的Python库</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e5ae89e8a385e5928ce8aebee7bdae"><i class="fa fa-check"></i>安装和设置</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e7a4bee58cbae5928ce4bc9ae8aeae"><i class="fa fa-check"></i>社区和会议</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#e69cace4b9a6e5afbce888aa"><i class="fa fa-check"></i>本书导航</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Python 语法基础，IPython 和 Jupyter Notebooks</a><ul>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python解释器</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i>IPython基础</a></li>
+<li class="chapter" data-level="" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i>Python语法基础</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#unicode"><i class="fa fa-check"></i>字节和Unicode</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#e68ea7e588b6e6b581"><i class="fa fa-check"></i>控制流</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>3</b> Python的数据结构、函数和文件</a><ul>
+<li class="chapter" data-level="3.1" data-path="structure.html"><a href="structure.html#section-3.1"><i class="fa fa-check"></i><b>3.1</b> 元组</a></li>
+<li class="chapter" data-level="3.2" data-path="structure.html"><a href="structure.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 列表</a></li>
+<li class="chapter" data-level="3.3" data-path="structure.html"><a href="structure.html#section-3.3"><i class="fa fa-check"></i><b>3.3</b> 序列函数</a></li>
+<li class="chapter" data-level="3.4" data-path="structure.html"><a href="structure.html#section-3.4"><i class="fa fa-check"></i><b>3.4</b> 字典</a></li>
+<li class="chapter" data-level="3.5" data-path="structure.html"><a href="structure.html#section-3.5"><i class="fa fa-check"></i><b>3.5</b> 集合</a></li>
+<li class="chapter" data-level="3.6" data-path="structure.html"><a href="structure.html#section-3.6"><i class="fa fa-check"></i><b>3.6</b> 列表、集合和字典推导式</a></li>
+<li class="chapter" data-level="3.7" data-path="structure.html"><a href="structure.html#section-3.7"><i class="fa fa-check"></i><b>3.7</b> 嵌套列表推导式</a></li>
+<li class="chapter" data-level="3.8" data-path="structure.html"><a href="structure.html#section-3.8"><i class="fa fa-check"></i><b>3.8</b> 函数</a></li>
+<li class="chapter" data-level="3.9" data-path="structure.html"><a href="structure.html#section-3.9"><i class="fa fa-check"></i><b>3.9</b> 生成器</a></li>
+<li class="chapter" data-level="3.10" data-path="structure.html"><a href="structure.html#section-3.10"><i class="fa fa-check"></i><b>3.10</b> 错误和异常处理</a></li>
+<li class="chapter" data-level="3.11" data-path="structure.html"><a href="structure.html#section-3.11"><i class="fa fa-check"></i><b>3.11</b> 文件和操作系统</a></li>
+<li class="chapter" data-level="3.12" data-path="structure.html"><a href="structure.html#section-3.12"><i class="fa fa-check"></i><b>3.12</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="preparation.html"><a href="preparation.html#numpy"><i class="fa fa-check"></i><b>4</b> NumPy基础：数组和矢量计算</a><ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4.1</b> NumPy的ndarray：一种多维数组对象</a></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 通用函数：快速的元素级数组函数</a></li>
+<li class="chapter" data-level="4.3" data-path="numpy.html"><a href="numpy.html#section-4.3"><i class="fa fa-check"></i><b>4.3</b> 利用数组进行数据处理</a></li>
+<li class="chapter" data-level="4.4" data-path="numpy.html"><a href="numpy.html#section-4.4"><i class="fa fa-check"></i><b>4.4</b> 用于数组的文件输入输出</a></li>
+<li class="chapter" data-level="4.5" data-path="numpy.html"><a href="numpy.html#section-4.5"><i class="fa fa-check"></i><b>4.5</b> 线性代数</a></li>
+<li class="chapter" data-level="4.6" data-path="numpy.html"><a href="numpy.html#section-4.6"><i class="fa fa-check"></i><b>4.6</b> 伪随机数生成</a></li>
+<li class="chapter" data-level="4.7" data-path="numpy.html"><a href="numpy.html#section-4.7"><i class="fa fa-check"></i><b>4.7</b> 示例：随机漫步</a></li>
+<li class="chapter" data-level="4.8" data-path="numpy.html"><a href="numpy.html#-1"><i class="fa fa-check"></i><b>4.8</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5</b> pandas入门</a><ul>
+<li class="chapter" data-level="5.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>5.1</b> pandas的数据结构介绍</a></li>
+<li class="chapter" data-level="5.2" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>5.2</b> 基本功能</a></li>
+<li class="chapter" data-level="5.3" data-path="pandas.html"><a href="pandas.html#section-5.3"><i class="fa fa-check"></i><b>5.3</b> 汇总和计算描述统计</a></li>
+<li class="chapter" data-level="5.4" data-path="pandas.html"><a href="pandas.html#-2"><i class="fa fa-check"></i><b>5.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data2file.html"><a href="data2file.html"><i class="fa fa-check"></i><b>6</b> 数据加载、存储与文件格式</a><ul>
+<li class="chapter" data-level="6.1" data-path="data2file.html"><a href="data2file.html#section-6.1"><i class="fa fa-check"></i><b>6.1</b> 读写文本格式的数据</a></li>
+<li class="chapter" data-level="6.2" data-path="data2file.html"><a href="data2file.html#section-6.2"><i class="fa fa-check"></i><b>6.2</b> 二进制数据格式</a></li>
+<li class="chapter" data-level="6.3" data-path="data2file.html"><a href="data2file.html#web-apis"><i class="fa fa-check"></i><b>6.3</b> Web APIs交互</a></li>
+<li class="chapter" data-level="6.4" data-path="data2file.html"><a href="data2file.html#section-6.4"><i class="fa fa-check"></i><b>6.4</b> 数据库交互</a></li>
+<li class="chapter" data-level="6.5" data-path="data2file.html"><a href="data2file.html#-3"><i class="fa fa-check"></i><b>6.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>7</b> 数据清洗和准备</a><ul>
+<li class="chapter" data-level="7.1" data-path="tidy.html"><a href="tidy.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 处理缺失数据</a></li>
+<li class="chapter" data-level="7.2" data-path="tidy.html"><a href="tidy.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 数据转换</a></li>
+<li class="chapter" data-level="7.3" data-path="tidy.html"><a href="tidy.html#section-7.3"><i class="fa fa-check"></i><b>7.3</b> 字符串操作</a></li>
+<li class="chapter" data-level="7.4" data-path="tidy.html"><a href="tidy.html#-4"><i class="fa fa-check"></i><b>7.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reshape.html"><a href="reshape.html"><i class="fa fa-check"></i><b>8</b> 数据规整：聚合、合并和重塑</a><ul>
+<li class="chapter" data-level="8.1" data-path="reshape.html"><a href="reshape.html#section-8.1"><i class="fa fa-check"></i><b>8.1</b> 层次化索引</a></li>
+<li class="chapter" data-level="8.2" data-path="reshape.html"><a href="reshape.html#section-8.2"><i class="fa fa-check"></i><b>8.2</b> 合并数据集</a></li>
+<li class="chapter" data-level="8.3" data-path="reshape.html"><a href="reshape.html#section-8.3"><i class="fa fa-check"></i><b>8.3</b> 重塑和轴向旋转</a></li>
+<li class="chapter" data-level="8.4" data-path="reshape.html"><a href="reshape.html#-5"><i class="fa fa-check"></i><b>8.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="visulization.html"><a href="visulization.html"><i class="fa fa-check"></i><b>9</b> 绘图和可视化</a><ul>
+<li class="chapter" data-level="9.1" data-path="visulization.html"><a href="visulization.html#matplotlib-api"><i class="fa fa-check"></i><b>9.1</b> matplotlib API入门</a></li>
+<li class="chapter" data-level="9.2" data-path="visulization.html"><a href="visulization.html#pandasseaborn"><i class="fa fa-check"></i><b>9.2</b> 使用pandas和seaborn绘图</a></li>
+<li class="chapter" data-level="9.3" data-path="preparation.html"><a href="preparation.html#python"><i class="fa fa-check"></i><b>9.3</b> 其它的Python可视化工具</a></li>
+<li class="chapter" data-level="9.4" data-path="visulization.html"><a href="visulization.html#-6"><i class="fa fa-check"></i><b>9.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="apply.html"><a href="apply.html"><i class="fa fa-check"></i><b>10</b> 数据聚合与分组运算</a><ul>
+<li class="chapter" data-level="10.1" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>10.1</b> GroupBy机制</a></li>
+<li class="chapter" data-level="10.2" data-path="apply.html"><a href="apply.html#section-10.2"><i class="fa fa-check"></i><b>10.2</b> 数据聚合</a></li>
+<li class="chapter" data-level="10.3" data-path="apply.html"><a href="apply.html#apply"><i class="fa fa-check"></i><b>10.3</b> apply：一般性的“拆分－应用－合并”</a></li>
+<li class="chapter" data-level="10.4" data-path="apply.html"><a href="apply.html#section-10.4"><i class="fa fa-check"></i><b>10.4</b> 透视表和交叉表</a></li>
+<li class="chapter" data-level="10.5" data-path="apply.html"><a href="apply.html#-7"><i class="fa fa-check"></i><b>10.5</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="timeSeries.html"><a href="timeSeries.html"><i class="fa fa-check"></i><b>11</b> 时间序列</a><ul>
+<li class="chapter" data-level="11.1" data-path="timeSeries.html"><a href="timeSeries.html#section-11.1"><i class="fa fa-check"></i><b>11.1</b> 日期和时间数据类型及工具</a></li>
+<li class="chapter" data-level="11.2" data-path="timeSeries.html"><a href="timeSeries.html#section-11.2"><i class="fa fa-check"></i><b>11.2</b> 时间序列基础</a></li>
+<li class="chapter" data-level="11.3" data-path="timeSeries.html"><a href="timeSeries.html#section-11.3"><i class="fa fa-check"></i><b>11.3</b> 日期的范围、频率以及移动</a></li>
+<li class="chapter" data-level="11.4" data-path="timeSeries.html"><a href="timeSeries.html#section-11.4"><i class="fa fa-check"></i><b>11.4</b> 时区处理</a></li>
+<li class="chapter" data-level="11.5" data-path="timeSeries.html"><a href="timeSeries.html#section-11.5"><i class="fa fa-check"></i><b>11.5</b> 时区本地化和转换</a></li>
+<li class="chapter" data-level="11.6" data-path="timeSeries.html"><a href="timeSeries.html#section-11.6"><i class="fa fa-check"></i><b>11.6</b> 时期及其算术运算</a></li>
+<li class="chapter" data-level="11.7" data-path="timeSeries.html"><a href="timeSeries.html#section-11.7"><i class="fa fa-check"></i><b>11.7</b> 重采样及频率转换</a></li>
+<li class="chapter" data-level="11.8" data-path="timeSeries.html"><a href="timeSeries.html#section-11.8"><i class="fa fa-check"></i><b>11.8</b> 移动窗口函数</a></li>
+<li class="chapter" data-level="11.9" data-path="timeSeries.html"><a href="timeSeries.html#-8"><i class="fa fa-check"></i><b>11.9</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="adPandas.html"><a href="adPandas.html"><i class="fa fa-check"></i><b>12</b> pandas高级应用</a><ul>
+<li class="chapter" data-level="12.1" data-path="adPandas.html"><a href="adPandas.html#section-12.1"><i class="fa fa-check"></i><b>12.1</b> 分类数据</a></li>
+<li class="chapter" data-level="12.2" data-path="apply.html"><a href="apply.html#groupby"><i class="fa fa-check"></i><b>12.2</b> GroupBy高级应用</a></li>
+<li class="chapter" data-level="12.3" data-path="adPandas.html"><a href="adPandas.html#section-12.3"><i class="fa fa-check"></i><b>12.3</b> 链式编程技术</a></li>
+<li class="chapter" data-level="12.4" data-path="adPandas.html"><a href="adPandas.html#-9"><i class="fa fa-check"></i><b>12.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="buildModels.html"><a href="buildModels.html"><i class="fa fa-check"></i><b>13</b> Python建模库介绍</a><ul>
+<li class="chapter" data-level="13.1" data-path="preparation.html"><a href="preparation.html#pandas"><i class="fa fa-check"></i><b>13.1</b> pandas与模型代码的接口</a></li>
+<li class="chapter" data-level="13.2" data-path="buildModels.html"><a href="buildModels.html#patsy"><i class="fa fa-check"></i><b>13.2</b> 用Patsy创建模型描述</a></li>
+<li class="chapter" data-level="13.3" data-path="preparation.html"><a href="preparation.html#statsmodels"><i class="fa fa-check"></i><b>13.3</b> statsmodels介绍</a></li>
+<li class="chapter" data-level="13.4" data-path="preparation.html"><a href="preparation.html#scikit-learn"><i class="fa fa-check"></i><b>13.4</b> scikit-learn介绍</a></li>
+<li class="chapter" data-level="13.5" data-path="buildModels.html"><a href="buildModels.html#section-13.5"><i class="fa fa-check"></i><b>13.5</b> 继续学习</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="dsCases.html"><a href="dsCases.html"><i class="fa fa-check"></i><b>14</b> 数据分析案例</a><ul>
+<li class="chapter" data-level="14.1" data-path="dsCases.html"><a href="dsCases.html#bitlyusa.gov"><i class="fa fa-check"></i><b>14.1</b> 来自Bitly的USA.gov数据</a></li>
+<li class="chapter" data-level="14.2" data-path="dsCases.html"><a href="dsCases.html#movielens-1m"><i class="fa fa-check"></i><b>14.2</b> MovieLens 1M数据集</a></li>
+<li class="chapter" data-level="14.3" data-path="dsCases.html"><a href="dsCases.html#section-14.3"><i class="fa fa-check"></i><b>14.3</b> 1880-2010年间全美婴儿姓名</a></li>
+<li class="chapter" data-level="14.4" data-path="dsCases.html"><a href="dsCases.html#usda"><i class="fa fa-check"></i><b>14.4</b> USDA食品数据库</a></li>
+<li class="chapter" data-level="14.5" data-path="dsCases.html"><a href="dsCases.html#section-14.5"><i class="fa fa-check"></i><b>14.5</b> 2012联邦选举委员会数据库</a></li>
+<li class="chapter" data-level="14.6" data-path="dsCases.html"><a href="dsCases.html#-10"><i class="fa fa-check"></i><b>14.6</b> 总结</a></li>
+</ul></li>
+<li class="appendix"><span><b>附录</b></span></li>
+<li class="chapter" data-level="A" data-path="adNumpy.html"><a href="adNumpy.html"><i class="fa fa-check"></i><b>A</b> NumPy高级应用</a><ul>
+<li class="chapter" data-level="A.1" data-path="numpy.html"><a href="numpy.html#ndarray"><i class="fa fa-check"></i><b>A.1</b> ndarray对象的内部机理</a></li>
+<li class="chapter" data-level="A.2" data-path="07-tidy.html"><a href="#section-A.2"><i class="fa fa-check"></i><b>A.2</b> 高级数组操作</a></li>
+<li class="chapter" data-level="A.3" data-path="07-tidy.html"><a href="#section-A.3"><i class="fa fa-check"></i><b>A.3</b> 广播</a></li>
+<li class="chapter" data-level="A.4" data-path="adNumpy.html"><a href="adNumpy.html#ufunc"><i class="fa fa-check"></i><b>A.4</b> ufunc高级应用</a></li>
+<li class="chapter" data-level="A.5" data-path="07-tidy.html"><a href="#section-A.5"><i class="fa fa-check"></i><b>A.5</b> 结构化和记录式数组</a></li>
+<li class="chapter" data-level="A.6" data-path="07-tidy.html"><a href="#section-A.6"><i class="fa fa-check"></i><b>A.6</b> 更多有关排序的话题</a></li>
+<li class="chapter" data-level="A.7" data-path="adNumpy.html"><a href="adNumpy.html#numbanumpy"><i class="fa fa-check"></i><b>A.7</b> 用Numba编写快速NumPy函数</a></li>
+<li class="chapter" data-level="A.8" data-path="07-tidy.html"><a href="#section-A.8"><i class="fa fa-check"></i><b>A.8</b> 高级数组输入输出</a></li>
+<li class="chapter" data-level="A.9" data-path="07-tidy.html"><a href="#section-A.9"><i class="fa fa-check"></i><b>A.9</b> 性能建议</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="moreInfo.html"><a href="moreInfo.html"><i class="fa fa-check"></i><b>B</b> 更多关于IPython的内容</a><ul>
+<li class="chapter" data-level="B.1" data-path="07-tidy.html"><a href="#section-B.1"><i class="fa fa-check"></i><b>B.1</b> 使用命令历史</a></li>
+<li class="chapter" data-level="B.2" data-path="07-tidy.html"><a href="#section-B.2"><i class="fa fa-check"></i><b>B.2</b> 与操作系统交互</a></li>
+<li class="chapter" data-level="B.3" data-path="07-tidy.html"><a href="#section-B.3"><i class="fa fa-check"></i><b>B.3</b> 软件开发工具</a></li>
+<li class="chapter" data-level="B.4" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.4</b> 使用IPython高效开发的技巧</a></li>
+<li class="chapter" data-level="B.5" data-path="basics.html"><a href="basics.html#ipython"><i class="fa fa-check"></i><b>B.5</b> IPython高级功能</a></li>
+<li class="chapter" data-level="B.6" data-path="moreInfo.html"><a href="moreInfo.html#-11"><i class="fa fa-check"></i><b>B.6</b> 总结</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">利用Python进行数据分析（第二版）中文翻译</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tidy" class="section level1">
+<h1><span class="header-section-number">第 7 章</span> 数据清洗和准备</h1>
+<p>在数据分析和建模的过程中，相当多的时间要用在数据准备上：加载、清理、转换以及重塑。这些工作会占到分析师时间的80%或更多。有时，存储在文件和数据库中的数据的格式不适合某个特定的任务。许多研究者都选择使用通用编程语言（如Python、Perl、R或Java）或UNIX文本处理工具（如sed或awk）对数据格式进行专门处理。幸运的是，pandas和内置的Python标准库提供了一组高级的、灵活的、快速的工具，可以让你轻松地将数据规变为想要的格式。</p>
+<p>如果你发现了一种本书或pandas库中没有的数据操作方式，请尽管在邮件列表或GitHub网站上提出。实际上，pandas的许多设计和实现都是由真实应用的需求所驱动的。</p>
+<p>在本章中，我会讨论处理缺失数据、重复数据、字符串操作和其它分析数据转换的工具。下一章，我会关注于用多种方法合并、重塑数据集。</p>
+<div id="section-7.1" class="section level2">
+<h2><span class="header-section-number">7.1</span> 处理缺失数据</h2>
+<p>在许多数据分析工作中，缺失数据是经常发生的。pandas的目标之一就是尽量轻松地处理缺失数据。例如，pandas对象的所有描述性统计默认都不包括缺失数据。</p>
+<p>缺失数据在pandas中呈现的方式有些不完美，但对于大多数用户可以保证功能正常。对于数值数据，pandas使用浮点值NaN（Not a Number）表示缺失数据。我们称其为哨兵值，可以方便的检测出来：</p>
+<pre><code>In [10]: string_data = pd.Series([&#39;aardvark&#39;, &#39;artichoke&#39;, np.nan, &#39;avocado&#39;])
+
+In [11]: string_data
+Out[11]:
+0     aardvark
+1    artichoke
+2          NaN
+3      avocado
+dtype: object
+
+In [12]: string_data.isnull()
+Out[12]: 
+0    False
+1    False
+2     True
+3    False
+dtype: bool</code></pre>
+<p>在pandas中，我们采用了R语言中的惯用法，即将缺失值表示为NA，它表示不可用not available。在统计应用中，NA数据可能是不存在的数据或者虽然存在，但是没有观察到（例如，数据采集中发生了问题）。当进行数据清洗以进行分析时，最好直接对缺失数据进行分析，以判断数据采集的问题或缺失数据可能导致的偏差。</p>
+<p>Python内置的None值在对象数组中也可以作为NA：</p>
+<pre><code>In [13]: string_data[0] = None
+
+In [14]: string_data.isnull()
+Out[14]: 
+0     True
+1    False
+2     True
+3    False
+dtype: bool</code></pre>
+<p>pandas项目中还在不断优化内部细节以更好处理缺失数据，像用户API功能，例如pandas.isnull，去除了许多恼人的细节。表7-1列出了一些关于缺失数据处理的函数。</p>
+<div class="figure">
+<img src="" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>表7-1 NA处理方法</p>
+<div id="section-7.1.1" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> 滤除缺失数据</h3>
+<p>过滤掉缺失数据的办法有很多种。你可以通过pandas.isnull或布尔索引的手工方法，但dropna可能会更实用一些。对于一个Series，dropna返回一个仅含非空数据和索引值的Series：</p>
+<pre><code>In [15]: from numpy import nan as NA
+
+In [16]: data = pd.Series([1, NA, 3.5, NA, 7])
+
+In [17]: data.dropna()
+Out[17]: 
+0    1.0
+2    3.5
+4    7.0
+dtype: float64</code></pre>
+<p>这等价于：</p>
+<pre><code>In [18]: data[data.notnull()]
+Out[18]: 
+0    1.0
+2    3.5
+4    7.0
+dtype: float64</code></pre>
+<p>而对于DataFrame对象，事情就有点复杂了。你可能希望丢弃全NA或含有NA的行或列。dropna默认丢弃任何含有缺失值的行：</p>
+<pre><code>In [19]: data = pd.DataFrame([[1., 6.5, 3.], [1., NA, NA],
+   ....:                      [NA, NA, NA], [NA, 6.5, 3.]])
+
+In [20]: cleaned = data.dropna()
+
+In [21]: data
+Out[21]: 
+     0    1    2
+0  1.0  6.5  3.0
+1  1.0  NaN  NaN
+2  NaN  NaN  NaN
+3  NaN  6.5  3.0
+
+In [22]: cleaned
+Out[22]: 
+     0    1    2
+0  1.0  6.5  3.0</code></pre>
+<p>传入how=’all’将只丢弃全为NA的那些行：</p>
+<pre><code>In [23]: data.dropna(how=&#39;all&#39;)
+Out[23]: 
+     0    1    2
+0  1.0  6.5  3.0
+1  1.0  NaN  NaN
+3  NaN  6.5  3.0</code></pre>
+<p>用这种方式丢弃列，只需传入axis=1即可：</p>
+<pre><code>In [24]: data[4] = NA
+
+In [25]: data
+Out[25]: 
+     0    1    2   4
+0  1.0  6.5  3.0 NaN
+1  1.0  NaN  NaN NaN
+2  NaN  NaN  NaN NaN
+3  NaN  6.5  3.0 NaN
+
+In [26]: data.dropna(axis=1, how=&#39;all&#39;)
+Out[26]: 
+     0    1    2
+0  1.0  6.5  3.0
+1  1.0  NaN  NaN
+2  NaN  NaN  NaN
+3  NaN  6.5  3.0</code></pre>
+<p>另一个滤除DataFrame行的问题涉及时间序列数据。假设你只想留下一部分观测数据，可以用thresh参数实现此目的：</p>
+<pre><code>In [27]: df = pd.DataFrame(np.random.randn(7, 3))
+
+In [28]: df.iloc[:4, 1] = NA
+
+In [29]: df.iloc[:2, 2] = NA
+
+In [30]: df
+Out[30]: 
+          0         1         2
+0 -0.204708       NaN       NaN
+1 -0.555730       NaN       NaN
+2  0.092908       NaN  0.769023
+3  1.246435       NaN -1.296221
+4  0.274992  0.228913  1.352917
+5  0.886429 -2.001637 -0.371843
+6  1.669025 -0.438570 -0.539741
+
+In [31]: df.dropna()
+Out[31]: 
+          0         1         2
+4  0.274992  0.228913  1.352917
+5  0.886429 -2.001637 -0.371843
+6  1.669025 -0.438570 -0.539741
+
+In [32]: df.dropna(thresh=2)
+Out[32]: 
+          0         1         2
+2  0.092908       NaN  0.769023
+3  1.246435       NaN -1.296221
+4  0.274992  0.228913  1.352917
+5  0.886429 -2.001637 -0.371843
+6  1.669025 -0.438570 -0.539741</code></pre>
+</div>
+<div id="section-7.1.2" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> 填充缺失数据</h3>
+<p>你可能不想滤除缺失数据（有可能会丢弃跟它有关的其他数据），而是希望通过其他方式填补那些“空洞”。对于大多数情况而言，fillna方法是最主要的函数。通过一个常数调用fillna就会将缺失值替换为那个常数值：</p>
+<pre><code>In [33]: df.fillna(0)
+Out[33]: 
+          0         1         2
+0 -0.204708  0.000000  0.000000
+1 -0.555730  0.000000  0.000000
+2  0.092908  0.000000  0.769023
+3  1.246435  0.000000 -1.296221
+4  0.274992  0.228913  1.352917
+5  0.886429 -2.001637 -0.371843
+6  1.669025 -0.438570 -0.539741</code></pre>
+<p>若是通过一个字典调用fillna，就可以实现对不同的列填充不同的值：</p>
+<pre><code>In [34]: df.fillna({1: 0.5, 2: 0})
+Out[34]: 
+          0         1         2
+0 -0.204708  0.500000  0.000000
+1 -0.555730  0.500000  0.000000
+2  0.092908  0.500000  0.769023
+3  1.246435  0.500000 -1.296221
+4  0.274992  0.228913  1.352917
+5  0.886429 -2.001637 -0.371843
+6  1.669025 -0.438570 -0.539741</code></pre>
+<p>fillna默认会返回新对象，但也可以对现有对象进行就地修改：</p>
+<pre><code>In [35]: _ = df.fillna(0, inplace=True)
+
+In [36]: df
+Out[36]: 
+          0         1         2
+0 -0.204708  0.000000  0.000000
+1 -0.555730  0.000000  0.000000
+2  0.092908  0.000000  0.769023
+3  1.246435  0.000000 -1.296221
+4  0.274992  0.228913  1.352917
+5  0.886429 -2.001637 -0.371843
+6  1.669025 -0.438570 -0.539741</code></pre>
+<p>对reindexing有效的那些插值方法也可用于fillna：</p>
+<pre><code>In [37]: df = pd.DataFrame(np.random.randn(6, 3))
+
+In [38]: df.iloc[2:, 1] = NA
+
+In [39]: df.iloc[4:, 2] = NA
+
+In [40]: df
+Out[40]: 
+          0         1         2
+0  0.476985  3.248944 -1.021228
+1 -0.577087  0.124121  0.302614
+2  0.523772       NaN  1.343810
+3 -0.713544       NaN -2.370232
+4 -1.860761       NaN       NaN
+5 -1.265934       NaN       NaN
+
+In [41]: df.fillna(method=&#39;ffill&#39;)
+Out[41]: 
+          0         1         2
+0  0.476985  3.248944 -1.021228
+1 -0.577087  0.124121  0.302614
+2  0.523772  0.124121  1.343810
+3 -0.713544  0.124121 -2.370232
+4 -1.860761  0.124121 -2.370232
+5 -1.265934  0.124121 -2.370232
+
+In [42]: df.fillna(method=&#39;ffill&#39;, limit=2)
+Out[42]: 
+          0         1         2
+0  0.476985  3.248944 -1.021228
+1 -0.577087  0.124121  0.302614
+2  0.523772  0.124121  1.343810
+3 -0.713544  0.124121 -2.370232
+4 -1.860761       NaN -2.370232
+5 -1.265934       NaN -2.370232</code></pre>
+<p>只要有些创新，你就可以利用fillna实现许多别的功能。比如说，你可以传入Series的平均值或中位数：</p>
+<pre><code>In [43]: data = pd.Series([1., NA, 3.5, NA, 7])
+
+In [44]: data.fillna(data.mean())
+Out[44]: 
+0    1.000000
+1    3.833333
+2    3.500000
+3    3.833333
+4    7.000000
+dtype: float64</code></pre>
+<p>表7-2列出了fillna的参考。</p>
+<div class="figure">
+<img src="" alt="img" />
+<p class="caption">img</p>
+</div>
+<div class="figure">
+<img src="" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>fillna函数参数</p>
+</div>
+</div>
+<div id="section-7.2" class="section level2">
+<h2><span class="header-section-number">7.2</span> 数据转换</h2>
+<p>本章到目前为止介绍的都是数据的重排。另一类重要操作则是过滤、清理以及其他的转换工作。</p>
+<div id="section-7.2.1" class="section level3">
+<h3><span class="header-section-number">7.2.1</span> 移除重复数据</h3>
+<p>DataFrame中出现重复行有多种原因。下面就是一个例子：</p>
+<pre><code>In [45]: data = pd.DataFrame({&#39;k1&#39;: [&#39;one&#39;, &#39;two&#39;] * 3 + [&#39;two&#39;],
+   ....:                      &#39;k2&#39;: [1, 1, 2, 3, 3, 4, 4]})
+
+In [46]: data
+Out[46]: 
+    k1  k2
+0  one   1
+1  two   1
+2  one   2
+3  two   3
+4  one   3
+5  two   4
+6  two   4</code></pre>
+<p>DataFrame的duplicated方法返回一个布尔型Series，表示各行是否是重复行（前面出现过的行）：</p>
+<pre><code>In [47]: data.duplicated()
+Out[47]: 
+0    False
+1    False
+2    False
+3    False
+4    False
+5    False
+6     True
+dtype: bool</code></pre>
+<p>还有一个与此相关的drop_duplicates方法，它会返回一个DataFrame，重复的数组会标为False：</p>
+<pre><code>In [48]: data.drop_duplicates()
+Out[48]: 
+    k1  k2
+0  one   1
+1  two   1
+2  one   2
+3  two   3
+4  one   3
+5  two   4</code></pre>
+<p>这两个方法默认会判断全部列，你也可以指定部分列进行重复项判断。假设我们还有一列值，且只希望根据k1列过滤重复项：</p>
+<pre><code>In [49]: data[&#39;v1&#39;] = range(7)
+
+In [50]: data.drop_duplicates([&#39;k1&#39;])
+Out[50]: 
+    k1  k2  v1
+0  one   1   0
+1  two   1   1</code></pre>
+<p>duplicated和drop_duplicates默认保留的是第一个出现的值组合。传入keep=’last’则保留最后一个：</p>
+<pre><code>In [51]: data.drop_duplicates([&#39;k1&#39;, &#39;k2&#39;], keep=&#39;last&#39;)
+Out[51]: 
+    k1  k2  v1
+0  one   1   0
+1  two   1   1
+2  one   2   2
+3  two   3   3
+4  one   3   4
+6  two   4   6</code></pre>
+</div>
+<div id="section-7.2.2" class="section level3">
+<h3><span class="header-section-number">7.2.2</span> 利用函数或映射进行数据转换</h3>
+<p>对于许多数据集，你可能希望根据数组、Series或DataFrame列中的值来实现转换工作。我们来看看下面这组有关肉类的数据：</p>
+<pre><code>In [52]: data = pd.DataFrame({&#39;food&#39;: [&#39;bacon&#39;, &#39;pulled pork&#39;, &#39;bacon&#39;,
+   ....:                               &#39;Pastrami&#39;, &#39;corned beef&#39;, &#39;Bacon&#39;,
+   ....:                               &#39;pastrami&#39;, &#39;honey ham&#39;, &#39;nova lox&#39;],
+   ....:                      &#39;ounces&#39;: [4, 3, 12, 6, 7.5, 8, 3, 5, 6]})
+
+In [53]: data
+Out[53]: 
+          food  ounces
+0        bacon     4.0
+1  pulled pork     3.0
+2        bacon    12.0
+3     Pastrami     6.0
+4  corned beef     7.5
+5        Bacon     8.0
+6     pastrami     3.0
+7    honey ham     5.0
+8     nova lox     6.0</code></pre>
+<p>假设你想要添加一列表示该肉类食物来源的动物类型。我们先编写一个不同肉类到动物的映射：</p>
+<pre><code>meat_to_animal = {
+  &#39;bacon&#39;: &#39;pig&#39;,
+  &#39;pulled pork&#39;: &#39;pig&#39;,
+  &#39;pastrami&#39;: &#39;cow&#39;,
+  &#39;corned beef&#39;: &#39;cow&#39;,
+  &#39;honey ham&#39;: &#39;pig&#39;,
+  &#39;nova lox&#39;: &#39;salmon&#39;
+}</code></pre>
+<p>Series的map方法可以接受一个函数或含有映射关系的字典型对象，但是这里有一个小问题，即有些肉类的首字母大写了，而另一些则没有。因此，我们还需要使用Series的str.lower方法，将各个值转换为小写：</p>
+<pre><code>In [55]: lowercased = data[&#39;food&#39;].str.lower()
+
+In [56]: lowercased
+Out[56]: 
+0          bacon
+1    pulled pork
+2          bacon
+3       pastrami
+4    corned beef
+5          bacon
+6       pastrami
+7      honey ham
+8       nova lox
+Name: food, dtype: object
+
+In [57]: data[&#39;animal&#39;] = lowercased.map(meat_to_animal)
+
+In [58]: data
+Out[58]: 
+          food  ounces  animal
+0        bacon     4.0     pig
+1  pulled pork     3.0     pig
+2        bacon    12.0     pig
+3     Pastrami     6.0     cow
+4  corned beef     7.5     cow
+5        Bacon     8.0     pig
+6     pastrami     3.0     cow
+7    honey ham     5.0     pig
+8     nova lox     6.0  salmon</code></pre>
+<p>我们也可以传入一个能够完成全部这些工作的函数：</p>
+<pre><code>In [59]: data[&#39;food&#39;].map(lambda x: meat_to_animal[x.lower()])
+Out[59]: 
+0       pig
+1       pig
+2       pig
+3       cow
+4       cow
+5       pig
+6       cow
+7       pig
+8    salmon
+Name: food, dtype: object</code></pre>
+<p>使用map是一种实现元素级转换以及其他数据清理工作的便捷方式。</p>
+</div>
+<div id="section-7.2.3" class="section level3">
+<h3><span class="header-section-number">7.2.3</span> 替换值</h3>
+<p>利用fillna方法填充缺失数据可以看做值替换的一种特殊情况。前面已经看到，map可用于修改对象的数据子集，而replace则提供了一种实现该功能的更简单、更灵活的方式。我们来看看下面这个Series：</p>
+<pre><code>In [60]: data = pd.Series([1., -999., 2., -999., -1000., 3.])
+
+In [61]: data
+Out[61]: 
+0       1.0
+1    -999.0
+2       2.0
+3    -999.0
+4   -1000.0
+5       3.0</code></pre>
+<p>-999这个值可能是一个表示缺失数据的标记值。要将其替换为pandas能够理解的NA值，我们可以利用replace来产生一个新的Series（除非传入inplace=True）：</p>
+<pre><code>In [62]: data.replace(-999, np.nan)
+Out[62]: 
+0       1.0
+1       NaN
+2       2.0
+3       NaN
+4   -1000.0
+5       3.0
+dtype: float64</code></pre>
+<p>如果你希望一次性替换多个值，可以传入一个由待替换值组成的列表以及一个替换值：：</p>
+<pre><code>In [63]: data.replace([-999, -1000], np.nan)
+Out[63]: 
+0    1.0
+1    NaN
+2    2.0
+3    NaN
+4    NaN
+5    3.0
+dtype: float64</code></pre>
+<p>要让每个值有不同的替换值，可以传递一个替换列表：</p>
+<pre><code>In [64]: data.replace([-999, -1000], [np.nan, 0])
+Out[64]: 
+0    1.0
+1    NaN
+2    2.0
+3    NaN
+4    0.0
+5    3.0
+dtype: float64</code></pre>
+<p>传入的参数也可以是字典：</p>
+<pre><code>In [65]: data.replace({-999: np.nan, -1000: 0})
+Out[65]: 
+0    1.0
+1    NaN
+2    2.0
+3    NaN
+4    0.0
+5    3.0
+dtype: float64</code></pre>
+<blockquote>
+<p>笔记：data.replace方法与data.str.replace不同，后者做的是字符串的元素级替换。我们会在后面学习Series的字符串方法。</p>
+</blockquote>
+</div>
+<div id="section-7.2.4" class="section level3">
+<h3><span class="header-section-number">7.2.4</span> 重命名轴索引</h3>
+<p>跟Series中的值一样，轴标签也可以通过函数或映射进行转换，从而得到一个新的不同标签的对象。轴还可以被就地修改，而无需新建一个数据结构。接下来看看下面这个简单的例子：</p>
+<pre><code>In [66]: data = pd.DataFrame(np.arange(12).reshape((3, 4)),
+   ....:                     index=[&#39;Ohio&#39;, &#39;Colorado&#39;, &#39;New York&#39;],
+   ....:                     columns=[&#39;one&#39;, &#39;two&#39;, &#39;three&#39;, &#39;four&#39;])</code></pre>
+<p>跟Series一样，轴索引也有一个map方法：</p>
+<pre><code>In [67]: transform = lambda x: x[:4].upper()
+
+In [68]: data.index.map(transform)
+Out[68]: Index([&#39;OHIO&#39;, &#39;COLO&#39;, &#39;NEW &#39;], dtype=&#39;object&#39;)</code></pre>
+<p>你可以将其赋值给index，这样就可以对DataFrame进行就地修改：</p>
+<pre><code>In [69]: data.index = data.index.map(transform)
+
+In [70]: data
+Out[70]:
+one  two  three  four
+OHIO    0    1      2     3
+COLO    4    5      6     7
+NEW     8    9     10    11</code></pre>
+<p>如果想要创建数据集的转换版（而不是修改原始数据），比较实用的方法是rename：</p>
+<pre><code>In [71]: data.rename(index=str.title, columns=str.upper)
+Out[71]: 
+      ONE  TWO  THREE  FOUR
+Ohio    0    1      2     3
+Colo    4    5      6     7
+New     8    9     10    11</code></pre>
+<p>特别说明一下，rename可以结合字典型对象实现对部分轴标签的更新：</p>
+<pre><code>In [72]: data.rename(index={&#39;OHIO&#39;: &#39;INDIANA&#39;},
+   ....:             columns={&#39;three&#39;: &#39;peekaboo&#39;})
+Out[72]:
+one  two  peekaboo  four
+INDIANA    0    1         2     3
+COLO       4    5         6     7
+NEW        8    9        10    11</code></pre>
+<p>rename可以实现复制DataFrame并对其索引和列标签进行赋值。如果希望就地修改某个数据集，传入inplace=True即可：</p>
+<pre><code>In [73]: data.rename(index={&#39;OHIO&#39;: &#39;INDIANA&#39;}, inplace=True)
+
+In [74]: data
+Out[74]: 
+         one  two  three  four
+INDIANA    0    1      2     3
+COLO       4    5      6     7
+NEW        8    9     10    11</code></pre>
+</div>
+<div id="section-7.2.5" class="section level3">
+<h3><span class="header-section-number">7.2.5</span> 离散化和面元划分</h3>
+<p>为了便于分析，连续数据常常被离散化或拆分为“面元”（bin）。假设有一组人员数据，而你希望将它们划分为不同的年龄组：</p>
+<pre><code>In [75]: ages = [20, 22, 25, 27, 21, 23, 37, 31, 61, 45, 41, 32]</code></pre>
+<p>接下来将这些数据划分为“18到25”、“26到35”、“35到60”以及“60以上”几个面元。要实现该功能，你需要使用pandas的cut函数：</p>
+<pre><code>In [76]: bins = [18, 25, 35, 60, 100]
+
+In [77]: cats = pd.cut(ages, bins)
+
+In [78]: cats
+Out[78]: 
+[(18, 25], (18, 25], (18, 25], (25, 35], (18, 25], ..., (25, 35], (60, 100], (35,60], (35, 60], (25, 35]]
+Length: 12
+Categories (4, interval[int64]): [(18, 25] &lt; (25, 35] &lt; (35, 60] &lt; (60, 100]]</code></pre>
+<p>pandas返回的是一个特殊的Categorical对象。结果展示了pandas.cut划分的面元。你可以将其看做一组表示面元名称的字符串。它的底层含有一个表示不同分类名称的类型数组，以及一个codes属性中的年龄数据的标签：</p>
+<pre><code>In [79]: cats.codes
+Out[79]: array([0, 0, 0, 1, 0, 0, 2, 1, 3, 2, 2, 1], dtype=int8)
+
+In [80]: cats.categories
+Out[80]: 
+IntervalIndex([(18, 25], (25, 35], (35, 60], (60, 100]]
+              closed=&#39;right&#39;,
+              dtype=&#39;interval[int64]&#39;)
+
+In [81]: pd.value_counts(cats)
+Out[81]: 
+(18, 25]     5
+(35, 60]     3
+(25, 35]     3
+(60, 100]    1
+dtype: int64</code></pre>
+<p>pd.value_counts(cats)是pandas.cut结果的面元计数。</p>
+<p>跟“区间”的数学符号一样，圆括号表示开端，而方括号则表示闭端（包括）。哪边是闭端可以通过right=False进行修改：</p>
+<pre><code>In [82]: pd.cut(ages, [18, 26, 36, 61, 100], right=False)
+Out[82]: 
+[[18, 26), [18, 26), [18, 26), [26, 36), [18, 26), ..., [26, 36), [61, 100), [36,
+ 61), [36, 61), [26, 36)]
+Length: 12
+Categories (4, interval[int64]): [[18, 26) &lt; [26, 36) &lt; [36, 61) &lt; [61, 100)]</code></pre>
+<p>你可 以通过传递一个列表或数组到labels，设置自己的面元名称：</p>
+<pre><code>In [83]: group_names = [&#39;Youth&#39;, &#39;YoungAdult&#39;, &#39;MiddleAged&#39;, &#39;Senior&#39;]
+
+In [84]: pd.cut(ages, bins, labels=group_names)
+Out[84]: 
+[Youth, Youth, Youth, YoungAdult, Youth, ..., YoungAdult, Senior, MiddleAged, Mid
+dleAged, YoungAdult]
+Length: 12
+Categories (4, object): [Youth &lt; YoungAdult &lt; MiddleAged &lt; Senior]</code></pre>
+<p>如果向cut传入的是面元的数量而不是确切的面元边界，则它会根据数据的最小值和最大值计算等长面元。下面这个例子中，我们将一些均匀分布的数据分成四组：</p>
+<pre><code>In [85]: data = np.random.rand(20)
+
+In [86]: pd.cut(data, 4, precision=2)
+Out[86]: 
+[(0.34, 0.55], (0.34, 0.55], (0.76, 0.97], (0.76, 0.97], (0.34, 0.55], ..., (0.34
+, 0.55], (0.34, 0.55], (0.55, 0.76], (0.34, 0.55], (0.12, 0.34]]
+Length: 20
+Categories (4, interval[float64]): [(0.12, 0.34] &lt; (0.34, 0.55] &lt; (0.55, 0.76] &lt; 
+(0.76, 0.97]]</code></pre>
+<p>选项precision=2，限定小数只有两位。</p>
+<p>qcut是一个非常类似于cut的函数，它可以根据样本分位数对数据进行面元划分。根据数据的分布情况，cut可能无法使各个面元中含有相同数量的数据点。而qcut由于使用的是样本分位数，因此可以得到大小基本相等的面元：</p>
+<pre><code>In [87]: data = np.random.randn(1000)  # Normally distributed
+
+In [88]: cats = pd.qcut(data, 4)  # Cut into quartiles
+
+In [89]: cats
+Out[89]: 
+[(-0.0265, 0.62], (0.62, 3.928], (-0.68, -0.0265], (0.62, 3.928], (-0.0265, 0.62]
+, ..., (-0.68, -0.0265], (-0.68, -0.0265], (-2.95, -0.68], (0.62, 3.928], (-0.68,
+ -0.0265]]
+Length: 1000
+Categories (4, interval[float64]): [(-2.95, -0.68] &lt; (-0.68, -0.0265] &lt; (-0.0265,
+ 0.62] &lt;
+                                    (0.62, 3.928]]
+
+In [90]: pd.value_counts(cats)
+Out[90]:
+(0.62, 3.928]       250
+(-0.0265, 0.62]     250
+(-0.68, -0.0265]    250
+(-2.95, -0.68]      250
+dtype: int64</code></pre>
+<p>与cut类似，你也可以传递自定义的分位数（0到1之间的数值，包含端点）：</p>
+<pre><code>In [91]: pd.qcut(data, [0, 0.1, 0.5, 0.9, 1.])
+Out[91]: 
+[(-0.0265, 1.286], (-0.0265, 1.286], (-1.187, -0.0265], (-0.0265, 1.286], (-0.026
+5, 1.286], ..., (-1.187, -0.0265], (-1.187, -0.0265], (-2.95, -1.187], (-0.0265, 
+1.286], (-1.187, -0.0265]]
+Length: 1000
+Categories (4, interval[float64]): [(-2.95, -1.187] &lt; (-1.187, -0.0265] &lt; (-0.026
+5, 1.286] &lt;
+                                    (1.286, 3.928]]</code></pre>
+<p>本章稍后在讲解聚合和分组运算时会再次用到cut和qcut，因为这两个离散化函数对分位和分组分析非常重要。</p>
+</div>
+<div id="section-7.2.6" class="section level3">
+<h3><span class="header-section-number">7.2.6</span> 检测和过滤异常值</h3>
+<p>过滤或变换异常值（outlier）在很大程度上就是运用数组运算。来看一个含有正态分布数据的DataFrame：</p>
+<pre><code>In [92]: data = pd.DataFrame(np.random.randn(1000, 4))
+
+In [93]: data.describe()
+Out[93]: 
+                 0            1            2            3
+count  1000.000000  1000.000000  1000.000000  1000.000000
+mean      0.049091     0.026112    -0.002544    -0.051827
+std       0.996947     1.007458     0.995232     0.998311
+min      -3.645860    -3.184377    -3.745356    -3.428254
+25%      -0.599807    -0.612162    -0.687373    -0.747478
+50%       0.047101    -0.013609    -0.022158    -0.088274
+75%       0.756646     0.695298     0.699046     0.623331
+max       2.653656     3.525865     2.735527     3.366626</code></pre>
+<p>假设你想要找出某列中绝对值大小超过3的值：</p>
+<pre><code>In [94]: col = data[2]
+
+In [95]: col[np.abs(col) &gt; 3]
+Out[95]: 
+41    -3.399312
+136   -3.745356
+Name: 2, dtype: float64</code></pre>
+<p>要选出全部含有“超过3或－3的值”的行，你可以在布尔型DataFrame中使用any方法：</p>
+<pre><code>In [96]: data[(np.abs(data) &gt; 3).any(1)]
+Out[96]: 
+            0         1         2         3
+41   0.457246 -0.025907 -3.399312 -0.974657
+60   1.951312  3.260383  0.963301  1.201206
+136  0.508391 -0.196713 -3.745356 -1.520113
+235 -0.242459 -3.056990  1.918403 -0.578828
+258  0.682841  0.326045  0.425384 -3.428254
+322  1.179227 -3.184377  1.369891 -1.074833
+544 -3.548824  1.553205 -2.186301  1.277104
+635 -0.578093  0.193299  1.397822  3.366626
+782 -0.207434  3.525865  0.283070  0.544635
+803 -3.645860  0.255475 -0.549574 -1.907459</code></pre>
+<p>根据这些条件，就可以对值进行设置。下面的代码可以将值限制在区间－3到3以内：</p>
+<pre><code>In [97]: data[np.abs(data) &gt; 3] = np.sign(data) * 3
+
+In [98]: data.describe()
+Out[98]: 
+                 0            1            2            3
+count  1000.000000  1000.000000  1000.000000  1000.000000
+mean      0.050286     0.025567    -0.001399    -0.051765
+std       0.992920     1.004214     0.991414     0.995761
+min      -3.000000    -3.000000    -3.000000    -3.000000
+25%      -0.599807    -0.612162    -0.687373    -0.747478
+50%       0.047101    -0.013609    -0.022158    -0.088274
+75%       0.756646     0.695298     0.699046     0.623331
+max       2.653656     3.000000     2.735527     3.000000</code></pre>
+<p>根据数据的值是正还是负，np.sign(data)可以生成1和-1：</p>
+<pre><code>In [99]: np.sign(data).head()
+Out[99]: 
+     0    1    2    3
+0 -1.0  1.0 -1.0  1.0
+1  1.0 -1.0  1.0 -1.0
+2  1.0  1.0  1.0 -1.0
+3 -1.0 -1.0  1.0 -1.0
+4 -1.0  1.0 -1.0 -1.0</code></pre>
+</div>
+<div id="section-7.2.7" class="section level3">
+<h3><span class="header-section-number">7.2.7</span> 排列和随机采样</h3>
+<p>利用numpy.random.permutation函数可以轻松实现对Series或DataFrame的列的排列工作（permuting，随机重排序）。通过需要排列的轴的长度调用permutation，可产生一个表示新顺序的整数数组：</p>
+<pre><code>In [100]: df = pd.DataFrame(np.arange(5 * 4).reshape((5, 4)))
+
+In [101]: sampler = np.random.permutation(5)
+
+In [102]: sampler
+Out[102]: array([3, 1, 4, 2, 0])</code></pre>
+<p>然后就可以在基于iloc的索引操作或take函数中使用该数组了：</p>
+<pre><code>In [103]: df
+Out[103]: 
+    0   1   2   3
+0   0   1   2   3
+1   4   5   6   7
+2   8   9  10  11
+3  12  13  14  15
+4  16  17  18  19
+
+In [104]: df.take(sampler)
+Out[104]: 
+    0   1   2   3
+3  12  13  14  15
+1   4   5   6   7
+4  16  17  18  19
+2   8   9  10  11
+0   0   1   2   3</code></pre>
+<p>如果不想用替换的方式选取随机子集，可以在Series和DataFrame上使用sample方法：</p>
+<pre><code>In [105]: df.sample(n=3)
+Out[105]: 
+    0   1   2   3
+3  12  13  14  15
+4  16  17  18  19
+2   8   9  10  11</code></pre>
+<p>要通过替换的方式产生样本（允许重复选择），可以传递replace=True到sample：</p>
+<pre><code>In [106]: choices = pd.Series([5, 7, -1, 6, 4])
+
+In [107]: draws = choices.sample(n=10, replace=True)
+
+In [108]: draws
+Out[108]: 
+4    4
+1    7
+4    4
+2   -1
+0    5
+3    6
+1    7
+4    4
+0    5
+4    4
+dtype: int64</code></pre>
+</div>
+<div id="section-7.2.8" class="section level3">
+<h3><span class="header-section-number">7.2.8</span> 计算指标/哑变量</h3>
+<p>另一种常用于统计建模或机器学习的转换方式是：将分类变量（categorical variable）转换为“哑变量”或“指标矩阵”。</p>
+<p>如果DataFrame的某一列中含有k个不同的值，则可以派生出一个k列矩阵或DataFrame（其值全为1和0）。pandas有一个get_dummies函数可以实现该功能（其实自己动手做一个也不难）。使用之前的一个DataFrame例子：</p>
+<pre><code>In [109]: df = pd.DataFrame({&#39;key&#39;: [&#39;b&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;, &#39;a&#39;, &#39;b&#39;],
+   .....:                    &#39;data1&#39;: range(6)})
+
+In [110]: pd.get_dummies(df[&#39;key&#39;])
+Out[110]: 
+   a  b  c
+0  0  1  0
+1  0  1  0
+2  1  0  0
+3  0  0  1
+4  1  0  0
+5  0  1  0</code></pre>
+<p>有时候，你可能想给指标DataFrame的列加上一个前缀，以便能够跟其他数据进行合并。get_dummies的prefix参数可以实现该功能：</p>
+<pre><code>In [111]: dummies = pd.get_dummies(df[&#39;key&#39;], prefix=&#39;key&#39;)
+
+In [112]: df_with_dummy = df[[&#39;data1&#39;]].join(dummies)
+
+In [113]: df_with_dummy
+Out[113]: 
+   data1  key_a  key_b  key_c
+0      0      0      1      0
+1      1      0      1      0
+2      2      1      0      0
+3      3      0      0      1
+4      4      1      0      0
+5      5      0      1      0</code></pre>
+<p>如果DataFrame中的某行同属于多个分类，则事情就会有点复杂。看一下MovieLens 1M数据集，14章会更深入地研究它：</p>
+<pre><code>In [114]: mnames = [&#39;movie_id&#39;, &#39;title&#39;, &#39;genres&#39;]
+
+In [115]: movies = pd.read_table(&#39;datasets/movielens/movies.dat&#39;, sep=&#39;::&#39;,
+   .....:                        header=None, names=mnames)
+
+In [116]: movies[:10]
+Out[116]: 
+   movie_id                               title                        genres
+0         1                    Toy Story (1995)   Animation|Children&#39;s|Comedy
+1         2                      Jumanji (1995)  Adventure|Children&#39;s|Fantasy
+2         3             Grumpier Old Men (1995)                Comedy|Romance
+3         4            Waiting to Exhale (1995)                  Comedy|Drama
+4         5  Father of the Bride Part II (1995)                        Comedy
+5         6                         Heat (1995)         Action|Crime|Thriller
+6         7                      Sabrina (1995)                Comedy|Romance
+7         8                 Tom and Huck (1995)          Adventure|Children&#39;s
+8         9                 Sudden Death (1995)
+Action
+9        10                    GoldenEye (1995)     Action|Adventure|Thriller</code></pre>
+<p>要为每个genre添加指标变量就需要做一些数据规整操作。首先，我们从数据集中抽取出不同的genre值：</p>
+<pre><code>In [117]: all_genres = []
+
+In [118]: for x in movies.genres:
+   .....:     all_genres.extend(x.split(&#39;|&#39;))
+
+In [119]: genres = pd.unique(all_genres)</code></pre>
+<p>现在有：</p>
+<pre><code>In [120]: genres
+Out[120]: 
+array([&#39;Animation&#39;, &quot;Children&#39;s&quot;, &#39;Comedy&#39;, &#39;Adventure&#39;, &#39;Fantasy&#39;,
+       &#39;Romance&#39;, &#39;Drama&#39;, &#39;Action&#39;, &#39;Crime&#39;, &#39;Thriller&#39;,&#39;Horror&#39;,
+       &#39;Sci-Fi&#39;, &#39;Documentary&#39;, &#39;War&#39;, &#39;Musical&#39;, &#39;Mystery&#39;, &#39;Film-Noir&#39;,
+       &#39;Western&#39;], dtype=object)</code></pre>
+<p>构建指标DataFrame的方法之一是从一个全零DataFrame开始：</p>
+<pre><code>In [121]: zero_matrix = np.zeros((len(movies), len(genres)))
+
+In [122]: dummies = pd.DataFrame(zero_matrix, columns=genres)</code></pre>
+<p>现在，迭代每一部电影，并将dummies各行的条目设为1。要这么做，我们使用dummies.columns来计算每个类型的列索引：</p>
+<pre><code>In [123]: gen = movies.genres[0]
+
+In [124]: gen.split(&#39;|&#39;)
+Out[124]: [&#39;Animation&#39;, &quot;Children&#39;s&quot;, &#39;Comedy&#39;]
+
+In [125]: dummies.columns.get_indexer(gen.split(&#39;|&#39;))
+Out[125]: array([0, 1, 2])</code></pre>
+<p>然后，根据索引，使用.iloc设定值：</p>
+<pre><code>In [126]: for i, gen in enumerate(movies.genres):
+   .....:     indices = dummies.columns.get_indexer(gen.split(&#39;|&#39;))
+   .....:     dummies.iloc[i, indices] = 1
+   .....:</code></pre>
+<p>然后，和以前一样，再将其与movies合并起来：</p>
+<pre><code>In [127]: movies_windic = movies.join(dummies.add_prefix(&#39;Genre_&#39;))
+
+In [128]: movies_windic.iloc[0]
+Out[128]: 
+movie_id                                       1
+title                           Toy Story (1995)
+genres               Animation|Children&#39;s|Comedy
+Genre_Animation                                1
+Genre_Children&#39;s                               1
+Genre_Comedy                                   1
+Genre_Adventure                                0
+Genre_Fantasy                                  0
+Genre_Romance                                  0
+Genre_Drama                                    0
+                                ...             
+Genre_Crime                                    0
+Genre_Thriller                                 0
+Genre_Horror                                   0
+Genre_Sci-Fi                                   0
+Genre_Documentary                              0
+Genre_War                                      0
+Genre_Musical                                  0
+Genre_Mystery                                  0
+Genre_Film-Noir                                0
+Genre_Western                                  0
+Name: 0, Length: 21, dtype: object</code></pre>
+<blockquote>
+<p>笔记：对于很大的数据，用这种方式构建多成员指标变量就会变得非常慢。最好使用更低级的函数，将其写入NumPy数组，然后结果包装在DataFrame中。</p>
+</blockquote>
+<p>一个对统计应用有用的秘诀是：结合get_dummies和诸如cut之类的离散化函数：</p>
+<pre><code>In [129]: np.random.seed(12345)
+
+In [130]: values = np.random.rand(10)
+
+In [131]: values
+Out[131]: 
+array([ 0.9296,  0.3164,  0.1839,  0.2046,  0.5677,  0.5955,  0.9645,
+        0.6532,  0.7489,  0.6536])
+
+In [132]: bins = [0, 0.2, 0.4, 0.6, 0.8, 1]
+
+In [133]: pd.get_dummies(pd.cut(values, bins))
+Out[133]: 
+   (0.0, 0.2]  (0.2, 0.4]  (0.4, 0.6]  (0.6, 0.8]  (0.8, 1.0]
+0           0           0           0           0           1
+1           0           1           0           0           0
+2           1           0           0           0           0
+3           0           1           0           0           0
+4           0           0           1           0           0
+5           0           0           1           0           0
+6           0           0           0           0           1
+7           0           0           0           1           0
+8           0           0           0           1           0
+9           0           0           0           1           0</code></pre>
+<p>我们用numpy.random.seed，使这个例子具有确定性。本书后面会介绍pandas.get_dummies。</p>
+</div>
+</div>
+<div id="section-7.3" class="section level2">
+<h2><span class="header-section-number">7.3</span> 字符串操作</h2>
+<p>Python能够成为流行的数据处理语言，部分原因是其简单易用的字符串和文本处理功能。大部分文本运算都直接做成了字符串对象的内置方法。对于更为复杂的模式匹配和文本操作，则可能需要用到正则表达式。pandas对此进行了加强，它使你能够对整组数据应用字符串表达式和正则表达式，而且能处理烦人的缺失数据。</p>
+<div id="section-7.3.1" class="section level3">
+<h3><span class="header-section-number">7.3.1</span> 字符串对象方法</h3>
+<p>对于许多字符串处理和脚本应用，内置的字符串方法已经能够满足要求了。例如，以逗号分隔的字符串可以用split拆分成数段：</p>
+<pre><code>In [134]: val = &#39;a,b,  guido&#39;
+In [135]: val.split(&#39;,&#39;)
+Out[135]: [&#39;a&#39;, &#39;b&#39;, &#39;  guido&#39;]</code></pre>
+<p>split常常与strip一起使用，以去除空白符（包括换行符）：</p>
+<pre><code>In [136]: pieces = [x.strip() for x in val.split(&#39;,&#39;)]
+
+In [137]: pieces
+Out[137]: [&#39;a&#39;, &#39;b&#39;, &#39;guido&#39;]</code></pre>
+<p>利用加法，可以将这些子字符串以双冒号分隔符的形式连接起来：</p>
+<pre><code>In [138]: first, second, third = pieces
+
+In [139]: first + &#39;::&#39; + second + &#39;::&#39; + third
+Out[139]: &#39;a::b::guido&#39;</code></pre>
+<p>但这种方式并不是很实用。一种更快更符合Python风格的方式是，向字符串“::”的join方法传入一个列表或元组：</p>
+<pre><code>In [140]: &#39;::&#39;.join(pieces)
+Out[140]: &#39;a::b::guido&#39;</code></pre>
+<p>其它方法关注的是子串定位。检测子串的最佳方式是利用Python的in关键字，还可以使用index和find：</p>
+<pre><code>In [141]: &#39;guido&#39; in val
+Out[141]: True
+
+In [142]: val.index(&#39;,&#39;)
+Out[142]: 1
+
+In [143]: val.find(&#39;:&#39;)
+Out[143]: -1</code></pre>
+<p>注意find和index的区别：如果找不到字符串，index将会引发一个异常（而不是返回－1）：</p>
+<pre><code>In [144]: val.index(&#39;:&#39;)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+&lt;ipython-input-144-280f8b2856ce&gt; in &lt;module&gt;()
+----&gt; 1 val.index(&#39;:&#39;)
+ValueError: substring not found</code></pre>
+<p>与此相关，count可以返回指定子串的出现次数：</p>
+<pre><code>In [145]: val.count(&#39;,&#39;)
+Out[145]: 2</code></pre>
+<p>replace用于将指定模式替换为另一个模式。通过传入空字符串，它也常常用于删除模式：</p>
+<pre><code>In [146]: val.replace(&#39;,&#39;, &#39;::&#39;)
+Out[146]: &#39;a::b::  guido&#39;
+
+In [147]: val.replace(&#39;,&#39;, &#39;&#39;)
+Out[147]: &#39;ab  guido&#39;</code></pre>
+<p>表7-3列出了Python内置的字符串方法。</p>
+<p>这些运算大部分都能使用正则表达式实现（马上就会看到）。</p>
+<div class="figure">
+<img src="//upload-images.jianshu.io/upload_images/7178691-087fe67bf6db0701.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img" />
+<p class="caption">img</p>
+</div>
+<div class="figure">
+<img src="" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>casefold 将字符转换为小写，并将任何特定区域的变量字符组合转换成一个通用的可比较形式。</p>
+</div>
+<div id="section-7.3.2" class="section level3">
+<h3><span class="header-section-number">7.3.2</span> 正则表达式</h3>
+<p>正则表达式提供了一种灵活的在文本中搜索或匹配（通常比前者复杂）字符串模式的方式。正则表达式，常称作regex，是根据正则表达式语言编写的字符串。Python内置的re模块负责对字符串应用正则表达式。我将通过一些例子说明其使用方法。</p>
+<blockquote>
+<p>笔记：正则表达式的编写技巧可以自成一章，超出了本书的范围。从网上和其它书可以找到许多非常不错的教程和参考资料。</p>
+</blockquote>
+<p>re模块的函数可以分为三个大类：模式匹配、替换以及拆分。当然，它们之间是相辅相成的。一个regex描述了需要在文本中定位的一个模式，它可以用于许多目的。我们先来看一个简单的例子：假设我想要拆分一个字符串，分隔符为数量不定的一组空白符（制表符、空格、换行符等）。描述一个或多个空白符的regex是+：</p>
+<pre><code>In [148]: import re
+
+In [149]: text = &quot;foo    bar\t baz  \tqux&quot;
+
+In [150]: re.split(&#39;\s+&#39;, text)
+Out[150]: [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;, &#39;qux&#39;]</code></pre>
+<p>调用re.split(‘+’,text)时，正则表达式会先被编译，然后再在text上调用其split方法。你可以用re.compile自己编译regex以得到一个可重用的regex对象：</p>
+<pre><code>In [151]: regex = re.compile(&#39;\s+&#39;)
+
+In [152]: regex.split(text)
+Out[152]: [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;, &#39;qux&#39;]</code></pre>
+<p>如果只希望得到匹配regex的所有模式，则可以使用findall方法：</p>
+<pre><code>In [153]: regex.findall(text)
+Out[153]: [&#39;    &#39;, &#39;\t &#39;, &#39;  \t&#39;]</code></pre>
+<blockquote>
+<p>笔记：如果想避免正则表达式中不需要的转义（），则可以使用原始字符串字面量如r’C:‘（也可以编写其等价式’C:’）。</p>
+</blockquote>
+<p>如果打算对许多字符串应用同一条正则表达式，强烈建议通过re.compile创建regex对象。这样将可以节省大量的CPU时间。</p>
+<p>match和search跟findall功能类似。findall返回的是字符串中所有的匹配项，而search则只返回第一个匹配项。match更加严格，它只匹配字符串的首部。来看一个小例子，假设我们有一段文本以及一条能够识别大部分电子邮件地址的正则表达式：</p>
+<pre><code>text = &quot;&quot;&quot;Dave dave@google.com
+Steve steve@gmail.com
+Rob rob@gmail.com
+Ryan ryan@yahoo.com
+&quot;&quot;&quot;
+pattern = r&#39;[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}&#39;
+
+# re.IGNORECASE makes the regex case-insensitive
+regex = re.compile(pattern, flags=re.IGNORECASE)</code></pre>
+<p>对text使用findall将得到一组电子邮件地址：</p>
+<pre><code>In [155]: regex.findall(text)
+Out[155]: 
+[&#39;dave@google.com&#39;,
+ &#39;steve@gmail.com&#39;,
+ &#39;rob@gmail.com&#39;,
+ &#39;ryan@yahoo.com&#39;]</code></pre>
+<p>search返回的是文本中第一个电子邮件地址（以特殊的匹配项对象形式返回）。对于上面那个regex，匹配项对象只能告诉我们模式在原字符串中的起始和结束位置：</p>
+<pre><code>In [156]: m = regex.search(text)
+
+In [157]: m
+Out[157]: &lt;_sre.SRE_Match object; span=(5, 20), match=&#39;dave@google.com&#39;&gt;
+
+In [158]: text[m.start():m.end()]
+Out[158]: &#39;dave@google.com&#39;</code></pre>
+<p>regex.match则将返回None，因为它只匹配出现在字符串开头的模式：</p>
+<pre><code>In [159]: print(regex.match(text))
+None</code></pre>
+<p>相关的，sub方法可以将匹配到的模式替换为指定字符串，并返回所得到的新字符串：</p>
+<pre><code>In [160]: print(regex.sub(&#39;REDACTED&#39;, text))
+Dave REDACTED
+Steve REDACTED
+Rob REDACTED
+Ryan REDACTED</code></pre>
+<p>假设你不仅想要找出电子邮件地址，还想将各个地址分成3个部分：用户名、域名以及域后缀。要实现此功能，只需将待分段的模式的各部分用圆括号包起来即可：</p>
+<pre><code>In [161]: pattern = r&#39;([A-Z0-9._%+-]+)@([A-Z0-9.-]+)\.([A-Z]{2,4})&#39;
+
+In [162]: regex = re.compile(pattern, flags=re.IGNORECASE)</code></pre>
+<p>由这种修改过的正则表达式所产生的匹配项对象，可以通过其groups方法返回一个由模式各段组成的元组：</p>
+<pre><code>In [163]: m = regex.match(&#39;wesm@bright.net&#39;)
+
+In [164]: m.groups()
+Out[164]: (&#39;wesm&#39;, &#39;bright&#39;, &#39;net&#39;)</code></pre>
+<p>对于带有分组功能的模式，findall会返回一个元组列表：</p>
+<pre><code>In [165]: regex.findall(text)
+Out[165]:
+[(&#39;dave&#39;, &#39;google&#39;, &#39;com&#39;),
+ (&#39;steve&#39;, &#39;gmail&#39;, &#39;com&#39;),
+ (&#39;rob&#39;, &#39;gmail&#39;, &#39;com&#39;),
+ (&#39;ryan&#39;, &#39;yahoo&#39;, &#39;com&#39;)]</code></pre>
+<p>sub还能通过诸如\1、\2之类的特殊符号访问各匹配项中的分组。符号\1对应第一个匹配的组，\2对应第二个匹配的组，以此类推：</p>
+<pre><code>In [166]: print(regex.sub(r&#39;Username: \1, Domain: \2, Suffix: \3&#39;, text))
+Dave Username: dave, Domain: google, Suffix: com
+Steve Username: steve, Domain: gmail, Suffix: com
+Rob Username: rob, Domain: gmail, Suffix: com
+Ryan Username: ryan, Domain: yahoo, Suffix: com</code></pre>
+<p>Python中还有许多的正则表达式，但大部分都超出了本书的范围。表7-4是一个简要概括。</p>
+<div class="figure">
+<img src="//upload-images.jianshu.io/upload_images/7178691-efbb80a793759fc0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img" />
+<p class="caption">img</p>
+</div>
+</div>
+<div id="pandas" class="section level3">
+<h3><span class="header-section-number">7.3.3</span> pandas的矢量化字符串函数</h3>
+<p>清理待分析的散乱数据时，常常需要做一些字符串规整化工作。更为复杂的情况是，含有字符串的列有时还含有缺失数据：</p>
+<pre><code>In [167]: data = {&#39;Dave&#39;: &#39;dave@google.com&#39;, &#39;Steve&#39;: &#39;steve@gmail.com&#39;,
+   .....:         &#39;Rob&#39;: &#39;rob@gmail.com&#39;, &#39;Wes&#39;: np.nan}
+
+In [168]: data = pd.Series(data)
+
+In [169]: data
+Out[169]: 
+Dave     dave@google.com
+Rob        rob@gmail.com
+Steve    steve@gmail.com
+Wes                  NaN
+dtype: object
+
+In [170]: data.isnull()
+Out[170]: 
+Dave     False
+Rob      False
+Steve    False
+Wes       True
+dtype: bool</code></pre>
+<p>通过data.map，所有字符串和正则表达式方法都能被应用于（传入lambda表达式或其他函数）各个值，但是如果存在NA（null）就会报错。为了解决这个问题，Series有一些能够跳过NA值的面向数组方法，进行字符串操作。通过Series的str属性即可访问这些方法。例如，我们可以通过str.contains检查各个电子邮件地址是否含有“gmail”：</p>
+<pre><code>In [171]: data.str.contains(&#39;gmail&#39;)
+Out[171]: 
+Dave     False
+Rob       True
+Steve     True
+Wes        NaN
+dtype: object</code></pre>
+<p>也可以使用正则表达式，还可以加上任意re选项（如IGNORECASE）：</p>
+<pre><code>In [172]: pattern
+Out[172]: &#39;([A-Z0-9._%+-]+)@([A-Z0-9.-]+)\\.([A-Z]{2,4})&#39;
+
+In [173]: data.str.findall(pattern, flags=re.IGNORECASE)
+Out[173]: 
+Dave     [(dave, google, com)]
+Rob        [(rob, gmail, com)]
+Steve    [(steve, gmail, com)]
+Wes                        NaN
+dtype: object</code></pre>
+<p>有两个办法可以实现矢量化的元素获取操作：要么使用str.get，要么在str属性上使用索引：</p>
+<pre><code>In [174]: matches = data.str.match(pattern, flags=re.IGNORECASE)
+
+In [175]: matches
+Out[175]: 
+Dave     True
+Rob      True
+Steve    True
+Wes       NaN
+dtype: object</code></pre>
+<p>要访问嵌入列表中的元素，我们可以传递索引到这两个函数中：</p>
+<pre><code>In [176]: matches.str.get(1)
+Out[176]: 
+Dave    NaN
+Rob     NaN
+Steve   NaN
+Wes     NaN
+dtype: float64
+
+In [177]: matches.str[0]
+Out[177]: 
+Dave    NaN
+Rob     NaN
+Steve   NaN
+Wes     NaN
+dtype: float64</code></pre>
+<p>你可以利用这种方法对字符串进行截取：</p>
+<pre><code>In [178]: data.str[:5]
+Out[178]: 
+Dave     dave@
+Rob      rob@g
+Steve    steve
+Wes        NaN
+dtype: object</code></pre>
+<p>表7-5介绍了更多的pandas字符串方法。</p>
+<div class="figure">
+<img src="//upload-images.jianshu.io/upload_images/7178691-a634364ed6d5d5c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img" />
+<p class="caption">img</p>
+</div>
+<p>表7-5 部分矢量化字符串方法</p>
+</div>
+</div>
+<div id="-4" class="section level2">
+<h2><span class="header-section-number">7.4</span> 总结</h2>
+<p>高效的数据准备可以让你将更多的时间用于数据分析，花较少的时间用于准备工作，这样就可以极大地提高生产力。我们在本章中学习了许多工具，但覆盖并不全面。下一章，我们会学习pandas的聚合与分组。</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data2file.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reshape.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/openbiox/Cookbook-for-R-Chinese/edit/master/book/07-tidy.Rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
